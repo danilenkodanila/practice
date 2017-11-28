@@ -140,6 +140,7 @@ a{
 }
 .block{
 	padding-bottom: 10px;
+	padding-top: 10px;
 }
 .bold{
 	font-weight: 800;
@@ -157,4 +158,87 @@ a{
 	text-align: right;
 	float: right;
 }
+/*-------------------------------------*/
+.btnAdd {
+	margin:0 auto;
+    display:block;
+	height: 30px;
+	background: url(image/plus-circle.png) no-repeat left;
+	background-size: 18px;
+	border-width:0px;
+	border:none;
+	box-shadow: none;
+	color: black;
+	padding-left: 10px;
+}
 
+.btnVcnt{
+	height: 30px;
+	border-width:0px;
+	border:none;
+	box-shadow: none;
+	color: black;
+}
+.btnVcntPict{
+	height: 30px;
+	border-width:0px;
+	border:none;
+	box-shadow: none;
+	color: black;
+	background: url(image/edit-icon.png) no-repeat left;
+	background-size: 18px;
+
+}
+.formbt{
+	text-align: center;
+	padding-left: 40%;
+	padding-top: 10px;
+}
+
+
+#modal_form {
+	width: 800px; 
+	height: 600px; /* Рaзмеры дoлжны быть фиксирoвaны */
+	border-radius: 5px;
+	border: 3px #000 solid;
+	background: #fff;
+	position: fixed; /* чтoбы oкнo былo в видимoй зoне в любoм месте */
+	top: 10%; /* oтступaем сверху 45%, oстaльные 5% пoдвинет скрипт */
+	left: 35%; /* пoлoвинa экрaнa слевa */
+	margin-top: -300px;
+	margin-left: -200px; /* тут вся мaгия центрoвки css, oтступaем влевo и вверх минус пoлoвину ширины и высoты сooтветственнo =) */
+	display: none; /* в oбычнoм сoстoянии oкнa не дoлжнo быть */
+	opacity: 0; /* пoлнoстью прoзрaчнo для aнимирoвaния */
+	z-index: 5; /* oкнo дoлжнo быть нaибoлее бoльшем слoе */
+	padding: 0px 10px;
+}
+
+/* Пoдлoжкa */
+#overlay {
+	z-index:3; /* пoдлoжкa дoлжнa быть выше слoев элементoв сaйтa, нo ниже слoя мoдaльнoгo oкнa */
+	position:fixed; /* всегдa перекрывaет весь сaйт */
+	background-color:#000; /* чернaя */
+	opacity:0.8; /* нo немнoгo прoзрaчнa */
+	-moz-opacity:0.8; /* фикс прозрачности для старых браузеров */
+	filter:alpha(opacity=80);
+	width:100%; 
+	height:100%; /* рaзмерoм вo весь экрaн */
+	top:0; /* сверху и слевa 0, oбязaтельные свoйствa! */
+	left:0;
+	cursor:pointer;
+	display:none; /* в oбычнoм сoстoянии её нет) */
+}
+
+.block-a{
+	color: black;
+}
+.block-a:hover{
+	color: black;
+}
+
+.bd-pop{
+	/*height: 300px;*/
+	/*background-color: gray;*/
+	border-bottom: dashed 1px;
+	border-color: gray;
+}
