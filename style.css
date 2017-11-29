@@ -332,10 +332,67 @@ a{
 /*Блок с ссылками*/
 .link-block{
 	padding-top: 10px;
-	height: 440px;
+	height: 420px;
 }
 .link-employers{
 	text-decoration: underline;
 	color: blue;
 
 }
+/*Регистрация*/
+.reg-name{
+	padding-top: 20px;
+	text-align: center;
+	font-weight: 600;
+}
+.registration-plchldr{
+	/*text-align: left;
+	height: 30px;
+	width: 25%;
+	float: left;*/
+	padding-left: 50px;
+	height: 12px;
+	font-size: 12px;
+	padding-bottom: 0px;
+	padding-top: 0px;
+	width: 25%;
+	border-width:0px;
+	border:none;
+	box-shadow: none;
+	border-bottom: solid 1px;
+	color: black;
+	padding-left: 0px;
+}
+.registration-plchldr:hover{
+	border-width:0px;
+	border:none;
+	box-shadow: none;
+	border-bottom: solid 1px;
+}
+.registration-plchldr:focus{
+	border-width:0px;
+	border:none;
+	box-shadow: none;
+	border-bottom: solid 1px;
+}
+.registration-block-line{
+	padding-left: 30px;
+}
+.line-stroke{
+	border-bottom: dashed 2px;
+	border-color: black;
+}
+.registration-btn{
+	height: 25px;
+	color: black;
+	width: 150px;
+	text-decoration: underline;
+}
+
+
+
+
+
+
+
+

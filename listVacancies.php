@@ -23,10 +23,10 @@
       </div>
       <div class="grid-x header-2">
         <div class="small-1 large-2 columns vacancies">
-          <a href="#" class="bt-1">Вакансии</a>
+          <a href="/listVacancies.php" class="bt-1">Вакансии</a>
         </div>
         <div class="small-1 large-2 columns employers">
-          <a href="#" class="bt-2">Работодатели</a>
+          <a href="/employers-list.php" class="bt-2">Работодатели</a>
         </div>
         <div class="small-0 large-4 columns"></div>
         <div class="small-1 large-3 columns logo">
@@ -124,7 +124,7 @@
               <input type="button" class="authorization-btn" value="Войти">
             </div>
             <div class="authorization-block-inside-two">
-              <a href="#" class="authorization-rgstrtn">Зарегистрироваться</a>
+              <a href="/registrationPartOne.php" class="authorization-rgstrtn">Зарегистрироваться</a>
             </div>
           </div>
           <div class="small-0 large-1 columns"></div>

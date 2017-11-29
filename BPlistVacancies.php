@@ -21,10 +21,10 @@
       </div>
       <div class="grid-x header-2">
         <div class="small-1 large-2 columns vacancies">
-          <a href="#" class="bt-1">Вакансии</a>
+          <a href="/listVacancies.php" class="bt-1">Вакансии</a>
         </div>
         <div class="small-1 large-2 columns employers">
-          <a href="#" class="bt-2">Работодатели</a>
+          <a href="/employers-list.php" class="bt-2">Работодатели</a>
         </div>
         <div class="small-0 large-4 columns"></div>
         <div class="small-1 large-3 columns logo">

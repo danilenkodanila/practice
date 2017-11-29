@@ -19,9 +19,9 @@
   
       <!-- header -->
       <div class="grid-x header">
-        <div class="small-1 large-4 columns site-name">Практикант ДВФУ</div>
-        <div class="small-2 large-4 columns"></div>
-        <div class="small-1 large-4 columns logo">
+        <div class="small-3 medium-4 large-4 columns site-name">Практикант ДВФУ</div>
+        <div class="small-2 medium-2 large-4 columns"></div>
+        <div class="small-3 medium-4 large-4 columns logo">
           <img src="image/fefu-logo.png" class="fefu-logo">
         </div>
       </div>
@@ -30,12 +30,12 @@
           <a href="/listVacancies.php" class="bt-2">Вакансии</a>
         </div>
         <div class="small-1 large-2 columns employers">
-          <a href="/employers-list.php" class="bt-1">Работодатели</a>
+          <a href="/employers-list.php" class="bt-2">Работодатели</a>
         </div>
         <div class="small-1 large-2 columns employers">
-          <a href="#" class="bt-2">Приказы</a>
+          <!-- <a href="#" class="bt-2">Приказы</a> -->
         </div>
-        <div class="small-0 large-2 columns"></div>
+        <div class="small-2 large-2 columns"></div>
         <div class="small-1 large-3 columns logo">
           <div class="lk">
             <img src="image/lk-logo.png" class="lk-logo">
@@ -75,44 +75,40 @@
       <div id="overlayTwo"></div>
       <!-- Конец формы авторизации -->
     
-    <!-- Выбор года-->
+    <!-- Надпись-->
      <div class="grid-x search-row">
       <div class="small-0 large-1 columns"></div>
       <div class="small-10 large-10 columns">                                                                     
-<!-- @@@ @@@   @@@@@@      @@@  @@@   @@@@@@   @@@@@@@   @@@@@@   @@@       
-@@@ @@@  @@@@@@@@     @@@  @@@  @@@@@@@   @@@@@@@  @@@@@@@@  @@@       
-@@! !@@  @@!  @@@     @@!  @@@  !@@         @@!    @@!  @@@  @@!       
-!@! @!!  !@!  @!@     !@!  @!@  !@!         !@!    !@!  @!@  !@!       
- !@!@!   @!@!@!@!     @!@  !@!  !!@@!!      @!!    @!@!@!@!  @!!       
-  @!!!   !!!@!!!!     !@!  !!!   !!@!!!     !!!    !!!@!!!!  !!!       
-  !!:    !!:  !!!     !!:  !!!       !:!    !!:    !!:  !!!  !!:       
-  :!:    :!:  !:!     :!:  !:!      !:!     :!:    :!:  !:!   :!:      
-   ::    ::   :::     ::::: ::  :::: ::      ::    ::   :::   :: ::::  
-   :      :   : :      : :  :   :: : :       :      :   : :  : :: : :  
-Поэтому просто сделаю так [тут нужен джим керри]-->
-        <div class="year-choice">Выбор года</div>                           
+        <div class="reg-name">Регистрация</div>                           
       </div>
       <div class="small-0 large-1 columns"></div>
     </div>
-    <!-- Конец поиска-->
+    <!-- Конец надписи-->
 
-    <!-- Блок со ссылками-->
+    <!-- Форма регистрации -->
     <div class="grid-x link-block">
       <div class="small-0 large-1 columns"></div>
       <div class="small-10 large-10 columns">
-        <a href="#" class="link-employers">Название предприятия 1 - ссылка на страницу с описанием</a><br>
-        <a href="#" class="link-employers">Название предприятия 2 - ссылка на страницу с описанием</a><br>
-        <a href="#" class="link-employers">Название предприятия 3 - ссылка на страницу с описанием</a><br>
-        <a href="#" class="link-employers">Название предприятия 4 - ссылка на страницу с описанием</a><br>
-        <a href="#" class="link-employers">Название предприятия 5 - ссылка на страницу с описанием</a><br>
-        <a href="#" class="link-employers">Название предприятия 6 - ссылка на страницу с описанием</a><br>
-        <a href="#" class="link-employers">Название предприятия 7 - ссылка на страницу с описанием</a><br>
-        <a href="#" class="link-employers">Название предприятия 8 - ссылка на страницу с описанием</a><br>
+        <div class="registration-block-line"><input class="registration-plchldr" type="text" placeholder="Имя"></div>
+        <div class="registration-block-line"><input class="registration-plchldr" type="text" placeholder="Фамилия"></div>
+        <div class="registration-block-line"><input class="registration-plchldr" type="text" placeholder="Отчество"></div>
+        <div class="registration-block-line"><input class="registration-plchldr" type="text" placeholder="Номер группы Б0000х"></div>
+        <div class="registration-block-line"><input class="registration-plchldr" type="text" placeholder="Номер зачетной книжки"></div>
+        <div class="line-stroke"></div><br>
+        <div class="registration-block-line"><input class="registration-plchldr" type="text" placeholder="Пароль"></div>
+        <div class="registration-block-line"><input class="registration-plchldr" type="text" placeholder="Повтор пароля"></div>
+        <div class="registration-block-line"><input class="registration-plchldr" type="text" placeholder="Электронная почта"></div>
+        <div class="registration-block-line"><input class="registration-plchldr" type="text" placeholder="Номер телефона"></div>
+        <div class="registration-block-line"><input type="checkbox" name="your-group" value="unit-in-group">&emsp;&emsp;   Запомнить меня</div>
+        <div class="authorization-block-inside">
+              <input type="button" class="registration-btn" value="Подтвердить">
+            </div>
       </div>
       <div class="small-0 large-1 columns"></div>
     </div>
-    <!-- Конец блока со ссылками -->
+     <!-- Конец-->
 
+    
 
     <!-- footer -->               
     <div class="footer">
