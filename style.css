@@ -410,7 +410,56 @@ th,tr,thead,td{
 	background-color: white;
 }
 
-
-
-
-
+/*Личный кабинет*/
+.tabs-right{
+	text-align: right;
+	float: right;
+	padding-right: 25%;
+}
+.tabs-left{
+	padding-left: 25%;
+}
+.tabs-title{
+	color: black;
+	border-width:0px;
+	border:none;
+	box-shadow: none;
+	background-color: white;
+}
+.tbl{
+	width: 100%;
+}
+.white-color{
+	border: none;
+}
+.link-table{
+	border-bottom: solid 1px;
+	border-color: black;
+	color: black;
+}
+.link-table:hover{
+	border-bottom: solid 1px;
+	border-color: black;
+	color: black;
+}
+.block-dan{
+	padding-left: 20px;
+}
+.pssw-solid{
+	border-bottom: solid 1px;
+	border-color: black;
+}
+.edt-icon{
+	height: 15px;
+	width: 15px;
+}
+.link-table-two{
+	border-bottom: solid 1px;
+	border-color: blue;
+	color: blue;
+}
+.link-table-two:hover{
+	border-bottom: solid 1px;
+	border-color: blue;
+	color: blue;
+}
