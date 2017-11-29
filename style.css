@@ -60,7 +60,7 @@ a{
 }
 .employers{
 	padding-top: 35px;
-	padding-left: 50px;
+	padding-left: 20px;
 }
 
 .bt-1{
@@ -86,8 +86,8 @@ a{
     font-size: 16px;
     /*border-bottom: 2px;*/
     /*border-color: #1b49a2;*/
-    padding-left: 5px;
-    padding-right: 5px;
+    /*padding-left: 5px;*/
+    /*padding-right: 5px;*/
 }
 .bt-2:hover{
 	/*background-color: white;*/
@@ -320,4 +320,22 @@ a{
 }
 .authorization-rgstrtn:hover{
 	color: black;
+}
+
+/*Выбор года*/
+.year-choice{
+	padding-top: 20px;
+	padding-bottom: 20px;
+	text-align: center;
+}
+
+/*Блок с ссылками*/
+.link-block{
+	padding-top: 10px;
+	height: 440px;
+}
+.link-employers{
+	text-decoration: underline;
+	color: blue;
+
 }
