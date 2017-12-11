@@ -16,30 +16,24 @@
 
   </head>
   <body>
-  
       <!-- header -->
       <div class="grid-x header">
-        <div class="small-3 medium-4 large-4 columns site-name">Практикант ДВФУ</div>
-        <div class="small-2 medium-2 large-4 columns"></div>
-        <div class="small-3 medium-4 large-4 columns logo">
+        <div class="small-8 small-offset-1 medium-6 large-6 cell site-name">Практикант ДВФУ</div>
+        <div class="small-2 small-offset-1  medium-2 medium-offset-3 large-2 large-offset-3 cell logo">
           <img src="image/fefu-logo.png" class="fefu-logo">
         </div>
       </div>
       <div class="grid-x header-2">
-        <div class="small-1 large-2 columns vacancies">
-          <a href="/listVacancies.php" class="bt-2">Вакансии</a>
+        <div class="small-2 small-offset-1 medium-2 medium-offset-1 large-2 large-offset-1 cell vacancies">
+          <a href="/listVacancies.php" class="bt-1">Вакансии</a>
         </div>
-        <div class="small-1 large-2 columns employers">
+        <div class="small-2 small-offset-1 medium-2 medium-offset-0 large-2 large-offset-0 cell employers">
           <a href="/employers-list.php" class="bt-2">Работодатели</a>
         </div>
-        <div class="small-1 large-2 columns employers">
-          <!-- <a href="#" class="bt-2">Приказы</a> -->
-        </div>
-        <div class="small-2 large-2 columns"></div>
-        <div class="small-1 large-3 columns logo">
+        <div class="small-2 small-offset-3 medium-3 medium-offset-1 large-4 large-offset-2 cell logo">
           <div class="lk">
             <img src="image/lk-logo.png" class="lk-logo">
-            <a href="#" id="goTwo" class="link">International Brutal Marines</a>
+            <a href="#" class="link">International Brutal Marines</a>
           </div>
         </div>
       </div>
@@ -164,7 +158,7 @@
     <div class="footer">
       <div class="blue"></div>
       <div class="grid-x white">
-        <div class="large-4 columns footer-text">
+        <div class="small-10 small-offset-1 medium-10 medium-offset-1 large-10 large-offset-1 footer-text cell">
           Контактная информация<br>
           Адреса технической поддержки
         </div>
