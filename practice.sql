@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Дек 02 2017 г., 10:39
+-- Время создания: Дек 12 2017 г., 05:03
 -- Версия сервера: 5.5.53
 -- Версия PHP: 5.5.38
 
@@ -111,8 +111,15 @@ CREATE TABLE `vacancies` (
   `studentsfor` text,
   `place` varchar(255) DEFAULT NULL,
   `dateAdd` date NOT NULL,
-  `userAddId` int(21) UNSIGNED NOT NULL
+  `userAddId` int(21) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `vacancies`
+--
+
+INSERT INTO `vacancies` (`id`, `title`, `dateStart`, `dateFinish`, `description`, `studentsfor`, `place`, `dateAdd`, `userAddId`) VALUES
+(2, 'дизигнер', '2018-07-24', '2019-07-02', 'Описание вакансии', 'золотые руки', 'Добираться долго', '2017-12-23', 1);
 
 --
 -- Индексы сохранённых таблиц
@@ -177,17 +184,17 @@ ALTER TABLE `notification`
 -- AUTO_INCREMENT для таблицы `student_data`
 --
 ALTER TABLE `student_data`
-  MODIFY `id` int(21) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(21) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT для таблицы `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(21) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(21) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT для таблицы `vacancies`
 --
 ALTER TABLE `vacancies`
-  MODIFY `id` int(21) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(21) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- Ограничения внешнего ключа сохраненных таблиц
 --
@@ -208,8 +215,8 @@ ALTER TABLE `employers_data`
 -- Ограничения внешнего ключа таблицы `notification`
 --
 ALTER TABLE `notification`
-  ADD CONSTRAINT `notification_ibfk_2` FOREIGN KEY (`id_vacancy`) REFERENCES `vacancies` (`id`),
-  ADD CONSTRAINT `notification_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`);
+  ADD CONSTRAINT `notification_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `notification_ibfk_2` FOREIGN KEY (`id_vacancy`) REFERENCES `vacancies` (`id`);
 
 --
 -- Ограничения внешнего ключа таблицы `student_data`
