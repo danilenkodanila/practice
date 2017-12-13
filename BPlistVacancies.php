@@ -20,7 +20,7 @@
       </div>
       <div class="grid-x header-2">
         <div class="small-2 small-offset-1 medium-2 medium-offset-1 large-2 large-offset-1 cell vacancies">
-          <a href="/listVacancies.php" class="bt-1">Вакансии</a>
+          <a href="/BPlistVacancies.php" class="bt-1">Вакансии</a>
         </div>
         <div class="small-2 small-offset-1 medium-2 medium-offset-0 large-2 large-offset-0 cell employers">
           <a href="/employers-list.php" class="bt-2">Работодатели</a>
@@ -39,10 +39,9 @@
         <input class="search-icon" type="text" placeholder="Поиск">
       </div>
     </div>
-
     <div class="grid-x">
       <div class="small-10 small-offset-1 medium-10 medium-offset-1 large-10 large-offset-1 cell">
-        <input type="button" class="btnAdd" value="   Добавить вакансию">
+        <a href="/addingNewVacancy.php"><input type="button" class="btnAdd" value="   Добавить вакансию"></a>
       </div>
     </div>
 
@@ -104,7 +103,7 @@
       </div>
 
       <div class="formbt">
-        <input type="button" class="btnVcntPict" value="   Редактировать">
+        <a href="/addingNewVacancy.php"><input type="button" class="btnVcntPict" value="   Редактировать"></a>
       </div>
 
       <div class="small-1 large-1 columns"></div>
@@ -231,15 +230,12 @@
     </div>
 
                    
-    <div class="footer">
-      <div class="blue"></div>
-      <div class="grid-x white">
-        <div class="small-10 small-offset-1 medium-10 medium-offset-1 large-10 large-offset-1 footer-text cell">
-          Контактная информация<br>
-          Адреса технической поддержки
-        </div>
-      </div>
-    </div>
+    <!-- footer -->               
+    <?php
+      include_once("footer.php");
+      echoFooter();
+    ?>
+    <!-- Конец footer`а --> 
 
     <script type="text/javascript">
       $(document).ready(function() { // вся мaгия пoсле зaгрузки стрaницы

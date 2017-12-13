@@ -62,6 +62,7 @@ a{
 }
 .employers{
 	padding-top: 35px;
+	text-align: left;
 }
 
 .bt-1{
@@ -351,7 +352,6 @@ a{
 	height: 30px;
 	width: 25%;
 	float: left;*/
-	padding-left: 50px;
 	height: 12px;
 	font-size: 12px;
 	padding-bottom: 0px;
