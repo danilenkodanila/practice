@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="en" dir="ltr">
+<html class="no-js" lang="ru" dir="ltr">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -16,6 +16,7 @@
 
   </head>
   <body>
+  
       <!-- header -->
       <div class="grid-x header">
         <div class="small-8 small-offset-1 medium-6 large-6 cell site-name">Практикант ДВФУ</div>
@@ -25,15 +26,15 @@
       </div>
       <div class="grid-x header-2">
         <div class="small-2 small-offset-1 medium-2 medium-offset-1 large-2 large-offset-1 cell vacancies">
-          <a href="/listVacancies.php" class="bt-1">Вакансии</a>
+          <a href="/listVacancies.php" class="bt-2Z">Вакансии</a>
         </div>
         <div class="small-2 small-offset-1 medium-2 medium-offset-0 large-2 large-offset-0 cell employers">
           <a href="/employers-list.php" class="bt-2">Работодатели</a>
         </div>
-        <div class="small-2 small-offset-3 medium-3 medium-offset-1 large-4 large-offset-2 cell logo">
+        <div class="small-2 small-offset-3 medium-3 medium-offset-3 large-3 large-offset-3 cell logo">
           <div class="lk">
-            <img src="image/lk-logo.png" class="lk-logo">
-            <a href="#" class="link">International Brutal Marines</a>
+            <img src="image/lk-logo.png" class="lk-logo-Two">
+            <a href="#" class="link-lk">Виктор Цой</a>
           </div>
         </div>
       </div>
@@ -99,87 +100,99 @@
 
           <div class="tabs-panel is-active" id="panel1c">
             <div class="block-dan">
-              International Brutal Marines
+              Цой Виктор Робертович
               <br>
-              Адрес: .......
+              Группа: Б0000х
               <br>
-              ИНН орнанизации: ......
+              Номер зачетной книжки: 000000
               <br>
               <br>
               Номер телефона: 8 999 999 99 99  <input class="edt-icon"type="image" src="image/edit-icon.png" />
               <br>
-              Электронная почта: mail@mail.ru  <input class="edt-icon"type="image" src="image/edit-icon.png" />
+              Электронная почта: mail@mail.ru  <input class="edt-icon" type="image" src="image/edit-icon.png" />
               <br>
               <br>
               <a href="#" class="authorization-rgstrtn">Сменить пароль</a>
             </div>
           </div>
 
+           
+    
           <div class="tabs-panel" id="panel2c">
-          <div class="line-solid">Вакансия 1</div><br>
            <div class="grid-x">
+            <div class="small-0 large-12 cell">
+              Выбранное место прохождение практики:
+              <br>
+              <a href="#" style="color: blue;border-color: blue;" class="link-table">Вакансия 3</a>
+              <br>
+              <br>
+              <div style="display:inline;"><a href="#" class="link-table">Отклонить</a></div>  (доступно в течении 6 часов)
+              <br>
+              <br>
+            </div>
+          </div>
+         <div class="grid-x">
             <div class="small-4 medium-8 large-10 cell">
-          <table class="fnt tbl">
-          <thead>
-            <tr>
-              <th width="200">Отозвавшиеся студенты</th>
-              <th width="200">Статус</th>
-              <!-- <th width="100"></th> -->
-              <!-- <th width="100"></th> -->
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Студент 1</td>
-              <td>Отказано</td>
-              <!-- <td width="100"><a href="#" class="link-table">Одобрить</a></td> -->
-              <!-- <td width="100"><a href="#" class="link-table">Отказать</a></td> -->
-            </tr>
-            <tr>
-              <td>Студент 2</td>
-              <td>Одобрено</td>
-              <!-- <td width="100"><a href="#" class="link-table">Удалить</a></td> -->
-              <!-- <td></td> -->
-            </tr>
-            <tr>
-              <td>Студент 3</td>
-              <td>Согласовано</td>
-              <!-- <td></td> -->
-              <!-- <td></td> -->
-            </tr>
-          </tbody>
-        </table>
-      </div>
-              <div class="small-2 medium-2 large-2 cell">
+                 
+            <table class="fnt tbl">
+            <thead>
+              <tr>
+                <th width="400">Наименование вакансии</th>
+                <th width="200">Наименование организации</th>
+                <th width="200">Статус заявки</th>
+                <!-- <th width="100"></th> -->
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><a href="#" class="link-table-two">Вакансия 1</a></td>
+                <td>International Brutal Marines</td>
+                <td>Рассматривается</td>
+                <!-- <td></td> -->
+              </tr>
+              <tr>
+                <td><a href="#" class="link-table-two">Вакансия 2</a></td>
+                <td>Color Dream</td>
+                <td>Отклонена</td>
+                <!-- <td width="100"><a href="#" class="link-table">Удалить</a></td> -->
+              </tr>
+              <tr>
+                <td><a href="#" class="link-table-two">Вакансия 3</a></td>
+                <td>Ростовский Дон</td>
+                <td>Согласована</td>
+                <!-- <td></td> -->
+              </tr>
+            </tbody>
+            </table>
+            </div>
+            <div class="small-0 medium-2 large-2 cell">
                 <table style="border-collapse: separate;">
                   <thead>
                     <tr class="delete-border">
-                      <th class="delete-border" width="50">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                       <th class="delete-border" width="50">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr class="delete-border">
-                      <td class="delete-border"><a href="#" class="link-black-underline">Одобрить</a></td>
-                      <td class="delete-border"><a href="#" class="link-black-underline">Отказать</a></td>
-                    </tr>
-                    <tr class="delete-border">
-                      <td class="delete-border">&nbsp;</td>
+                       <td class="delete-border">&nbsp;</td>
                     </tr>
                     <tr class="delete-border">
                       <td class="delete-border"><a href="#" class="link-black-underline">Удалить</a></td>
                     </tr>
+                    <tr class="delete-border">
+                      <td class="delete-border">&nbsp;</td> 
+                    </tr>
                   </tbody>
                 </table>
               </div>
-
-
+            </div>
           </div>
-          </div>
+
         </div>
         
+        
       </div>
-      <div class="small-0 large-1 columns"></div>
+      
     </div>
      <!-- Конец-->
 

@@ -332,7 +332,8 @@ a{
 /*Блок с ссылками*/
 .link-block{
 	padding-top: 10px;
-	height: 420px;
+	padding-bottom: 10px;
+	/*height: 420px;*/
 }
 .link-employers{
 	text-decoration: underline;
@@ -411,24 +412,51 @@ th,tr,thead,td{
 }
 
 /*Личный кабинет*/
-.tabs-right{
-	text-align: right;
-	float: right;
-	padding-right: 25%;
+a.tabs-a{
+	color: black;
+	background-color: white;
 }
-.tabs-left{
-	padding-left: 25%;
+a.tabs-a:hover{
+	color: black;
+	background-color: white;
 }
-.tabs-title{
+.tabs-title > a:focus{
+	color: black;
+	background-color: white;
+	border: 0;
+	border-color: white;
+}
+.tabs-title > a:visited{
+	color: black;
+	background-color: white;
+	border: 0;
+	border-color: white;
+}
+.tabs-title > a[aria-selected='true']{
+	background-color: white;
+	display: list-item;
+	list-style-type: disc;
+	list-style-position: inside;
+	color: black;
+	border: 0;
+	font-weight: bold;
+}
+ul.tabs{
+	border: 0;
+}
+.tabs-content{
+	border: 0;
+}
+li.tabs-title{
 	color: black;
 	border-width:0px;
 	border:none;
 	box-shadow: none;
 	background-color: white;
 }
-.tbl{
+/*.tbl{
 	width: 100%;
-}
+}*/
 .white-color{
 	border: none;
 }
@@ -484,3 +512,22 @@ th,tr,thead,td{
     	height: 7px;
     }
 }
+
+.vacancies-second{
+	color: blue;
+	text-decoration: underline;
+}
+
+.link-black-underline{
+	text-decoration: underline;
+	text-decoration-color: black;
+	color:black;
+}
+
+.delete-border{
+	border: 0;
+}
+
+
+
+

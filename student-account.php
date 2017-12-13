@@ -72,24 +72,27 @@
     
     <!-- Надпись-->
      <div class="grid-x search-row">
-      <div class="small-0 large-1 columns"></div>
-      <div class="small-10 large-10 columns">                                                                     
-        Личный кабинет                   
+      <div class="large-10 large-offset-1 cell">                                                                     
+        <div style="text-align: center;">Личный кабинет</div>                   
       </div>
-      <div class="small-0 large-1 columns"></div>
     </div>
     <!-- Конец надписи-->
 
 
-    <!-- Форма регистрации -->
+    <!-- Форма с табами -->
     <div class="grid-x link-block">
-      <div class="small-0 large-1 columns"></div>
-      <div class="small-10 large-10 columns">
+      <div class="small-10 small-offset-1 medium-10 medium-offset-1 large-10 large-offset-1 cell">
         
         <div class="line-stroke"></div>
          <ul class="tabs" data-active-collapse="true" data-tabs id="collapsing-tabs">
-          <div class="tabs-left"><li class="tabs-title is-active"><a href="#panel1c" aria-selected="true">Персональные данные</a></li></div>
-          <div class="tabs-right"><li class="tabs-title tabs"><a href="#panel2c">Информация по вакансиям</a></li></div>
+          <div class="grid-x">
+            <div class="small-10 small-offset-2 large-4 medium-3 medium-offset-2 large-offset-2 cell">
+              <li class="tabs-title is-active"><a class="tabs-a" href="#panel1c" aria-selected="true">Персональные данные</a></li>
+            </div>
+            <div class="small-10 small-offset-2 large-4 medium-3 medium-offset-2 large-offset-1 cell">
+              <li class="tabs-title tabs"><a class="tabs-a" href="#panel2c">Информация по вакансиям</a></li>
+            </div>
+          </div>
         </ul>
         <div class="line-stroke"></div>
 
@@ -104,9 +107,9 @@
               Номер зачетной книжки: 000000
               <br>
               <br>
-              Номер телефона: 8 999 999 99 99  <input class="edt-icon"type="image" src="image/edit-icon.png" />
+              Номер телефона: 8 999 999 99 99  <a href="#"><input class="edt-icon"type="image" src="image/edit-icon.png"/></a>
               <br>
-              Электронная почта: mail@mail.ru  <input class="edt-icon"type="image" src="image/edit-icon.png" />
+              Электронная почта: mail@mail.ru  <a href="#"><input class="edt-icon"type="image" src="image/edit-icon.png"/></a>
               <br>
               <br>
               <a href="#" class="authorization-rgstrtn">Сменить пароль</a>
@@ -114,36 +117,57 @@
           </div>
 
           <div class="tabs-panel" id="panel2c">
-          <table class="fnt tbl">
-          <thead>
-            <tr>
-              <th width="400">Наименование вакансии</th>
-              <th width="200">Наименование организации</th>
-              <th width="200">Статус заявки</th>
-              <th width="100"></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><a href="#" class="link-table-two">Вакансия 1</a></td>
-              <td>International Brutal Marines</td>
-              <td>Рассматривается</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><a href="#" class="link-table-two">Вакансия 2</a></td>
-              <td>Color Dream</td>
-              <td>Отклонена</td>
-              <td width="100"><a href="#" class="link-table">Удалить</a></td>
-            </tr>
-            <tr>
-              <td><a href="#" class="link-table-two">Вакансия 3</a></td>
-              <td>Ростовский Дон</td>
-              <td>Подтверждена</td>
-              <td width="100"><a href="#" class="link-table">Принять</a></td>
-            </tr>
-          </tbody>
-        </table>
+            <div class="grid-x">
+              <div class="small-0 medium-8 large-10 cell">
+                <table class="fnt tbl">
+                  <thead>
+                    <tr>
+                      <th width="400">Наименование вакансии</th>
+                      <th width="200">Наименование организации</th>
+                      <th width="200">Статус заявки</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><a href="#" class="link-table-two">Вакансия 1</a></td>
+                      <td>International Brutal Marines</td>
+                      <td>Рассматривается</td>
+                    </tr>
+                    <tr>
+                      <td><a href="#" class="link-table-two">Вакансия 2</a></td>
+                      <td>Color Dream</td>
+                      <td>Отклонена</td>
+                    </tr>
+                    <tr>
+                      <td><a href="#" class="link-table-two">Вакансия 3</a></td>
+                      <td>Ростовский Дон</td>
+                      <td>Подтверждена</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="small-0 medium-2 large-2 cell">
+                <table style="border-collapse: separate;">
+                  <thead>
+                    <tr class="delete-border">
+                      <th class="delete-border" width="50">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="delete-border">
+                      <td class="delete-border"><a href="#" class="link-black-underline">Принять</a></td>
+                    </tr>
+                    <tr class="delete-border">
+                      <td class="delete-border">&nbsp;</td>
+                    </tr>
+                    <tr class="delete-border">
+                      <td class="delete-border"><a href="#" class="link-black-underline">Удалить</a></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          
           </div>
         </div>
         
