@@ -19,8 +19,10 @@ session_start(); ?>
   <body>
 
 
+
 <?php
 include ("header.php"); ?>
+
 
 
     <!-- Блок со ссылками-->
