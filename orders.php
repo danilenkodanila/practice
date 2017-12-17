@@ -1,4 +1,5 @@
-<!doctype html>
+<?php
+session_start(); ?>
 <html class="no-js" lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
@@ -17,64 +18,8 @@
   </head>
   <body>
   
-      <!-- header -->
-      <div class="grid-x header">
-        <div class="small-1 large-4 columns site-name">Практикант ДВФУ</div>
-        <div class="small-2 large-4 columns"></div>
-        <div class="small-1 large-4 columns logo">
-          <img src="image/fefu-logo.png" class="fefu-logo">
-        </div>
-      </div>
-      <div class="grid-x header-2">
-        <div class="small-1 large-2 columns vacancies">
-          <a href="/listVacancies.php" class="bt-2">Вакансии</a>
-        </div>
-        <div class="small-1 large-2 columns employers">
-          <a href="/employers-list.php" class="bt-2">Работодатели</a>
-        </div>
-        <div class="small-1 large-2 columns employers">
-          <a href="#" class="bt-1">Приказы</a>
-        </div>
-        <div class="small-0 large-2 columns"></div>
-        <div class="small-1 large-3 columns logo">
-          <div class="lk">
-            <img src="image/lk-logo.png" class="lk-logo">
-            <a href="#" id="goTwo" class="link">Личный кабинет</a>
-          </div>
-        </div>
-      </div>
-      <!-- Конец header`а -->
-
-      
-
-      <!-- Форма авторизации -->
-      <div id="modal_formTwo">
-        <div class="grid-x search-row">
-          <div class="small-0 large-1 columns"></div>
-          <div class="small-10 large-10 columns">
-            <div class="bold text-left">Авторизация</div>
-            <input class="authorization-plchldr" type="text" placeholder="Имя учетной записи">
-            <input class="authorization-plchldr" type="text" placeholder="Пароль">
-          </div>
-          <div class="small-0 large-1 columns"></div>
-        </div>
-        <div class="grid-x search-row">
-          <div class="small-0 large-1 columns"></div>
-          <div class="small-10 large-10 columns">
-            <input type="checkbox" name="your-group" value="unit-in-group" />   Запомнить меня
-            <div class="authorization-block-inside">
-              <input type="button" class="authorization-btn" value="Войти">
-            </div>
-            <div class="authorization-block-inside-two">
-              <a href="/registrationPartOne.php" class="authorization-rgstrtn">Зарегистрироваться</a>
-            </div>
-          </div>
-          <div class="small-0 large-1 columns"></div>
-        </div>
-      </div>
-      <div id="overlayTwo"></div>
-      <!-- Конец формы авторизации -->
-    
+     <?php
+include ("header.php"); ?>
     <!-- Выбор года-->
      <div class="grid-x search-row">
       <div class="small-0 large-1 columns"></div>
@@ -88,16 +33,30 @@
     <!-- Блок со ссылками-->
     <div class="grid-x link-block">
       <div class="small-0 large-1 columns"></div>
-      <div class="small-10 large-10 columns">
-        <a href="#" class="link-employers">Название группы 1 - ссылка на страницу с приказом</a><br>
-        <a href="#" class="link-employers">Название группы 2 - ссылка на страницу с приказом</a><br>
-        <a href="#" class="link-employers">Название группы 3 - ссылка на страницу с приказом</a><br>
-        <a href="#" class="link-employers">Название группы 4 - ссылка на страницу с приказом</a><br>
-        <a href="#" class="link-employers">Название группы 5 - ссылка на страницу с приказом</a><br>
-        <a href="#" class="link-employers">Название группы 6 - ссылка на страницу с приказом</a><br>
-        <a href="#" class="link-employers">Название группы 7 - ссылка на страницу с приказом</a><br>
-        <a href="#" class="link-employers">Название группы 8 - ссылка на страницу с приказом</a><br>
-      </div>
+	  <?php
+	   session_start();
+		$dbhost = "localhost"; // Имя хоста БД
+		$dbusername = "newuser"; // Пользователь БД
+		$dbpass = "newuser"; // Пароль к базе
+		$dbname = "practice"; // Имя базы
+		//file_get_contents($query);
+		$dbconnect = mysql_connect ($dbhost, $dbusername, $dbpass); 
+		if (!$dbconnect) { echo ("Не могу подключиться к серверу базы данных!"); }
+
+		if(@mysql_select_db($dbname)) {}
+		else die ("Не могу подключиться к базе данных $dbname!");
+		
+		
+		$sql = "SELECT universityGroup FROM student_data GROUP BY universityGroup";
+		$result = mysql_query($sql) or die(mysql_error() ."<br/>". $sql);
+		
+
+		 while ($row = mysql_fetch_assoc($result))
+		 {  
+			$_SESSION['universityGroup']=$row['universityGroup'];
+			echo  "<td><a href=# class=link-employers name=group>".$row['universityGroup']."</a></td>\n";	 
+		 }
+	?>
       <div class="small-0 large-1 columns"></div>
     </div>
     <!-- Конец блока со ссылками -->

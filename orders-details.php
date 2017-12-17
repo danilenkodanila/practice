@@ -1,4 +1,5 @@
-<!doctype html>
+<?php
+session_start(); ?>
 <html class="no-js" lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
@@ -16,66 +17,8 @@
 
   </head>
   <body>
-  
-      <!-- header -->
-      <div class="grid-x header">
-        <div class="small-1 large-4 columns site-name">Практикант ДВФУ</div>
-        <div class="small-2 large-4 columns"></div>
-        <div class="small-1 large-4 columns logo">
-          <img src="image/fefu-logo.png" class="fefu-logo">
-        </div>
-      </div>
-      <div class="grid-x header-2">
-        <div class="small-1 large-2 columns vacancies">
-          <a href="/listVacancies.php" class="bt-2">Вакансии</a>
-        </div>
-        <div class="small-1 large-2 columns employers">
-          <a href="/employers-list.php" class="bt-2">Работодатели</a>
-        </div>
-        <div class="small-1 large-2 columns employers">
-          <a href="#" class="bt-1">Приказы</a>
-        </div>
-        <div class="small-0 large-2 columns"></div>
-        <div class="small-1 large-3 columns logo">
-          <div class="lk">
-            <img src="image/lk-logo.png" class="lk-logo">
-            <a href="#" id="goTwo" class="link">Личный кабинет</a>
-          </div>
-        </div>
-      </div>
-      <!-- Конец header`а -->
-
-      
-
-      <!-- Форма авторизации -->
-      <div id="modal_formTwo">
-        <div class="grid-x search-row">
-          <div class="small-0 large-1 columns"></div>
-          <div class="small-10 large-10 columns">
-            <div class="bold text-left">Авторизация</div>
-            <input class="authorization-plchldr" type="text" placeholder="Имя учетной записи">
-            <input class="authorization-plchldr" type="text" placeholder="Пароль">
-          </div>
-          <div class="small-0 large-1 columns"></div>
-        </div>
-        <div class="grid-x search-row">
-          <div class="small-0 large-1 columns"></div>
-          <div class="small-10 large-10 columns">
-            <input type="checkbox" name="your-group" value="unit-in-group" />   Запомнить меня
-            <div class="authorization-block-inside">
-              <input type="button" class="authorization-btn" value="Войти">
-            </div>
-            <div class="authorization-block-inside-two">
-              <a href="/registrationPartOne.php" class="authorization-rgstrtn">Зарегистрироваться</a>
-            </div>
-          </div>
-          <div class="small-0 large-1 columns"></div>
-        </div>
-      </div>
-      <div id="overlayTwo"></div>
-      <!-- Конец формы авторизации -->
-    
-    
+<?php
+include ("header.php"); ?>
 
     <!-- Блок со ссылками-->
     <div class="grid-x">
@@ -96,66 +39,41 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>ФИО 1 студента</td>
-              <td>Вакансия 1</td>
-              <td>Предприятие 1</td>
-              <td>1.06.17 - 15.06.17</td>
-            </tr>
-            <tr>
-              <td>ФИО 2 студента</td>
-              <td>Вакансия не выбрана</td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>ФИО 3 студента</td>
-              <td>Вакансия 2</td>
-              <td>Предприятие 2</td>
-              <td>1.06.17 - 15.06.17</td>
-            </tr>
-            <tr>
-              <td>ФИО 4 студента</td>
-              <td>Вакансия 3</td>
-              <td>Предприятие 1</td>
-              <td>1.06.17 - 15.06.17</td>
-            </tr>
-            <tr>
-              <td>ФИО 5 студента</td>
-              <td>Вакансия 4</td>
-              <td>Предприятие 3</td>
-              <td>1.06.17 - 15.06.17</td>
-            </tr>
-            <tr>
-              <td>ФИО 6 студента</td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>ФИО 7 студента</td>
-              <td>Вакансия не выбрана</td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>ФИО 8 студента</td>
-              <td>Вакансия 5</td>
-              <td>Предприятие 2</td>
-              <td>1.06.17 - 15.06.17</td>
-            </tr>
-            <tr>
-              <td>ФИО 9 студента</td>
-              <td>Вакансия 6</td>
-              <td>Предприятие 6</td>
-              <td>1.06.17 - 15.06.17</td>
-            </tr>
-            <tr>
-              <td>ФИО 9 студента</td>
-              <td>Вакансия не выбрана</td>
-              <td></td>
-              <td></td>
-            </tr>
+		  
+          <?php 
+		// require_once 'orders.php';
+		
+		$dbhost = "localhost"; // Имя хоста БД
+		$dbusername = "newuser"; // Пользователь БД
+		$dbpass = "newuser"; // Пароль к базе
+		$dbname = "practice"; // Имя базы
+
+		$dbconnect = mysql_connect ($dbhost, $dbusername, $dbpass); 
+		if (!$dbconnect) { echo ("Не могу подключиться к серверу базы данных!"); }
+
+		if(@mysql_select_db($dbname)) {}
+		else die ("Не могу подключиться к базе данных $dbname!");
+		$group = $_SESSION['universityGroup'];
+		
+		$sql = "SELECT student_data.universityGroup, vacancies.userAddId, vacancies.dateStart, vacancies.dateFinish, employers_data.name_company, employers_data.id, vacancies.id_employers,vacancies.title, student_data.surname, student_data.patronymic, student_data.id_user, student_data.name FROM student_data, vacancies, employers_data WHERE  vacancies.id_employers = employers_data.id AND vacancies.userAddId = student_data.id_user AND student_data.universityGroup='".$group."'";
+		
+		$result = mysql_query($sql) or die(mysql_error() ."<br/>". $sql);
+		
+
+		 while ($row = mysql_fetch_assoc($result))
+		 {
+		$table .= "<tr>\n";
+		$table .= "<td>".$row['name']." ".$row['patronymic']." ".$row['surname']."</td>\n";
+		$table .= "<td>".$row['title']."</td>\n";
+		$table .= "<td>".$row['name_company']."</td>\n";
+		$table .= "<td>".$row['dateStart']." - ".$row['dateFinish']."</td>\n";
+		$table .= "</tr>\n";
+		 }
+		  $table .= "</table>\n";
+
+ // Выводим заполненую таблицу на экран
+ echo $table;?>
+		 
           </tbody>
         </table>
       </div>

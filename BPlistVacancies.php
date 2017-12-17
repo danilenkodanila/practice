@@ -1,4 +1,6 @@
-<!doctype html>
+<?php
+session_start();
+?>
 <html class="no-js" lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
@@ -46,7 +48,7 @@
     <div class="grid-x search-bt">
       <div class="small-0 large-1 columns"></div>
       <div class="small-10 large-10 columns">
-        <input type="button" class="btnAdd" value="   Добавить вакансию">
+        <input type="button" class="btnAdd" value="Добавить вакансию">
       </div>
       <div class="small-0 large-1 columns"></div>
     </div>
