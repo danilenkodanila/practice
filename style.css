@@ -28,6 +28,7 @@ a{
 	color: white;
 	padding-top: 5px;
 	height: 20px;
+
 }
 .header-2{
 	/*background-color: #1b49a2;*/
@@ -35,7 +36,6 @@ a{
 	color: white;
 }
 .site-name{
-	padding-left: 100px;
 	font-size: 30px;
 	font-family: 'Impact', sans-serif;
 	font-weight: 800;
@@ -47,6 +47,9 @@ a{
 .lk-logo{
 	height: 25px;
 }
+.lk-logo-Two{
+	height: 25px;
+}
 .lk{
 	padding-top: 35px;
 	text-decoration-line: underline;
@@ -56,11 +59,10 @@ a{
 }
 .vacancies{
 	padding-top: 35px;
-	padding-left: 100px;
 }
 .employers{
 	padding-top: 35px;
-	padding-left: 20px;
+	text-align: left;
 }
 
 .bt-1{
@@ -101,7 +103,6 @@ a{
 
 .footer-text{
 	text-align: left;
-	padding-left: 100px;
 	padding-top: 6px;
 	padding-bottom: 6px;
 }
@@ -332,7 +333,8 @@ a{
 /*Блок с ссылками*/
 .link-block{
 	padding-top: 10px;
-	height: 420px;
+	padding-bottom: 10px;
+	/*height: 420px;*/
 }
 .link-employers{
 	text-decoration: underline;
@@ -350,7 +352,6 @@ a{
 	height: 30px;
 	width: 25%;
 	float: left;*/
-	padding-left: 50px;
 	height: 12px;
 	font-size: 12px;
 	padding-bottom: 0px;
@@ -411,24 +412,51 @@ th,tr,thead,td{
 }
 
 /*Личный кабинет*/
-.tabs-right{
-	text-align: right;
-	float: right;
-	padding-right: 25%;
+a.tabs-a{
+	color: black;
+	background-color: white;
 }
-.tabs-left{
-	padding-left: 25%;
+a.tabs-a:hover{
+	color: black;
+	background-color: white;
 }
-.tabs-title{
+.tabs-title > a:focus{
+	color: black;
+	background-color: white;
+	border: 0;
+	border-color: white;
+}
+.tabs-title > a:visited{
+	color: black;
+	background-color: white;
+	border: 0;
+	border-color: white;
+}
+.tabs-title > a[aria-selected='true']{
+	background-color: white;
+	display: list-item;
+	list-style-type: disc;
+	list-style-position: inside;
+	color: black;
+	border: 0;
+	font-weight: bold;
+}
+ul.tabs{
+	border: 0;
+}
+.tabs-content{
+	border: 0;
+}
+li.tabs-title{
 	color: black;
 	border-width:0px;
 	border:none;
 	box-shadow: none;
 	background-color: white;
 }
-.tbl{
+/*.tbl{
 	width: 100%;
-}
+}*/
 .white-color{
 	border: none;
 }
@@ -463,3 +491,43 @@ th,tr,thead,td{
 	border-color: blue;
 	color: blue;
 }
+.link{
+	overflow: hidden;
+	text-overflow: clip;
+	white-space: nowrap;
+}
+
+
+@media screen and (min-width: 0em) and (max-width: 40em) {
+    .link{
+    	font-size: 12px;
+    }
+    .link-lk{
+    	font-size: 6px;
+    }
+    .lk-logo{
+    	height: 16px;
+    }
+    .lk-logo-Two{
+    	height: 7px;
+    }
+}
+
+.vacancies-second{
+	color: blue;
+	text-decoration: underline;
+}
+
+.link-black-underline{
+	text-decoration: underline;
+	text-decoration-color: black;
+	color:black;
+}
+
+.delete-border{
+	border: 0;
+}
+
+
+
+
