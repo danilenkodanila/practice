@@ -18,8 +18,10 @@ session_start(); ?>
   </head>
   <body>
   
+
 <?php
 include ("header.php"); ?>
+
 
     
     <!-- Надпись-->

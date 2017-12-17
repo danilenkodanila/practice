@@ -1,24 +1,10 @@
 
+
 <?php
 session_start(); ?>
 <html class="no-js" lang="en" dir="ltr">
 
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Практикант ДВФУ</title>
-    <link rel="stylesheet" href="css/foundation.css">
-    <link rel="stylesheet" href="css/app.css">
-    <link rel="stylesheet" href="style.css">
-    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <link href="css/foundation-datepicker.css" rel="stylesheet">
-    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script src="js/foundation-datepicker.js"></script>
 
-  </head>
-  <body>
 
 <?php
 include ("header.php"); ?>

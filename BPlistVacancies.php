@@ -42,9 +42,11 @@ session_start();
       </div>
     </div>
 
+
     <div class="grid-x">
       <div class="small-10 small-offset-1 medium-10 medium-offset-1 large-10 large-offset-1 cell">
         <a href="/addingNewVacancy.php"><input type="button" class="btnAdd" value="   Добавить вакансию"></a>
+
 
       </div>
     </div>
