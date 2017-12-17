@@ -15,41 +15,42 @@ session_start();
   </head>
   <body>
       <div class="grid-x header">
-        <div class="small-8 small-offset-1 medium-6 large-6 cell site-name">Практикант ДВФУ</div>
-        <div class="small-2 small-offset-1  medium-2 medium-offset-3 large-2 large-offset-3 cell logo">
+        <div class="small-1 large-4 columns site-name">Практикант ДВФУ</div>
+        <div class="small-2 large-4 columns"></div>
+        <div class="small-1 large-4 columns logo">
           <img src="image/fefu-logo.png" class="fefu-logo">
         </div>
       </div>
       <div class="grid-x header-2">
-        <div class="small-2 small-offset-1 medium-2 medium-offset-1 large-2 large-offset-1 cell vacancies">
-          <a href="/BPlistVacancies.php" class="bt-1">Вакансии</a>
+        <div class="small-1 large-2 columns vacancies">
+          <a href="/listVacancies.php" class="bt-1">Вакансии</a>
         </div>
-        <div class="small-2 small-offset-1 medium-2 medium-offset-0 large-2 large-offset-0 cell employers">
+        <div class="small-1 large-2 columns employers">
           <a href="/employers-list.php" class="bt-2">Работодатели</a>
         </div>
-        <div class="small-2 small-offset-3 medium-3 medium-offset-3 large-3 large-offset-3 cell logo">
+        <div class="small-0 large-4 columns"></div>
+        <div class="small-1 large-3 columns logo">
           <div class="lk">
             <img src="image/lk-logo.png" class="lk-logo">
             <a href="#" class="link">farpost</a>
           </div>
         </div>
       </div>
-
     
      <div class="grid-x search-row">
-      <div class="small-10 small-offset-1 medium-10 medium-offset-1 large-10 large-offset-1 cell">
+      <div class="small-0 large-1 columns"></div>
+      <div class="small-10 large-10 columns">
         <input class="search-icon" type="text" placeholder="Поиск">
       </div>
+      <div class="small-0 large-1 columns"></div>
     </div>
 
-
-
-    <div class="grid-x">
-      <div class="small-10 small-offset-1 medium-10 medium-offset-1 large-10 large-offset-1 cell">
-        <a href="/addingNewVacancy.php"><input type="button" class="btnAdd" value="   Добавить вакансию"></a>
-
-
+    <div class="grid-x search-bt">
+      <div class="small-0 large-1 columns"></div>
+      <div class="small-10 large-10 columns">
+        <input type="button" class="btnAdd" value="Добавить вакансию">
       </div>
+      <div class="small-0 large-1 columns"></div>
     </div>
 
 <div id="modal_form">
@@ -110,7 +111,7 @@ session_start();
       </div>
 
       <div class="formbt">
-        <a href="/addingNewVacancy.php"><input type="button" class="btnVcntPict" value="   Редактировать"></a>
+        <input type="button" class="btnVcntPict" value="   Редактировать">
       </div>
 
       <div class="small-1 large-1 columns"></div>
@@ -237,12 +238,15 @@ session_start();
     </div>
 
                    
-    <!-- footer -->               
-    <?php
-      include_once("footer.php");
-      echoFooter();
-    ?>
-    <!-- Конец footer`а --> 
+    <div class="footer">
+      <div class="blue"></div>
+      <div class="grid-x white">
+        <div class="large-4 columns footer-text">
+          Контактная информация<br>
+          Адреса технической поддержки
+        </div>
+      </div>
+    </div>
 
     <script type="text/javascript">
       $(document).ready(function() { // вся мaгия пoсле зaгрузки стрaницы
