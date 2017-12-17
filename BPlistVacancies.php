@@ -1,4 +1,6 @@
-<!doctype html>
+<?php
+session_start();
+?>
 <html class="no-js" lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
@@ -39,9 +41,14 @@
         <input class="search-icon" type="text" placeholder="Поиск">
       </div>
     </div>
+
+
+
     <div class="grid-x">
       <div class="small-10 small-offset-1 medium-10 medium-offset-1 large-10 large-offset-1 cell">
         <a href="/addingNewVacancy.php"><input type="button" class="btnAdd" value="   Добавить вакансию"></a>
+
+
       </div>
     </div>
 

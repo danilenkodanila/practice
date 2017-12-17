@@ -1,4 +1,5 @@
-<!doctype html>
+<?php
+session_start(); ?>
 <html class="no-js" lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
@@ -16,59 +17,12 @@
 
   </head>
   <body>
-  
-      <!-- header -->
-      <div class="grid-x header">
-        <div class="small-8 small-offset-1 medium-6 large-6 cell site-name">Практикант ДВФУ</div>
-        <div class="small-2 small-offset-1  medium-2 medium-offset-3 large-2 large-offset-3 cell logo">
-          <img src="image/fefu-logo.png" class="fefu-logo">
-        </div>
-      </div>
-      <div class="grid-x header-2">
-        <div class="small-2 small-offset-1 medium-2 medium-offset-1 large-2 large-offset-1 cell vacancies">
-          <a href="/listVacancies.php" class="bt-2Z">Вакансии</a>
-        </div>
-        <div class="small-2 small-offset-1 medium-2 medium-offset-0 large-2 large-offset-0 cell employers">
-          <a href="/employers-list.php" class="bt-2">Работодатели</a>
-        </div>
-        <div class="small-2 small-offset-3 medium-3 medium-offset-3 large-3 large-offset-3 cell logo">
-          <div class="lk">
-            <img src="image/lk-logo.png" class="lk-logo-Two">
-            <a href="#" id="goTwo" class="link-lk">Личный кабинет</a>
-          </div>
-        </div>
-      </div>
-      <!-- Конец header`а -->
 
-      
 
-      <!-- Форма авторизации -->
-      <div id="modal_formTwo">
-        <div class="grid-x search-row">
-          <div class="small-0 large-1 columns"></div>
-          <div class="small-10 large-10 columns">
-            <div class="bold text-left">Авторизация</div>
-            <input class="authorization-plchldr" type="text" placeholder="Имя учетной записи">
-            <input class="authorization-plchldr" type="text" placeholder="Пароль">
-          </div>
-          <div class="small-0 large-1 columns"></div>
-        </div>
-        <div class="grid-x search-row">
-          <div class="small-0 large-1 columns"></div>
-          <div class="small-10 large-10 columns">
-            <input type="checkbox" name="your-group" value="unit-in-group" />   Запомнить меня
-            <div class="authorization-block-inside">
-              <input type="button" class="authorization-btn" value="Войти">
-            </div>
-            <div class="authorization-block-inside-two">
-              <a href="/registrationPartOne.php" class="authorization-rgstrtn">Зарегистрироваться</a>
-            </div>
-          </div>
-          <div class="small-0 large-1 columns"></div>
-        </div>
-      </div>
-      <div id="overlayTwo"></div>
-      <!-- Конец формы авторизации -->
+
+<?php
+include ("header.php"); ?>
+
     
     <!-- Надпись-->
      <div class="grid-x search-row">
@@ -80,27 +34,34 @@
     </div>
     <!-- Конец надписи-->
 
+
     <!-- Форма регистрации -->
+		  <?php 
+    if (isset($_POST['reg'])) {
+       require_once 'save_user.php'; 
+    }?>
+	<form action="" method="post">
     <div class="grid-x link-block">
       <div class="small-0 large-1 columns"></div>
       <div class="small-10 large-10 columns">
-        <div class="registration-block-line"><input class="registration-plchldr" type="text" placeholder="Имя"></div>
-        <div class="registration-block-line"><input class="registration-plchldr" type="text" placeholder="Фамилия"></div>
-        <div class="registration-block-line"><input class="registration-plchldr" type="text" placeholder="Отчество"></div>
-        <div class="registration-block-line"><input class="registration-plchldr" type="text" placeholder="Номер группы Б0000х"></div>
-        <div class="registration-block-line"><input class="registration-plchldr" type="text" placeholder="Номер зачетной книжки"></div>
+        <div class="registration-block-line"><input class="registration-plchldr" name="name" type="text" placeholder="Имя"></div>
+        <div class="registration-block-line"><input class="registration-plchldr" name="surname" type="text" placeholder="Фамилия"></div>
+        <div class="registration-block-line"><input class="registration-plchldr" name="patronymic" type="text" placeholder="Отчество"></div>
+        <div class="registration-block-line"><input class="registration-plchldr" name="universityGroup" type="text" placeholder="Номер группы Б0000х"></div>
+        <div class="registration-block-line"><input class="registration-plchldr" name="record_book_number" type="text" placeholder="Номер зачетной книжки"></div>
         <div class="line-stroke"></div><br>
-        <div class="registration-block-line"><input class="registration-plchldr" type="text" placeholder="Пароль"></div>
-        <div class="registration-block-line"><input class="registration-plchldr" type="text" placeholder="Повтор пароля"></div>
-        <div class="registration-block-line"><input class="registration-plchldr" type="text" placeholder="Электронная почта"></div>
-        <div class="registration-block-line"><input class="registration-plchldr" type="text" placeholder="Номер телефона"></div>
-        <div class="registration-block-line"><input type="checkbox" name="your-group" value="unit-in-group">&emsp;&emsp;   Запомнить меня</div>
+        <div class="registration-block-line"><input class="registration-plchldr" name="password" type="text" placeholder="Пароль"></div>
+        <div class="registration-block-line"><input class="registration-plchldr" name="password1" type="text" placeholder="Повтор пароля"></div>
+        <div class="registration-block-line"><input class="registration-plchldr" name="email" type="text" placeholder="Электронная почта"></div>
+        <div class="registration-block-line"><input class="registration-plchldr" name="telephone" type="text" placeholder="Номер телефона"></div>
+        <!-- <div class="registration-block-line"><input type="checkbox" name="your-group" value="unit-in-group">&emsp;&emsp;   Запомнить меня</div>-->
         <div class="authorization-block-inside">
-              <input type="button" class="registration-btn" value="Подтвердить">
+              <input name="reg" type="submit" class="registration-btn"  value="Подтвердить">
             </div>
       </div>
       <div class="small-0 large-1 columns"></div>
     </div>
+	</form>
      <!-- Конец-->
 
     

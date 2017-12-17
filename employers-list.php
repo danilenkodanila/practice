@@ -1,7 +1,24 @@
-<!doctype html>
+<?php
+	session_start();
+	$dbhost = "localhost"; // Имя хоста БД
+		$dbusername = "newuser"; // Пользователь БД
+		$dbpass = "newuser"; // Пароль к базе
+		$dbname = "practice"; // Имя базы
+
+		$dbconnect = mysql_connect ($dbhost, $dbusername, $dbpass); 
+		if (!$dbconnect) { echo ("Не могу подключиться к серверу базы данных!"); }
+
+		if(@mysql_select_db($dbname)) {}
+		else die ("Не могу подключиться к базе данных $dbname!");
+		
+		
+		$sql = "SELECT name_company FROM employers_data";
+		$result = mysql_query($sql) or die(mysql_error() ."<br/>". $sql);
+		
+?>
 <html class="no-js" lang="en" dir="ltr">
   <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Практикант ДВФУ</title>
@@ -13,65 +30,15 @@
     <link href="css/foundation-datepicker.css" rel="stylesheet">
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="js/foundation-datepicker.js"></script>
-
   </head>
   <body>
-    <!-- header -->
-      <div class="grid-x header">
-        <div class="small-8 small-offset-1 medium-6 large-6 cell site-name">Практикант ДВФУ</div>
-        <div class="small-2 small-offset-1  medium-2 medium-offset-3 large-2 large-offset-3 cell logo">
-          <img src="image/fefu-logo.png" class="fefu-logo">
-        </div>
-      </div>
-      <div class="grid-x header-2">
-        <div class="small-3 small-offset-1 medium-2 medium-offset-1 large-2 large-offset-1 cell vacancies">
-          <a href="/listVacancies.php" class="bt-2">Вакансии</a>
-        </div>
-        <div class="small-3 small-offset-0 medium-2 medium-offset-0 large-2 large-offset-0 cell employers">
-          <a href="/employers-list.php" class="bt-1">Работодатели</a>
-        </div>
-        <div class="small-3 small-offset-1 medium-2 medium-offset-0 large-2 large-offset-0 cell employers
-          <a href="#" class="bt-2">Приказы</a>
-        </div>
-        <div class="small-6 small-offset-2 medium-3 medium-offset-1 large-2 large-offset-2 cell logo">
-          <div class="lk">
-            <img src="image/lk-logo.png" class="lk-logo">
-            <a href="#" id="goTwo" class="link">Личный кабинет</a>
-          </div>
-        </div>
-      </div>
-      <!-- Конец header`а -->
+
+
+
+<?php
+include ("header.php"); ?>
 
       
-
-      <!-- Форма авторизации -->
-      <div id="modal_formTwo">
-        <div class="grid-x search-row">
-          <div class="small-0 large-1 columns"></div>
-          <div class="small-10 large-10 columns">
-            <div class="bold text-left">Авторизация</div>
-            <input class="authorization-plchldr" type="text" placeholder="Имя учетной записи">
-            <input class="authorization-plchldr" type="text" placeholder="Пароль">
-          </div>
-          <div class="small-0 large-1 columns"></div>
-        </div>
-        <div class="grid-x search-row">
-          <div class="small-0 large-1 columns"></div>
-          <div class="small-10 large-10 columns">
-            <input type="checkbox" name="your-group" value="unit-in-group" />   Запомнить меня
-            <div class="authorization-block-inside">
-              <input type="button" class="authorization-btn" value="Войти">
-            </div>
-            <div class="authorization-block-inside-two">
-              <a href="/registrationPartOne.php" class="authorization-rgstrtn">Зарегистрироваться</a>
-            </div>
-          </div>
-          <div class="small-0 large-1 columns"></div>
-        </div>
-      </div>
-      <div id="overlayTwo"></div>
-      <!-- Конец формы авторизации -->
-    
     <!-- Выбор года-->
      <div class="grid-x search-row">
       <div class="small-0 large-1 columns"></div>
@@ -97,14 +64,15 @@
     <div class="grid-x link-block">
       <div class="small-0 large-1 columns"></div>
       <div class="small-10 large-10 columns">
-        <a href="#" class="link-employers">Название предприятия 1 - ссылка на страницу с описанием</a><br>
-        <a href="#" class="link-employers">Название предприятия 2 - ссылка на страницу с описанием</a><br>
-        <a href="#" class="link-employers">Название предприятия 3 - ссылка на страницу с описанием</a><br>
-        <a href="#" class="link-employers">Название предприятия 4 - ссылка на страницу с описанием</a><br>
-        <a href="#" class="link-employers">Название предприятия 5 - ссылка на страницу с описанием</a><br>
-        <a href="#" class="link-employers">Название предприятия 6 - ссылка на страницу с описанием</a><br>
-        <a href="#" class="link-employers">Название предприятия 7 - ссылка на страницу с описанием</a><br>
-        <a href="#" class="link-employers">Название предприятия 8 - ссылка на страницу с описанием</a><br>
+<?php
+	  	$qroup=array();
+		
+		 while ($row = mysql_fetch_assoc($result))
+		 {
+			$qroup=$row['name_company'];
+			echo  "<td><a href=# class=link-employers>".$row['name_company']."</a></td>\n";	 
+		 }
+	?>
       </div>
       <div class="small-0 large-1 columns"></div>
     </div>

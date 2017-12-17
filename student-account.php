@@ -1,74 +1,13 @@
-<!doctype html>
-<html class="no-js" lang="ru" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Практикант ДВФУ</title>
-    <link rel="stylesheet" href="css/foundation.css">
-    <link rel="stylesheet" href="css/app.css">
-    <link rel="stylesheet" href="style.css">
-    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <link href="css/foundation-datepicker.css" rel="stylesheet">
-    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script src="js/foundation-datepicker.js"></script>
 
-  </head>
-  <body>
-  
-      <!-- header -->
-      <div class="grid-x header">
-        <div class="small-8 small-offset-1 medium-6 large-6 cell site-name">Практикант ДВФУ</div>
-        <div class="small-2 small-offset-1  medium-2 medium-offset-3 large-2 large-offset-3 cell logo">
-          <img src="image/fefu-logo.png" class="fefu-logo">
-        </div>
-      </div>
-      <div class="grid-x header-2">
-        <div class="small-2 small-offset-1 medium-2 medium-offset-1 large-2 large-offset-1 cell vacancies">
-          <a href="/listVacancies.php" class="bt-2Z">Вакансии</a>
-        </div>
-        <div class="small-2 small-offset-1 medium-2 medium-offset-0 large-2 large-offset-0 cell employers">
-          <a href="/employers-list.php" class="bt-2">Работодатели</a>
-        </div>
-        <div class="small-2 small-offset-3 medium-3 medium-offset-3 large-3 large-offset-3 cell logo">
-          <div class="lk">
-            <img src="image/lk-logo.png" class="lk-logo-Two">
-            <a href="#" class="link-lk">Виктор Цой</a>
-          </div>
-        </div>
-      </div>
-      <!-- Конец header`а -->
+<?php
+session_start(); ?>
+<html class="no-js" lang="en" dir="ltr">
 
-      
 
-      <!-- Форма авторизации -->
-      <div id="modal_formTwo">
-        <div class="grid-x search-row">
-          <div class="small-0 large-1 columns"></div>
-          <div class="small-10 large-10 columns">
-            <div class="bold text-left">Авторизация</div>
-            <input class="authorization-plchldr" type="text" placeholder="Имя учетной записи">
-            <input class="authorization-plchldr" type="text" placeholder="Пароль">
-          </div>
-          <div class="small-0 large-1 columns"></div>
-        </div>
-        <div class="grid-x search-row">
-          <div class="small-0 large-1 columns"></div>
-          <div class="small-10 large-10 columns">
-            <input type="checkbox" name="your-group" value="unit-in-group" />   Запомнить меня
-            <div class="authorization-block-inside">
-              <input type="button" class="authorization-btn" value="Войти">
-            </div>
-            <div class="authorization-block-inside-two">
-              <a href="/registrationPartOne.php" class="authorization-rgstrtn">Зарегистрироваться</a>
-            </div>
-          </div>
-          <div class="small-0 large-1 columns"></div>
-        </div>
-      </div>
-      <div id="overlayTwo"></div>
-      <!-- Конец формы авторизации -->
+
+
+<?php
+include ("header.php"); ?>
     
     <!-- Надпись-->
      <div class="grid-x search-row">
