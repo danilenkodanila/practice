@@ -17,12 +17,9 @@ session_start(); ?>
 
   </head>
   <body>
-
-
-
+  
 <?php
 include ("header.php"); ?>
-
     
     <!-- Надпись-->
      <div class="grid-x search-row">
@@ -67,10 +64,15 @@ include ("header.php"); ?>
     
 
     <!-- footer -->               
-    <?php
-      include_once("footer.php");
-      echoFooter();
-    ?>
+    <div class="footer">
+      <div class="blue"></div>
+      <div class="grid-x white">
+        <div class="large-4 columns footer-text">
+          Контактная информация<br>
+          Адреса технической поддержки
+        </div>
+      </div>
+    </div>
     <!-- Конец footer`а --> 
 
     <!-- Cкрипт, которыQ обрабатывает клик по личному кабинету -->  

@@ -14,12 +14,8 @@ session_start(); ?>
   </head>
   <body>
   
-
-
-
 <?php
 include ("header.php"); ?>
-
 
       <!-- Всплывающая форма подробное описание вакансии/оставить заявку -->
       <div id="modal_form">
@@ -118,9 +114,11 @@ include ("header.php"); ?>
     
     <!-- Поиск -->
      <div class="grid-x search-row">
-      <div class="small-10 small-offset-1 medium-10 medium-offset-1 large-10 large-offset-1 cell">
+      <div class="small-0 large-1 columns"></div>
+      <div class="small-10 large-10 columns">
         <input class="search-icon" type="text" placeholder="Поиск">
       </div>
+      <div class="small-0 large-1 columns"></div>
     </div>
     <!-- Конец поиска-->
 
@@ -248,10 +246,15 @@ include ("header.php"); ?>
     <!-- Конец второго блока с вакансией -->
 
     <!-- footer -->               
-    <?php
-      include_once("footer.php");
-      echoFooter();
-    ?>
+    <div class="footer">
+      <div class="blue"></div>
+      <div class="grid-x white">
+        <div class="large-4 columns footer-text">
+          Контактная информация<br>
+          Адреса технической поддержки
+        </div>
+      </div>
+    </div>
     <!-- Конец footer`а --> 
 
     <!-- Два одинаковых скрипта, которые обрабатывают клика по первой вакансии и личному кабинету -->  
