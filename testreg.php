@@ -76,6 +76,7 @@ session_start();// вся процедура работает на сессия�
 				exit("<html><head><meta http-equiv='Refresh' content='0; URL=../index.php'></head></html>");
 			}
 		}
-	} 
+	}
+exit("<html><head><meta http-equiv='Refresh' content='0; URL=employers-list.php'></head></html>");	
 	
 ?>
