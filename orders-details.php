@@ -43,16 +43,8 @@ include ("header.php"); ?>
           <?php 
 		// require_once 'orders.php';
 		
-		$dbhost = "localhost"; // Имя хоста БД
-		$dbusername = "newuser"; // Пользователь БД
-		$dbpass = "newuser"; // Пароль к базе
-		$dbname = "practice"; // Имя базы
-
-		$dbconnect = mysql_connect ($dbhost, $dbusername, $dbpass); 
-		if (!$dbconnect) { echo ("Не могу подключиться к серверу базы данных!"); }
-
-		if(@mysql_select_db($dbname)) {}
-		else die ("Не могу подключиться к базе данных $dbname!");
+		include ("bd.php");
+		
 		$group = $_SESSION['universityGroup'];
 		
 		$sql = "SELECT student_data.universityGroup, vacancies.userAddId, vacancies.dateStart, vacancies.dateFinish, employers_data.name_company, employers_data.id, vacancies.id_employers,vacancies.title, student_data.surname, student_data.patronymic, student_data.id_user, student_data.name FROM student_data, vacancies, employers_data WHERE  vacancies.id_employers = employers_data.id AND vacancies.userAddId = student_data.id_user AND student_data.universityGroup='".$group."'";
