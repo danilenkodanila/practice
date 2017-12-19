@@ -1,10 +1,9 @@
 <div class="grid-x header">
-	<div class="small-1 large-4 columns site-name">Практикант ДВФУ</div>
-	<div class="small-2 large-4 columns"></div>
-	<div class="small-1 large-4 columns logo">
-		<img src="image/fefu-logo.png" class="fefu-logo">
-	</div>
-</div>
+        <div class="small-8 small-offset-1 medium-6 large-6 cell site-name">Практикант ДВФУ</div>
+        <div class="small-2 small-offset-1  medium-2 medium-offset-3 large-2 large-offset-3 cell logo">
+          <img src="image/fefu-logo.png" class="fefu-logo">
+        </div>
+      </div>
 	  
 <?php 
 if (empty($_SESSION['category'])){
