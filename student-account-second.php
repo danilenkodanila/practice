@@ -17,58 +17,8 @@
   </head>
   <body>
   
-      <!-- header -->
-      <div class="grid-x header">
-        <div class="small-8 small-offset-1 medium-6 large-6 cell site-name">Практикант ДВФУ</div>
-        <div class="small-2 small-offset-1  medium-2 medium-offset-3 large-2 large-offset-3 cell logo">
-          <img src="image/fefu-logo.png" class="fefu-logo">
-        </div>
-      </div>
-      <div class="grid-x header-2">
-        <div class="small-2 small-offset-1 medium-2 medium-offset-1 large-2 large-offset-1 cell vacancies">
-          <a href="/listVacancies.php" class="bt-2Z">Вакансии</a>
-        </div>
-        <div class="small-2 small-offset-1 medium-2 medium-offset-0 large-2 large-offset-0 cell employers">
-          <a href="/employers-list.php" class="bt-2">Работодатели</a>
-        </div>
-        <div class="small-2 small-offset-3 medium-3 medium-offset-3 large-3 large-offset-3 cell logo">
-          <div class="lk">
-            <img src="image/lk-logo.png" class="lk-logo-Two">
-            <a href="#" class="link-lk">Виктор Цой</a>
-          </div>
-        </div>
-      </div>
-      <!-- Конец header`а -->
-
-      
-
-      <!-- Форма авторизации -->
-      <div id="modal_formTwo">
-        <div class="grid-x search-row">
-          <div class="small-0 large-1 columns"></div>
-          <div class="small-10 large-10 columns">
-            <div class="bold text-left">Авторизация</div>
-            <input class="authorization-plchldr" type="text" placeholder="Имя учетной записи">
-            <input class="authorization-plchldr" type="text" placeholder="Пароль">
-          </div>
-          <div class="small-0 large-1 columns"></div>
-        </div>
-        <div class="grid-x search-row">
-          <div class="small-0 large-1 columns"></div>
-          <div class="small-10 large-10 columns">
-            <input type="checkbox" name="your-group" value="unit-in-group" />   Запомнить меня
-            <div class="authorization-block-inside">
-              <input type="button" class="authorization-btn" value="Войти">
-            </div>
-            <div class="authorization-block-inside-two">
-              <a href="/registrationPartOne.php" class="authorization-rgstrtn">Зарегистрироваться</a>
-            </div>
-          </div>
-          <div class="small-0 large-1 columns"></div>
-        </div>
-      </div>
-      <div id="overlayTwo"></div>
-      <!-- Конец формы авторизации -->
+<?php
+include ("header.php"); ?>
     
     <!-- Надпись-->
      <div class="grid-x search-row">
@@ -197,17 +147,11 @@
      <!-- Конец-->
 
     
-
     <!-- footer -->               
-    <div class="footer">
-      <div class="blue"></div>
-      <div class="grid-x white">
-        <div class="small-10 small-offset-1 medium-10 medium-offset-1 large-10 large-offset-1 footer-text cell">
-          Контактная информация<br>
-          Адреса технической поддержки
-        </div>
-      </div>
-    </div>
+    <?php
+      include_once("footer.php");
+      echoFooter();
+    ?>
     <!-- Конец footer`а --> 
 
     <!-- Cкрипт, которыQ обрабатывает клик по личному кабинету -->  

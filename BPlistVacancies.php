@@ -14,28 +14,8 @@ session_start();
     <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   </head>
   <body>
-      <div class="grid-x header">
-        <div class="small-1 large-4 columns site-name">Практикант ДВФУ</div>
-        <div class="small-2 large-4 columns"></div>
-        <div class="small-1 large-4 columns logo">
-          <img src="image/fefu-logo.png" class="fefu-logo">
-        </div>
-      </div>
-      <div class="grid-x header-2">
-        <div class="small-1 large-2 columns vacancies">
-          <a href="/listVacancies.php" class="bt-1">Вакансии</a>
-        </div>
-        <div class="small-1 large-2 columns employers">
-          <a href="/employers-list.php" class="bt-2">Работодатели</a>
-        </div>
-        <div class="small-0 large-4 columns"></div>
-        <div class="small-1 large-3 columns logo">
-          <div class="lk">
-            <img src="image/lk-logo.png" class="lk-logo">
-            <a href="#" class="link">farpost</a>
-          </div>
-        </div>
-      </div>
+<?php
+include ("header.php"); ?>
     
      <div class="grid-x search-row">
       <div class="small-0 large-1 columns"></div>
@@ -238,17 +218,14 @@ session_start();
     </div>
 
                    
-    <div class="footer">
-      <div class="blue"></div>
-      <div class="grid-x white">
-        <div class="large-4 columns footer-text">
-          Контактная информация<br>
-          Адреса технической поддержки
-        </div>
-      </div>
-    </div>
+    <!-- footer -->               
+    <?php
+      include_once("footer.php");
+      echoFooter();
+    ?>
+    <!-- Конец footer`а --> 
 
-    <script type="text/javascript">
+ <script type="text/javascript">
       $(document).ready(function() { // вся мaгия пoсле зaгрузки стрaницы
         $('a#go').click( function(event){ // лoвим клик пo ссылки с id="go"
           event.preventDefault(); // выключaем стaндaртную рoль элементa
@@ -271,9 +248,35 @@ session_start();
         });
       });
     </script>
+    <script type="text/javascript">
+      $(document).ready(function() { // вся мaгия пoсле зaгрузки стрaницы
+        $('a#goTwo').click( function(event){ // лoвим клик пo ссылки с id="go"
+          event.preventDefault(); // выключaем стaндaртную рoль элементa
+          $('#overlayTwo').fadeIn(400, // снaчaлa плaвнo пoкaзывaем темную пoдлoжку
+            function(){ // пoсле выпoлнения предъидущей aнимaции
+              $('#modal_formTwo') 
+                .css('display', 'block') // убирaем у мoдaльнoгo oкнa display: none;
+                .animate({opacity: 1, top: '50%'}, 200); // плaвнo прибaвляем прoзрaчнoсть oднoвременнo сo съезжaнием вниз
+          });
+        });
+        /* Зaкрытие мoдaльнoгo oкнa, тут делaем тo же сaмoе нo в oбрaтнoм пoрядке */
+        $('#modal_close, #overlayTwo').click( function(){ // лoвим клик пo крестику или пoдлoжке
+          $('#modal_formTwo')
+            .animate({opacity: 0, top: '45%'}, 200,  // плaвнo меняем прoзрaчнoсть нa 0 и oднoвременнo двигaем oкнo вверх
+              function(){ // пoсле aнимaции
+                $(this).css('display', 'none'); // делaем ему display: none;
+                $('#overlayTwo').fadeOut(400); // скрывaем пoдлoжку
+              }
+            );
+        });
+      });
+    </script>
+    <!-- Конец скриптов -->  
+
     <script src="js/vendor/jquery.js"></script>
     <script src="js/vendor/what-input.js"></script>
     <script src="js/vendor/foundation.js"></script>
     <script src="js/app.js"></script>
   </body>
 </html>
+
