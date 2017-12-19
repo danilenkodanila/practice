@@ -24,24 +24,27 @@ include ("header.php"); ?>
     
     <!-- Надпись-->
      <div class="grid-x search-row">
-      <div class="small-0 large-1 columns"></div>
-      <div class="small-10 large-10 columns">                                                                     
-        Личный кабинет                   
+      <div class="large-10 large-offset-1 cell">                                                                     
+        <div style="text-align: center;">Личный кабинет</div>                   
       </div>
-      <div class="small-0 large-1 columns"></div>
     </div>
     <!-- Конец надписи-->
 
 
     <!-- Форма регистрации -->
     <div class="grid-x link-block">
-      <div class="small-0 large-1 columns"></div>
-      <div class="small-10 large-10 columns">
+      <div class="small-10 small-offset-1 medium-10 medium-offset-1 large-10 large-offset-1 cell">
         
         <div class="line-stroke"></div>
          <ul class="tabs" data-active-collapse="true" data-tabs id="collapsing-tabs">
-          <div class="tabs-left"><li class="tabs-title is-active"><a href="#panel1c" aria-selected="true">Персональные данные</a></li></div>
-          <div class="tabs-right"><li class="tabs-title tabs"><a href="#panel2c">Информация по вакансиям</a></li></div>
+          <div class="grid-x">
+            <div class="small-10 small-offset-2 large-4 medium-3 medium-offset-2 large-offset-2 cell">
+              <li class="tabs-title is-active"><a class="tabs-a" href="#panel1c" aria-selected="true">Персональные данные</a></li>
+            </div>
+            <div class="small-10 small-offset-2 large-4 medium-3 medium-offset-2 large-offset-1 cell">
+              <li class="tabs-title tabs"><a class="tabs-a" href="#panel2c">Информация по вакансиям</a></li>
+            </div>
+          </div>
         </ul>
         <div class="line-stroke"></div>
 
@@ -67,36 +70,64 @@ include ("header.php"); ?>
 
           <div class="tabs-panel" id="panel2c">
           <div class="line-solid">Вакансия 1</div><br>
+           <div class="grid-x">
+            <div class="small-4 medium-8 large-10 cell">
           <table class="fnt tbl">
           <thead>
             <tr>
-              <th width="400">Отозвавшиеся студенты</th>
+              <th width="200">Отозвавшиеся студенты</th>
               <th width="200">Статус</th>
-              <th width="100"></th>
-              <th width="100"></th>
+              <!-- <th width="100"></th> -->
+              <!-- <th width="100"></th> -->
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>Студент 1</td>
               <td>Отказано</td>
-              <td width="100"><a href="#" class="link-table">Одобрить</a></td>
-              <td width="100"><a href="#" class="link-table">Отказать</a></td>
+              <!-- <td width="100"><a href="#" class="link-table">Одобрить</a></td> -->
+              <!-- <td width="100"><a href="#" class="link-table">Отказать</a></td> -->
             </tr>
             <tr>
               <td>Студент 2</td>
               <td>Одобрено</td>
-              <td width="100"><a href="#" class="link-table">Удалить</a></td>
-              <td></td>
+              <!-- <td width="100"><a href="#" class="link-table">Удалить</a></td> -->
+              <!-- <td></td> -->
             </tr>
             <tr>
               <td>Студент 3</td>
               <td>Согласовано</td>
-              <td></td>
-              <td></td>
+              <!-- <td></td> -->
+              <!-- <td></td> -->
             </tr>
           </tbody>
         </table>
+      </div>
+              <div class="small-2 medium-2 large-2 cell">
+                <table style="border-collapse: separate;">
+                  <thead>
+                    <tr class="delete-border">
+                      <th class="delete-border" width="50">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                      <th class="delete-border" width="50">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="delete-border">
+                      <td class="delete-border"><a href="#" class="link-black-underline">Одобрить</a></td>
+                      <td class="delete-border"><a href="#" class="link-black-underline">Отказать</a></td>
+                    </tr>
+                    <tr class="delete-border">
+                      <td class="delete-border">&nbsp;</td>
+                    </tr>
+                    <tr class="delete-border">
+                      <td class="delete-border"><a href="#" class="link-black-underline">Удалить</a></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+
+          </div>
           </div>
         </div>
         
