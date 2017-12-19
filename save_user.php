@@ -38,14 +38,7 @@ else{
 	
 	$password = md5($password);
 //если логин и пароль введены,то обрабатываем их, чтобы теги и скрипты не работали, мало ли что люди могут ввести
-	$dsn = 'mysql:dbname=practice;host=localhost;charset=utf8';
-	$opt = [
-		PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-		PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-		PDO::ATTR_EMULATE_PREPARES   => false,
-	];
-	 
-	$pdo = new PDO($dsn, 'newuser', 'newuser', $opt);
+	include ("bd_PDO.php");
 	
 	$sql="SELECT * FROM student_data WHERE record_book_number=?";
 	
