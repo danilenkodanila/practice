@@ -1,5 +1,6 @@
 <?php
-session_start();?>
+      session_start();
+    ?>
 <html class="no-js" lang="ru" dir="ltr">
   <head>
     <meta charset="utf-8">
@@ -15,20 +16,73 @@ session_start();?>
   <body>
   
 <?php
-include ("header.php"); ?>
+  include ("header.php"); 
+  include("bd_PDO.php");
 
+  function HTTP403(){
+    printValue("<br>У вас нет прав для просмотра этой страницы :с");
+    echo'<br><div class="grid-x">
+             <div style="text-align: center;" class="small-6 small-offset-3 medium-6 medium-offset-3 large-6 large-offset-3 cell"><img src="image/403.png"></div>
+             <div style="text-align: center; padding-top:20px;" class="small-6 small-offset-3 medium-6 medium-offset-3 large-6 large-offset-3 cell"><a href="/listVacancies.php" class="bt-1" style="color: blue;" ">Перейти на страницу с вакансиями</a></div>
+             </div><br><br>';
+  }
+  function addedForm($title,$dateStart,$dateFinish,$description,$studentsfor,$place){
+    echo '<form action="changeVacancy.php" method="post">
       <div class="grid-x" style="min-height: 500px; padding-top:20px; padding-bottom: 20px;">
         <div class="small-10 medium-offset-1 medium-10 medium-offset-1 large-10 large-offset-1 cell">
-          <div class="registration-block-line"><input class="registration-plchldr" value="Заголовок вакансии" type="text" placeholder="Заголовок"></div>
-          <div class="registration-block-line"><input class="registration-plchldr" value="22-05-18" type="text" placeholder="Дата начала"></div>
-          <div class="registration-block-line"><input class="registration-plchldr" value="04-06-18" type="text" placeholder="Дата окончания"></div>
-          <div class="registration-block-line"><textarea class="registration-plchldr" placeholder="Описание">Ищем талантливого программиста в нашу дружную команду. Ты будешь заниматься поддержкой системы баннерной рекламы и доработкой нового функционала, а еще разработкой и поддержкой системы ремаркетинга.</textarea></div>
-          <div class="registration-block-line"><input class="registration-plchldr" value="Б8419а" type="text" placeholder="Для студентов группы"></div>
-          <div class="registration-block-line"><input class="registration-plchldr" value="Дальзавод" type="text" placeholder="Место проведения"></div>
-          <div style="text-align: center;"><input type="button" class="registration-btn" value="Изменить"></div>
+          <div class="registration-block-line"><input class="registration-plchldr" value="',$title,'" name="title" type="text" placeholder="Заголовок" required ></div>
+          <div class="registration-block-line"><input class="registration-plchldr" value="',$dateStart,'" name="dateStart" type="text" placeholder="Дата начала" pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])" required></div>
+          <div class="registration-block-line"><input class="registration-plchldr" value="',$dateFinish,'" name="dateFinish" type="text" placeholder="Дата окончания" pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])" required></div>
+          <div class="registration-block-line"><textarea class="registration-plchldr" name="description" placeholder="Описание" required >',$description,'</textarea></div>
+          <div class="registration-block-line"><input class="registration-plchldr" value="',$studentsfor,'" name="studentsfor" type="text" placeholder="Для студентов группы" required ></div>
+          <div class="registration-block-line"><input class="registration-plchldr" value="',$place,'" name="place" type="text" placeholder="Место проведения" required ></div>
+          <div style="text-align: center;"><input type="submit" class="registration-btn" value="Изменить"></div>
         </div>
       </div>
+    </form>';
+  }
+$idVacancies = 1;
+if (empty($_SESSION['category'])){
+  HTTP403();
+} else if ($_SESSION['category']==2) {
+  //если post пустой, то выводим форму
+  if (empty($_POST)){
+    $sql = "SELECT * FROM vacancies WHERE id=?";
+    $result = executeRequest($pdo,$sql,[$idVacancies]);
+    addedForm($result[0]["title"],$result[0]["dateStart"],$result[0]["dateFinish"],$result[0]["description"],$result[0]["studentsfor"],$result[0]["place"]);
+  //если пост не пустой, то то разбираем его выводим сообщение
+  } else {
+    if ($_POST['title'] <> "" && $_POST['dateStart'] <> "" && $_POST['dateFinish'] <> "" && $_POST['description'] <> "" && $_POST['studentsfor'] <> "" && $_POST['place'] <> "") {
+      $date = date('Y-m-d', time());
+      $title = $_POST['title'];
+      $dateStart = $_POST['dateStart'];
+      $dateFinish = $_POST['dateFinish'];
+      $description = $_POST['description'];
+      $studentsfor = $_POST['studentsfor'];
+      $place = $_POST['place'];
+      $idUser = $_SESSION['id'];
+      $idEmployers = queryRequest($pdo, "SELECT `id` FROM `employers_data` WHERE `id_user` = '$idUser'");
+      $idEmployers = $idEmployers[0]["id"];
 
+      $sql = "UPDATE vacancies SET title='$title', dateStart='$dateStart', dateFinish='$dateFinish', description='$description', studentsfor='$studentsfor', place='$place' WHERE id='$idVacancies'";
+      
+      queryRequest($pdo, $sql);
+
+      printValue("Вакансия успешно изменена!");
+      echo'<br><div class="grid-x">
+             <div style="text-align: center;" class="small-6 small-offset-3 medium-6 medium-offset-3 large-6 large-offset-3 cell"><img src="image/done.png"></div>
+             <div style="text-align: center; padding-top:20px;" class="small-6 small-offset-3 medium-6 medium-offset-3 large-6 large-offset-3 cell"><a href="/listVacancies.php" class="bt-1" style="color: blue;" ">Перейти на страницу с вакансиями</a></div>
+             </div><br><br>';
+
+    } else {
+      printValue("Введите данные во все поля");
+      addedForm($_POST['title'],$_POST['dateStart'],$_POST['dateFinish'],$_POST['description'],$_POST['studentsfor'],$_POST['place']);
+    }
+  }
+} else {
+  HTTP403();
+}
+?>
 
 
     <!-- footer -->               
