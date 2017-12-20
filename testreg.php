@@ -27,7 +27,7 @@ session_start();// вся процедура работает на сессия�
 			alert("Вы ввели не всю информацию, венитесь назад и заполните все поля!");
 		</script>
 		<?
-		exit("<html><head><meta http-equiv='Refresh' content='0; URL=employers-list.php'></head></html>");
+		exit("<html><head><meta http-equiv='Refresh' content='0; URL=../index.php'></head></html>");
 	}
 	else
 	{
@@ -45,7 +45,7 @@ session_start();// вся процедура работает на сессия�
 				alert("Извините, введённый вами email неверный.");
 			</script>
 			<?
-			exit("<html><head><meta http-equiv='Refresh' content='0; URL=employers-list.php'></head></html>");
+			exit("<html><head><meta http-equiv='Refresh' content='0; URL=../index.php'></head></html>");
 		} 
 		else
 		{ //если существует, то сверяем пароли
@@ -53,6 +53,7 @@ session_start();// вся процедура работает на сессия�
 			$password=md5($password);
 			if ($res['password']==$password) 
 			{
+				
 					//если пароли совпадают, то запускаем пользователю сессию! Можете его поздравить, он вошел!
 					$_SESSION['email']=$res['email']; 
 					$_SESSION['password']=$res['password']; 
@@ -67,7 +68,7 @@ session_start();// вся процедура работает на сессия�
 					alert("Извините, введённый пароль неверный.");
 				</script>
 				<?
-				exit("<html><head><meta http-equiv='Refresh' content='0; URL=addingNewVacancy.php'></head></html>");
+				exit("<html><head><meta http-equiv='Refresh' content='0; URL=../index.php'></head></html>");
 			}
 		}
 	}

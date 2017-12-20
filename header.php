@@ -6,18 +6,42 @@
       </div>
 	  
 <?php 
+
+// if (!empty($_SESSION['category'])){
+// 	switch ($_SESSION['category']) {
+// 	    case 1:
+// 	    	include ("login_form_user.php");
+// 	        break;
+// 	    case 2:
+// 	    	include ("login_form_prof.php");
+// 	        break;
+// 	    case 3:
+// 	    	include ("login_form_admin.php");
+// 	        break;
+// 	}
+// } else {
+// 	include ("login_form.php");
+// }
+
 if (empty($_SESSION['category'])){
 	include ("login_form.php");
-	} 
-if ($_SESSION['category']==1){
+} else if ($_SESSION['category']==1) {
 	include ("login_form_user.php");
-} 
-if ($_SESSION['category']==2){
+} else if ($_SESSION['category']==2) {
 	include ("login_form_prof.php");
-} 
-if ($_SESSION['category']==3){
+} else if ($_SESSION['category']==3){
 	include ("login_form_admin.php");
 }
+
+// if ($_SESSION['category']==1){
+// 	include ("login_form_user.php");
+// } 
+// if ($_SESSION['category']==2){
+// 	include ("login_form_prof.php");
+// } 
+// if ($_SESSION['category']==3){
+// 	include ("login_form_admin.php");
+// }
 ?>
-      <!-- Конец header`а -->
+    
 
