@@ -1,5 +1,8 @@
 <?php
-session_start(); ?>
+session_start(); 
+include ("bd_PDO.php");
+$id_user=$_SESSION['id'];
+?>
 <html class="no-js" lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
@@ -51,16 +54,62 @@ include ("header.php"); ?>
 
           <div class="tabs-panel is-active" id="panel1c">
             <div class="block-dan">
-              Цой Виктор Робертович
+			
+              <?php 
+			  $stmt = $pdo->prepare("SELECT name FROM student_data WHERE id_user=?");
+			  $stmt->execute(array($id_user));
+			  $name = $stmt->fetchColumn();
+			  echo $name;
+			  echo " ";
+			  $stmt = $pdo->prepare("SELECT surname FROM student_data WHERE id_user=?");
+			  $stmt->execute(array($id_user));
+			  $name = $stmt->fetchColumn();
+			  echo $name;
+			  ?>
+			  
               <br>
-              Группа: Б0000х
+              Группа: 
+			  
+			  <?php 			  
+			  $stmt = $pdo->prepare("SELECT universityGroup FROM student_data WHERE id_user=?");
+			  $stmt->execute(array($id_user));
+			  $name = $stmt->fetchColumn();
+			  echo $name;
+			  ?>
+			  
               <br>
-              Номер зачетной книжки: 000000
+              Номер зачетной книжки: 
+			  
+			  <?php 
+			  $stmt = $pdo->prepare("SELECT record_book_number FROM student_data WHERE id_user=?");
+			  $stmt->execute(array($id_user));
+			  $name = $stmt->fetchColumn();
+			  echo $name;
+			  ?>
+			  
               <br>
               <br>
-              Номер телефона: 8 999 999 99 99  <a href="#"><input class="edt-icon"type="image" src="image/edit-icon.png"/></a>
+              Номер телефона: 
+			  
+			  <?php 
+			  $stmt = $pdo->prepare("SELECT telephone FROM user WHERE id=?");
+			  $stmt->execute(array($id_user));
+			  $name = $stmt->fetchColumn();
+			  echo $name;
+			  ?>
+			  
+			  <a href="#"><input class="edt-icon"type="image" src="image/edit-icon.png"/></a>
               <br>
-              Электронная почта: mail@mail.ru  <a href="#"><input class="edt-icon"type="image" src="image/edit-icon.png"/></a>
+              Электронная почта: 
+			  
+			  <?php 
+			  $stmt = $pdo->prepare("SELECT email FROM user WHERE id=?");
+			  $stmt->execute(array($id_user));
+			  $name = $stmt->fetchColumn();
+			  echo $name;
+			  ?>
+			  
+			  <a href="#"><input class="edt-icon"type="image" src="image/edit-icon.png"/></a>
               <br>
               <br>
               <a href="#" class="authorization-rgstrtn">Сменить пароль</a>

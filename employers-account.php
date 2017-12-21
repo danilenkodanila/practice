@@ -1,5 +1,10 @@
 <?php
-session_start(); ?>
+session_start(); 
+
+
+include ("bd_PDO.php");
+$id_user=$_SESSION['id'];
+?>
 <html class="no-js" lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
@@ -52,16 +57,60 @@ include ("header.php"); ?>
 
           <div class="tabs-panel is-active" id="panel1c">
             <div class="block-dan">
-              International Brutal Marines
+			  
+			  Компания:
+              <?php 
+			 
+			 $stmt = $pdo->prepare("SELECT name_company FROM employers_data WHERE id_user=?");
+			 $stmt->execute(array($id_user));
+			 $name = $stmt->fetchColumn();
+			 echo $name;
+			  ?>
               <br>
-              Адрес: .......
+			  
+              Адрес:
+			  <?php 
+			  $stmt = $pdo->prepare("SELECT address FROM employers_data WHERE id_user=?");
+			  $stmt->execute(array($id_user));
+			  $name = $stmt->fetchColumn();
+			  echo $name;
+
+			  ?>
               <br>
-              ИНН орнанизации: ......
+			  
+              ИНН орнанизации: 
+			  <?php 
+			  $stmt = $pdo->prepare("SELECT inn FROM employers_data WHERE id_user=?");
+			  $stmt->execute(array($id_user));
+			  $name = $stmt->fetchColumn();
+			  echo $name;
+
+			  ?>
               <br>
+			  
               <br>
-              Номер телефона: 8 999 999 99 99  <input class="edt-icon"type="image" src="image/edit-icon.png" />
+			  
+              Номер телефона: 
+			  <?php 
+			  $stmt = $pdo->prepare("SELECT telephone FROM user WHERE id=?");
+			  $stmt->execute(array($id_user));
+			  $name = $stmt->fetchColumn();
+			  echo $name;
+
+			  ?>
+			  <input class="edt-icon"type="image" src="image/edit-icon.png" />
               <br>
-              Электронная почта: mail@mail.ru  <input class="edt-icon"type="image" src="image/edit-icon.png" />
+			  
+              Электронная почта:   
+			  <?php 
+			  $stmt = $pdo->prepare("SELECT email FROM user WHERE id=?");
+			  $stmt->execute(array($id_user));
+			  $name = $stmt->fetchColumn();
+			  echo $name;
+
+			  ?>
+			  
+			  <input class="edt-icon"type="image" src="image/edit-icon.png" />
               <br>
               <br>
               <a href="#" class="authorization-rgstrtn">Сменить пароль</a>
@@ -139,10 +188,15 @@ include ("header.php"); ?>
     
 
     <!-- footer -->               
-    <?php
-      include_once("footer.php");
-      echoFooter();
-    ?>
+    <div class="footer">
+      <div class="blue"></div>
+      <div class="grid-x white">
+        <div class="large-4 columns footer-text">
+          Контактная информация<br>
+          Адреса технической поддержки
+        </div>
+      </div>
+    </div>
     <!-- Конец footer`а --> 
 
     <!-- Cкрипт, которыQ обрабатывает клик по личному кабинету -->  
