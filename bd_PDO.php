@@ -3,12 +3,12 @@
 
 		$user = "admin";
 		$pass = "76543210";
+		//, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
 		try {
 			$pdo = new PDO('mysql:host=localhost;dbname=practice;charset=utf8', $user, $pass);
 		} catch (PDOException $e) {
 			die('Подключение не удалось: ' . $e->getMessage());
 		}
-		// $pdo = new PDO($dsn, 'admin', '76543210', $opt);
 
 		function printValue($outputText){
 	    	echo'<div class="grid-x">
@@ -18,7 +18,7 @@
 	
 		function queryRequest($dbh,$sql){
 			$sth = $dbh->query($sql);
-	        $result = $sth->fetchAll();
+	        $result = $sth->fetchAll(PDO::FETCH_ASSOC);
 	        return $result;
 		}
 		function executeRequest($dbh,$sql,$array){

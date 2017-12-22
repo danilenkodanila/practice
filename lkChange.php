@@ -1,7 +1,7 @@
 <?php
       session_start();
     ?>
-<html class="no-js" lang="ru" dir="ltr">
+    <html class="no-js" lang="ru" dir="ltr">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -19,6 +19,7 @@
   include ("header.php"); 
   include("bd_PDO.php");
 
+  //выводит 403 ошибку — досуп запрещен
   function HTTP403(){
     printValue("<br>У вас нет прав для просмотра этой страницы :с");
     echo'<br><div class="grid-x">
@@ -26,63 +27,81 @@
              <div style="text-align: center; padding-top:20px;" class="small-6 small-offset-3 medium-6 medium-offset-3 large-6 large-offset-3 cell"><a href="/listVacancies.php" class="bt-1" style="color: blue;" ">Перейти на страницу с вакансиями</a></div>
              </div><br><br>';
   }
-  function addedForm($title,$dateStart,$dateFinish,$description,$studentsfor,$place){
-    echo '<form action="changeVacancy.php" method="post">
+
+  //выводит информация после обновления вакансии
+  function refresh(){
+    echo'<br><div class="grid-x">
+             <div style="text-align: center;" class="small-6 small-offset-3 medium-6 medium-offset-3 large-6 large-offset-3 cell"><img src="image/done.png"></div>
+             <div style="text-align: center; padding-top:20px;" class="small-6 small-offset-3 medium-6 medium-offset-3 large-6 large-offset-3 cell"><a href="';
+      if ($_SESSION['category']==1) {
+        echo "/student-account.php";
+      }
+      if ($_SESSION['category']==2) {
+        echo "/employers-account.php";
+      }
+      echo'" class="bt-1" style="color: blue;" ">Перейти в личный кабинет</a></div>
+             </div><br><br>';
+  }
+  //добавляет форму
+  function addedForm($placeholder,$name){
+    echo '<form action="lkChange.php" method="post">
       <div class="grid-x" style="min-height: 500px; padding-top:20px; padding-bottom: 20px;">
         <div class="small-10 medium-offset-1 medium-10 medium-offset-1 large-10 large-offset-1 cell">
-          <div class="registration-block-line"><input class="registration-plchldr" value="',$title,'" name="title" type="text" placeholder="Заголовок" required ></div>
-          <div class="registration-block-line"><input class="registration-plchldr" value="',$dateStart,'" name="dateStart" type="text" placeholder="Дата начала" pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])" required></div>
-          <div class="registration-block-line"><input class="registration-plchldr" value="',$dateFinish,'" name="dateFinish" type="text" placeholder="Дата окончания" pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])" required></div>
-          <div class="registration-block-line"><textarea class="registration-plchldr" name="description" placeholder="Описание" required >',$description,'</textarea></div>
-          <div class="registration-block-line"><input class="registration-plchldr" value="',$studentsfor,'" name="studentsfor" type="text" placeholder="Для студентов группы" required ></div>
-          <div class="registration-block-line"><input class="registration-plchldr" value="',$place,'" name="place" type="text" placeholder="Место проведения" required ></div>
+          <div class="registration-block-line"><input class="registration-plchldr" value="" name="',$name,'" type="text" ';
+    //юзаем паттерны, если телефон и почта
+    if ($name == "telephone") {
+      echo 'pattern="[\+]\d{11}$"';
+    }
+    if ($name == "email") {
+      echo 'pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"';
+    }
+    echo 'placeholder="',$placeholder,'" required ></div>
           <div style="text-align: center;"><input type="submit" class="registration-btn" value="Изменить"></div>
+          <input type="hidden" name="action" value="change">
+          <input type="hidden" name="update" value="',$name,'">
         </div>
       </div>
     </form>';
   }
-$idVacancies = 1;
+
+//проверяем доступ
 if (empty($_SESSION['category'])){
   HTTP403();
-} else if ($_SESSION['category']==2) {
-  //если post пустой, то выводим форму
+} else if ( ($_SESSION['category']==1) || ($_SESSION['category']==2) ) {
+  //проверяем на пустой пост
   if (empty($_POST)){
-    $sql = "SELECT * FROM vacancies WHERE id=?";
-    $result = executeRequest($pdo,$sql,[$idVacancies]);
-    addedForm($result[0]["title"],$result[0]["dateStart"],$result[0]["dateFinish"],$result[0]["description"],$result[0]["studentsfor"],$result[0]["place"]);
-  //если пост не пустой, то то разбираем его выводим сообщение
+    printValue("Что-то пошло не так");
   } else {
-    if ($_POST['title'] <> "" && $_POST['dateStart'] <> "" && $_POST['dateFinish'] <> "" && $_POST['description'] <> "" && $_POST['studentsfor'] <> "" && $_POST['place'] <> "") {
-      $date = date('Y-m-d', time());
-      $title = $_POST['title'];
-      $dateStart = $_POST['dateStart'];
-      $dateFinish = $_POST['dateFinish'];
-      $description = $_POST['description'];
-      $studentsfor = $_POST['studentsfor'];
-      $place = $_POST['place'];
-      $idUser = $_SESSION['id'];
-      $idEmployers = queryRequest($pdo, "SELECT `id` FROM `employers_data` WHERE `id_user` = '$idUser'");
-      $idEmployers = $idEmployers[0]["id"];
-
-      $sql = "UPDATE vacancies SET title='$title', dateStart='$dateStart', dateFinish='$dateFinish', description='$description', studentsfor='$studentsfor', place='$place' WHERE id='$idVacancies'";
-      
+    //проверяем что нужно вывести — формы или отправить пост с изменениями
+    if ($_POST['action'] == 'phone') {
+      addedForm("Телефон","telephone");
+    }
+    if ($_POST['action'] == 'password') {
+      addedForm("Пароль","password");
+    }
+    if ($_POST['action'] == 'email') {
+      addedForm("Почта","email");
+    }
+    if ($_POST['action'] == 'change') {
+      $update = $_POST['update'];
+      $value = $_POST[$update];
+      $id = $_SESSION['id'];
+      if ($update == "telephone") {$sql = "UPDATE user SET telephone='$value' WHERE id='$id'";}
+      if ($update == "password") {$value = md5($value); $sql = "UPDATE user SET password='$value' WHERE id='$id'";}
+      if ($update == "email") {$_SESSION['email']=$value;$sql = "UPDATE user SET email='$value' WHERE id='$id'";}
       queryRequest($pdo, $sql);
-
-      printValue("Вакансия успешно изменена!");
-      echo'<br><div class="grid-x">
-             <div style="text-align: center;" class="small-6 small-offset-3 medium-6 medium-offset-3 large-6 large-offset-3 cell"><img src="image/done.png"></div>
-             <div style="text-align: center; padding-top:20px;" class="small-6 small-offset-3 medium-6 medium-offset-3 large-6 large-offset-3 cell"><a href="/listVacancies.php" class="bt-1" style="color: blue;" ">Перейти на страницу с вакансиями</a></div>
-             </div><br><br>';
-
-    } else {
-      printValue("Введите данные во все поля");
-      addedForm($_POST['title'],$_POST['dateStart'],$_POST['dateFinish'],$_POST['description'],$_POST['studentsfor'],$_POST['place']);
+      printValue("<br>Данные успешно обновлены");
+      refresh();
     }
   }
 } else {
   HTTP403();
 }
-?>
+
+
+    // var_dump($_SESSION['id']);
+    ?>
+
 
     <!-- footer -->               
     <?php
@@ -92,6 +111,9 @@ if (empty($_SESSION['category'])){
     <!-- Конец footer`а --> 
 
  <script type="text/javascript">
+
+
+
       $(document).ready(function() { // вся мaгия пoсле зaгрузки стрaницы
         $('a#go').click( function(event){ // лoвим клик пo ссылки с id="go"
           event.preventDefault(); // выключaем стaндaртную рoль элементa
@@ -145,3 +167,4 @@ if (empty($_SESSION['category'])){
     <script src="js/app.js"></script>
   </body>
 </html>
+

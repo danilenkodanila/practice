@@ -34,7 +34,7 @@ include ("header.php"); ?>
 
 
     <!-- Форма с табами -->
-    <div class="grid-x link-block">
+    <div class="grid-x link-block" style="min-height: 400px;">
       <div class="small-10 small-offset-1 medium-10 medium-offset-1 large-10 large-offset-1 cell">
         
         <div class="line-stroke"></div>
@@ -98,7 +98,12 @@ include ("header.php"); ?>
 			  echo $name;
 			  ?>
 			  
-			  <a href="#"><input class="edt-icon"type="image" src="image/edit-icon.png"/></a>
+			  <form action="lkChange.php" style="display: inline;" method="post">
+          <button type="submit">
+            <image class="edt-icon" src="image/edit-icon.png">
+          </button>
+          <input type="hidden" name="action" value="phone">
+        </form>
               <br>
               Электронная почта: 
 			  
@@ -109,10 +114,18 @@ include ("header.php"); ?>
 			  echo $name;
 			  ?>
 			  
-			  <a href="#"><input class="edt-icon"type="image" src="image/edit-icon.png"/></a>
+			 <form action="lkChange.php" style="display: inline;" method="post">
+          <button type="submit">
+            <image class="edt-icon" src="image/edit-icon.png">
+          </button>
+          <input type="hidden" name="action" value="email">
+        </form>
               <br>
               <br>
-              <a href="#" class="authorization-rgstrtn">Сменить пароль</a>
+              <form action="lkChange.php" method="post">
+                <input class="authorization-rgstrtn" type="submit" value="Сменить пароль" />
+                <input type="hidden" name="action" value="password">
+              </form>
             </div>
           </div>
 

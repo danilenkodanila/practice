@@ -318,6 +318,10 @@ a{
 .authorization-rgstrtn{
 	text-decoration: underline;
 	color: black;
+	border-width:0px;
+	border:none;
+	box-shadow: none;
+	padding-left: 0px;
 }
 .authorization-rgstrtn:hover{
 	color: black;
