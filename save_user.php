@@ -12,7 +12,7 @@ if (isset($_POST['password1'])) { $password1 = str_replace(" ","",$_POST['passwo
 if (isset($_POST['telephone'])) { $telephone=$_POST['telephone']; if ($telephone =='') { unset($telephone);} }
 if (isset($_POST['email'])) { $email=$_POST['email']; if ($email =='') { unset($email);} }
 //заносим введенный пользователем пароль в переменную $password, если он пустой, то уничтожаем переменную
-
+$category=1;
 
 if (empty($name) or empty($surname) or empty($patronymic) or empty($universityGroup) or empty($record_book_number) or empty($email) or empty($password)or empty($password1)){ //если пользователь не ввел логин или пароль, то выдаем ошибку и останавливаем скрипт
 	?>
@@ -56,8 +56,8 @@ else{
 	}
 	else 
 	{
-		$act=-1;
 		// если такого нет, то сохраняем данные 
+		
 		$stmt = $pdo->prepare("INSERT INTO user (email,password, telephone, category) VALUES (?,?,?,?)");	
 		$stmt->execute(Array($email, $password, $telephone, $category));//поставить конкретную категорию
 		$result2=true;
