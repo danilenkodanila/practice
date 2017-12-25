@@ -35,13 +35,17 @@ include ("header.php"); ?>
     <div class="grid-x link-block">
       <div class="small-0 large-1 columns"></div>
       <div class="small-10 large-10 columns">
-        <div class="bold text-left">Кто вы?</div><br><br>
-        <form>
+        <div class="bold text-left">Кого вы хотите зарегистрировать?</div><br><br>
+        <form action="" method="post">
           <input type="radio" name="pokemon" value="Red" id="pokemonRed"><label for="pokemonRed">Студент</label><br>
-          <input type="radio" name="pokemon" value="Blue" id="pokemonBlue"><label for="pokemonBlue">Работодатель</label><br>
-        </form>
-        <a href="#" class="button">Продолжить</a>
+          <input type="radio" name="pokemon1" value="Blue" id="pokemonBlue"><label for="pokemonBlue">Работодатель</label><br>
+		  <input type="submit" class="button" value="Подтвердить"></input>
+        </form>	  <?php if( isset( $_POST['pokemon'] ) )
+				{exit("<html><head><meta http-equiv='Refresh' content='0; URL=../registrationStident.php'></head></html>");exit();} else if ( isset( $_POST['pokemon1'] ) )
+				{exit("<html><head><meta http-equiv='Refresh' content='0; URL=../registrationCompany.php'></head></html>");}
+	              ?>
       </div>
+
       <div class="small-0 large-1 columns"></div>
     </div>
      <!-- Конец-->
