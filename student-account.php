@@ -56,6 +56,7 @@ include ("header.php"); ?>
             <div class="block-dan">
       
               <?php 
+              if ($_SESSION['category']==1){
         $stmt = $pdo->prepare("SELECT name FROM student_data WHERE id_user=?");
         $stmt->execute(array($id_user));
         $name = $stmt->fetchColumn();
@@ -112,6 +113,7 @@ include ("header.php"); ?>
         $stmt->execute(array($id_user));
         $name = $stmt->fetchColumn();
         echo $name;
+              }
         ?>
         
        <form action="lkChange.php" style="display: inline;" method="post">
