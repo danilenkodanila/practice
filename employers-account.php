@@ -56,8 +56,12 @@ include ("header.php"); ?>
           <div class="tabs-panel is-active" id="panel1c">
             <div class="block-dan">
         
-        Компания:
-              <?php 
+        
+              <?php if ($_SESSION['category']==2){  
+			  
+              
+			 
+			 echo ("Компания:");
        
        $stmt = $pdo->prepare("SELECT name_company FROM employers_data WHERE id_user=?");
        $stmt->execute(array($id_user));
@@ -107,6 +111,7 @@ include ("header.php"); ?>
         $stmt->execute(array($id_user));
         $name = $stmt->fetchColumn();
         echo $name;
+  }
         ?>
         
         <form action="lkChange.php" style="display: inline;" method="post">
