@@ -1,9 +1,8 @@
 <?php
 session_start(); 
-include ("bd_PDO_short.php");
+include ("bd_PDO.php");
 $id_user=$_SESSION['id'];
 ?>
-
 <html class="no-js" lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
@@ -35,8 +34,8 @@ include ("header.php"); ?>
     <!-- Конец надписи-->
 
 
-    <!-- Форма регистрации -->
-    <div class="grid-x link-block">
+    <!-- Форма -->
+    <div class="grid-x link-block" style="min-height: 400px;">
       <div class="small-10 small-offset-1 medium-10 medium-offset-1 large-10 large-offset-1 cell">
         
         <div class="line-stroke"></div>
@@ -56,65 +55,72 @@ include ("header.php"); ?>
 
           <div class="tabs-panel is-active" id="panel1c">
             <div class="block-dan">
-			
-			<?php if ($_SESSION['category']==2){  
-			  
-              
-			 
-			 echo ("Компания:");
-			 $stmt = $pdo->prepare("SELECT name_company FROM employers_data WHERE id_user=?");
-			 $stmt->execute(array($id_user));
-			 $name = $stmt->fetchColumn();
-			 echo $name;
-			  ?>
+        
+        Компания:
+              <?php 
+       
+       $stmt = $pdo->prepare("SELECT name_company FROM employers_data WHERE id_user=?");
+       $stmt->execute(array($id_user));
+       $name = $stmt->fetchColumn();
+       echo $name;
+        ?>
               <br>
-			  
+        
               Адрес:
-			  <?php 
-			  $stmt = $pdo->prepare("SELECT address FROM employers_data WHERE id_user=?");
-			  $stmt->execute(array($id_user));
-			  $name = $stmt->fetchColumn();
-			  echo $name;
-
-			  ?>
+        <?php 
+        $stmt = $pdo->prepare("SELECT address FROM employers_data WHERE id_user=?");
+        $stmt->execute(array($id_user));
+        $name = $stmt->fetchColumn();
+        echo $name;
+        ?>
               <br>
-			  
+        
               ИНН орнанизации: 
-			  <?php 
-			  $stmt = $pdo->prepare("SELECT inn FROM employers_data WHERE id_user=?");
-			  $stmt->execute(array($id_user));
-			  $name = $stmt->fetchColumn();
-			  echo $name;
-
-			  ?>
+        <?php 
+        $stmt = $pdo->prepare("SELECT inn FROM employers_data WHERE id_user=?");
+        $stmt->execute(array($id_user));
+        $name = $stmt->fetchColumn();
+        echo $name;
+        ?>
               <br>
-			  
+        
               <br>
-			  
+        
               Номер телефона: 
-			  <?php 
-			  $stmt = $pdo->prepare("SELECT telephone FROM user WHERE id=?");
-			  $stmt->execute(array($id_user));
-			  $name = $stmt->fetchColumn();
-			  echo $name;
-
-			  ?>
-			  <input class="edt-icon"type="image" src="image/edit-icon.png" />
+        <?php 
+        $stmt = $pdo->prepare("SELECT telephone FROM user WHERE id=?");
+        $stmt->execute(array($id_user));
+        $name = $stmt->fetchColumn();
+        echo $name;
+        ?>
+        <form action="lkChange.php" style="display: inline;" method="post">
+          <button type="submit">
+            <image class="edt-icon" src="image/edit-icon.png">
+          </button>
+          <input type="hidden" name="action" value="phone">
+        </form>
               <br>
-			  
+        
               Электронная почта:   
-			  <?php 
-			  $stmt = $pdo->prepare("SELECT email FROM user WHERE id=?");
-			  $stmt->execute(array($id_user));
-			  $name = $stmt->fetchColumn();
-			  echo $name;
-			}
-			  ?>
-			  
-			  <input class="edt-icon"type="image" src="image/edit-icon.png" />
+        <?php 
+        $stmt = $pdo->prepare("SELECT email FROM user WHERE id=?");
+        $stmt->execute(array($id_user));
+        $name = $stmt->fetchColumn();
+        echo $name;
+        ?>
+        
+        <form action="lkChange.php" style="display: inline;" method="post">
+          <button type="submit">
+            <image class="edt-icon" src="image/edit-icon.png">
+          </button>
+          <input type="hidden" name="action" value="email">
+        </form>
               <br>
               <br>
-              <a href="#" class="authorization-rgstrtn">Сменить пароль</a>
+              <form action="lkChange.php" method="post">
+                <input class="authorization-rgstrtn" type="submit" value="Сменить пароль" />
+                <input type="hidden" name="action" value="password">
+              </form>
             </div>
           </div>
 
@@ -189,15 +195,10 @@ include ("header.php"); ?>
     
 
     <!-- footer -->               
-    <div class="footer">
-      <div class="blue"></div>
-      <div class="grid-x white">
-        <div class="large-4 columns footer-text">
-          Контактная информация<br>
-          Адреса технической поддержки
-        </div>
-      </div>
-    </div>
+    <?php
+      include_once("footer.php");
+      echoFooter();
+    ?>
     <!-- Конец footer`а --> 
 
     <!-- Cкрипт, которыQ обрабатывает клик по личному кабинету -->  
