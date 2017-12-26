@@ -1,8 +1,9 @@
 <?php
 session_start(); 
-include ("bd_PDO.php");
+include ("bd_PDO_short.php");
 $id_user=$_SESSION['id'];
 ?>
+
 <html class="no-js" lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
@@ -22,7 +23,8 @@ $id_user=$_SESSION['id'];
   <body>
   
 <?php
-include ("header.php"); ?>
+include ("header.php"); 
+?>
     
     <!-- Надпись-->
      <div class="grid-x search-row">
@@ -34,7 +36,7 @@ include ("header.php"); ?>
 
 
     <!-- Форма с табами -->
-    <div class="grid-x link-block" style="min-height: 400px;">
+    <div class="grid-x link-block">
       <div class="small-10 small-offset-1 medium-10 medium-offset-1 large-10 large-offset-1 cell">
         
         <div class="line-stroke"></div>
@@ -56,11 +58,14 @@ include ("header.php"); ?>
             <div class="block-dan">
 			
               <?php 
+			  
+			  if ($_SESSION['category']==1){
+			  
 			  $stmt = $pdo->prepare("SELECT name FROM student_data WHERE id_user=?");
 			  $stmt->execute(array($id_user));
 			  $name = $stmt->fetchColumn();
 			  echo $name;
-			  echo " ";
+			  echo ' ';
 			  $stmt = $pdo->prepare("SELECT surname FROM student_data WHERE id_user=?");
 			  $stmt->execute(array($id_user));
 			  $name = $stmt->fetchColumn();
@@ -98,12 +103,7 @@ include ("header.php"); ?>
 			  echo $name;
 			  ?>
 			  
-			  <form action="lkChange.php" style="display: inline;" method="post">
-          <button type="submit">
-            <image class="edt-icon" src="image/edit-icon.png">
-          </button>
-          <input type="hidden" name="action" value="phone">
-        </form>
+			  <a href="#"><input class="edt-icon"type="image" src="image/edit-icon.png"/></a>
               <br>
               Электронная почта: 
 			  
@@ -112,20 +112,14 @@ include ("header.php"); ?>
 			  $stmt->execute(array($id_user));
 			  $name = $stmt->fetchColumn();
 			  echo $name;
+			  
+			  }
 			  ?>
 			  
-			 <form action="lkChange.php" style="display: inline;" method="post">
-          <button type="submit">
-            <image class="edt-icon" src="image/edit-icon.png">
-          </button>
-          <input type="hidden" name="action" value="email">
-        </form>
+			  <a href="#"><input class="edt-icon"type="image" src="image/edit-icon.png"/></a>
               <br>
               <br>
-              <form action="lkChange.php" method="post">
-                <input class="authorization-rgstrtn" type="submit" value="Сменить пароль" />
-                <input type="hidden" name="action" value="password">
-              </form>
+              <a href="#" class="authorization-rgstrtn">Сменить пароль</a>
             </div>
           </div>
 

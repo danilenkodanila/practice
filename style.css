@@ -109,10 +109,17 @@ a{
 .search-row{
 	padding-top: 10px;
 }
+
+.edt-icon-two{
+height: 15px;
+width: 15px;
+/*display: inline;*/
+float: right;
+}
+
 .search-icon{
 	text-align: left;
 	height: 30px;
-	background: url(image/search-icon.png) no-repeat right;
 	background-size: 18px;
 	float: right;
 	border-width:0px;

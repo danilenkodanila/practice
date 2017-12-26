@@ -1,5 +1,7 @@
 <?php
-session_start(); ?>
+session_start(); 
+include ("bd_PDO_short.php");
+?>
 <html class="no-js" lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
@@ -18,7 +20,7 @@ session_start(); ?>
 include ("header.php"); ?>
 
       <!-- Всплывающая форма подробное описание вакансии/оставить заявку -->
-      <div id="modal_form">
+     <!-- <div id="modal_form">
         <div class="grid-x block">
         <div class="small-1 large-1 columns"></div>
         <div class="small-10 large-10 columns bd-pop">
@@ -81,7 +83,7 @@ include ("header.php"); ?>
         <div class="small-1 large-1 columns"></div>
         </div>
       </div>
-      <div id="overlay"></div>
+      <div id="overlay"></div> -->
       <!-- Конец формы -->
 
       <!-- Форма авторизации -->
@@ -112,138 +114,129 @@ include ("header.php"); ?>
       <div id="overlayTwo"></div>
       <!-- Конец формы авторизации -->
     
-    <!-- Поиск -->
-     <div class="grid-x search-row">
-      <div class="small-0 large-1 columns"></div>
-      <div class="small-10 large-10 columns">
-        <input class="search-icon" type="text" placeholder="Поиск">
-      </div>
-      <div class="small-0 large-1 columns"></div>
-    </div>
-    <!-- Конец поиска-->
+<!-- Поиск -->
+<div class="grid-x search-row">
+<div class="small-0 large-1 columns"></div>
+<div class="small-10 large-10 columns" style="position: relative;">
+<form action="" style="display: inline;" method="post">
+<input class="search-icon" name="search" type="text" placeholder="Поиск">
+<button type="submit" style="position: absolute;right: 0;bottom: 50%;" >
+<image class="edt-icon-two" src="image/search-icon.png">
+</button>
+<input type="hidden" name="action" value="phone">
+</form>
+</div>
+<div class="small-0 large-1 columns"></div>
+</div>
+<!-- Конец поиска-->
 
 
     <!-- Первый блок с вакансией -->
     <!-- Этот блок кликабельный -->
-    <a href="#" id="go" class="block-a">
-    <div class="grid-x block">
-      <div class="small-1 large-1 columns"></div>
-      <div class="small-10 large-10 columns bd">
+	
+	<?php
+	//echo (). ' ';
+			$search=$_POST['search'];
+			$stmt = $pdo->query("SELECT * FROM vacancies WHERE title LIKE '%$search%'");
+			$stmt->setFetchMode(PDO::FETCH_ASSOC);
+			while($row = $stmt->fetch())
+{
+    
+	
+    printf('<a href="#" id="go" class="block-a">');
+    printf('<div class="grid-x block">');
+      printf('<div class="small-1 large-1 columns"></div>');
+      printf('<div class="small-10 large-10 columns bd">');
 
-        <div class="grid-x block-line">
-          <div class="small-1 large-1 columns"></div>
-          <div class="small-10 large-10 columns">
-            <div class="bold text-left">Заголовок</div>
-            <div class="bold text-right">Работодатель</div>
-          </div>
-          <div class="small-1 large-1 columns"></div>
-        </div>
+        printf('<div class="grid-x block-line">');
+          printf('<div class="small-1 large-1 columns"></div>');
+          printf('<div class="small-10 large-10 columns">');
+		  
+		  $suka=$row['title'];
+            printf('<div class="bold text-left">'.$suka.'</div>'); //nazvanie
+			
+		  $suka=$row['id_employers'];	
+		  $stmt1 = $pdo->prepare("SELECT name_company FROM employers_data WHERE id=?");
+		  $stmt1->execute(array($suka));
+		  $name1 = $stmt1->fetchColumn();
+			  
+            printf('<div class="bold text-right">'.$name1.'</div>'); //rabotodatel
+			
+         printf('</div>');
+          printf('<div class="small-1 large-1 columns"></div>');
+        printf('</div>');
 
-        <div class="grid-x block-line">
-          <div class="small-1 large-1 columns"></div>
-          <div class="small-10 large-10 columns">
-            &emsp;&emsp;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam non metus a quam dapibus ullamcorper non consequat ex. Aenean porta iaculis dui, et vestibulum magna ultricies a. Nulla id semper libero. In quis est non tellus pharetra imperdiet nec et risus. Nunc pretium auctor mi vitae fringilla. Proin porttitor faucibus justo, ac convallis purus euismod vitae. Donec non ipsum arcu. Proin consequat tortor nunc, sit amet viverra velit accumsan eu.
-            <br>&emsp;&emsp;Vivamus consectetur sapien at malesuada semper. Suspendisse potenti. Cras in scelerisque velit. Aliquam dignissim, justo nec maximus facilisis, arcu neque fermentum mi, consequat ultricies justo nulla sed enim. Ut in magna eget turpis maximus rhoncus. Vivamus aliquet et metus at sollicitudin. Phasellus id suscipit magna.
-          </div>
-          <div class="small-1 large-1 columns"></div>
-        </div>
+        printf('<div class="grid-x block-line">');
+          printf('<div class="small-1 large-1 columns"></div>');
+          printf('<div class="small-10 large-10 columns">');
+		  
+		   $suka=$row['description'];
+            printf($suka);
+			
+			
+         printf(' </div>');
+         printf(' <div class="small-1 large-1 columns"></div>');
+       printf(' </div>');
 
-        <div class="grid-x block-line">
-          <div class="small-1 large-1 columns"></div>
-          <div class="small-10 large-10 columns">
-            <div class="bold">Ориентировано на:</div> студентов группы ...
-          </div>
-          <div class="small-1 large-1 columns"></div>
-        </div>
+       printf(' <div class="grid-x block-line">');
+         printf(' <div class="small-1 large-1 columns"></div>');
+         printf(' <div class="small-10 large-10 columns">');
+		 
+		    $suka=$row['studentsfor'];
+            printf('<div class="bold">Ориентировано на:</div> студентов группы '.$suka);
+			
+         printf(' </div>');
+         printf(' <div class="small-1 large-1 columns"></div>');
+       printf(' </div>');
 
-        <div class="grid-x block-line">
-          <div class="small-1 large-1 columns"></div>
-          <div class="small-10 large-10 columns">
-            <div class="bold">Дата проведения:</div> с ... по ... 
-          </div>
-          <div class="small-1 large-1 columns"></div>
-        </div>
+       printf(' <div class="grid-x block-line">');
+         printf(' <div class="small-1 large-1 columns"></div>');
+         printf(' <div class="small-10 large-10 columns">');
+		 
+		   $suka=$row['dateStart'];
+		   $suka2=$row['dateFinish'];
+           printf(' <div class="bold">Дата проведения:</div> с '.$suka.' по '.$suka2);
+		   
+		   
+         printf(' </div>');
+         printf(' <div class="small-1 large-1 columns"></div>');
+       printf(' </div>');
 
-        <div class="grid-x block-line">
-          <div class="small-1 large-1 columns"></div>
-          <div class="small-10 large-10 columns">
-            <div class="bold">Место проведения:</div> ул. ..., ООО ....
-          </div>
-          <div class="small-1 large-1 columns"></div>
-        </div>
+        printf('<div class="grid-x block-line">');
+         printf(' <div class="small-1 large-1 columns"></div>');
+         printf(' <div class="small-10 large-10 columns">');
+		 
+		   $suka=$row['place'];
+           printf(' <div class="bold">Место проведения:</div> '.$suka);
+			
+			
+			
+			
+         printf(' </div>');
+         printf(' <div class="small-1 large-1 columns"></div>');
+        printf('</div>');
 
-        <div class="grid-x block-line">
-          <div class="small-1 large-1 columns"></div>
-          <div class="small-10 large-10 columns">
-            <div class="bold text-right">Дата добавления</div>
-          </div>
-          <div class="small-1 large-1 columns"></div>
-        </div>
+        printf('<div class="grid-x block-line">');
+          printf('<div class="small-1 large-1 columns"></div>');
+          printf('<div class="small-10 large-10 columns">');
+		  
+		   $suka=$row['dateAdd'];
+           printf(' <div class="bold text-right">Дата добавления '. $suka.'</div>');
+		   
+         printf(' </div>');
+         printf(' <div class="small-1 large-1 columns"></div>');
+       printf(' </div>');
 
-      </div>
-      <div class="small-1 large-1 columns"></div>
-    </div>
-    </a>
+      printf('</div>');
+     printf(' <div class="small-1 large-1 columns"></div>');
+   printf(' </div>');
+   printf(' </a>');
+	
+	}
+			?>
     <!-- Конец первого блока с вакансией -->
 
-    <!-- Второй блок с вакансией -->
-    <div class="grid-x block">
-      <div class="small-1 large-1 columns"></div>
-      <div class="small-10 large-10 columns bd">
-
-        <div class="grid-x block-line">
-          <div class="small-1 large-1 columns"></div>
-          <div class="small-10 large-10 columns">
-            <div class="bold text-left">Заголовок</div>
-            <div class="bold text-right">Работодатель</div>
-          </div>
-          <div class="small-1 large-1 columns"></div>
-        </div>
-
-        <div class="grid-x block-line">
-          <div class="small-1 large-1 columns"></div>
-          <div class="small-10 large-10 columns">
-            &emsp;&emsp;А тут короткое описание
-          </div>
-          <div class="small-1 large-1 columns"></div>
-        </div>
-
-        <div class="grid-x block-line">
-          <div class="small-1 large-1 columns"></div>
-          <div class="small-10 large-10 columns">
-            <div class="bold">Ориентировано на:</div> студентов группы ...
-          </div>
-          <div class="small-1 large-1 columns"></div>
-        </div>
-
-        <div class="grid-x block-line">
-          <div class="small-1 large-1 columns"></div>
-          <div class="small-10 large-10 columns">
-            <div class="bold">Дата проведения:</div> с ... по ... 
-          </div>
-          <div class="small-1 large-1 columns"></div>
-        </div>
-
-        <div class="grid-x block-line">
-          <div class="small-1 large-1 columns"></div>
-          <div class="small-10 large-10 columns">
-            <div class="bold">Место проведения:</div> ул. ..., ООО ....
-          </div>
-          <div class="small-1 large-1 columns"></div>
-        </div>
-
-        <div class="grid-x block-line">
-          <div class="small-1 large-1 columns"></div>
-          <div class="small-10 large-10 columns">
-            <div class="bold text-right">Дата добавления</div>
-          </div>
-          <div class="small-1 large-1 columns"></div>
-        </div>
-
-      </div>
-      <div class="small-1 large-1 columns"></div>
-    </div>
-    <!-- Конец второго блока с вакансией -->
+  
 
     <!-- footer -->               
     <?php
