@@ -18,12 +18,11 @@ if (empty($name) or empty($surname) or empty($patronymic) or empty($universityGr
 	?>
 	<script>
 		alert("Вы ввели не всю информацию, венитесь назад и заполните все поля!");
-
+		javascript:history.back(); 
 	</script>
 	<?
-	exit("<html><head><meta http-equiv='Refresh' content='0; URL=../registrationStident.php'></head></html>");
-	
-}
+	//exit("<html><head><meta http-equiv='Refresh' content='0; URL=../registrationStident.php'></head></html>");	
+} else
 if ($password<>$password1){ 
 	?>
 	<script>
@@ -35,7 +34,6 @@ if ($password<>$password1){
 	exit("<html><head><meta http-equiv='Refresh' content='0; URL=../registrationStident.php'></head></html>");
 }
 else{
-	
 	$password = md5($password);
 //если логин и пароль введены,то обрабатываем их, чтобы теги и скрипты не работали, мало ли что люди могут ввести
 	include ("bd_PDO.php");
@@ -45,6 +43,21 @@ else{
 	$stm = $pdo->prepare($sql);
 	$stm->execute([$record_book_number]);
 	$res = $stm->fetch();
+	 
+	$sql1="SELECT * FROM user WHERE email=?";
+	
+	$stm = $pdo->prepare($sql1);
+	$stm->execute([$email]);
+	$res1 = $stm->fetch(); 
+	 if ($res1) {
+		?>
+		<script>
+			alert("Извините, введённый вами email уже зарегистрирован.");
+			javascript:history.back() 
+		</script>
+		<?
+		/*exit("<html><head><meta http-equiv='Refresh' content='0; URL=../registr_form.php'></head></html>");*/
+	} else
 	if ($res) {
 		?>
 		<script>
@@ -53,7 +66,7 @@ else{
 		</script>
 		<?
 		/*exit("<html><head><meta http-equiv='Refresh' content='0; URL=../registr_form.php'></head></html>");*/
-	}
+	} 
 	else 
 	{
 		// если такого нет, то сохраняем данные 
@@ -63,7 +76,6 @@ else{
 		$result2=true;
 
 		
-		//If ($select_status=="1"){//поменять статус можно тут 
 			$sql="SELECT id FROM user WHERE telephone=?";
 			$stm = $pdo->prepare($sql);
 			$stm->execute([$telephone]);

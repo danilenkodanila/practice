@@ -41,7 +41,7 @@ include ("header.php"); ?>
           <input type="radio" name="pokemon1" value="Blue" id="pokemonBlue"><label for="pokemonBlue">Работодатель</label><br>
 		  <input type="submit" class="button" value="Подтвердить"></input>
         </form>	  <?php if( isset( $_POST['pokemon'] ) )
-				{exit("<html><head><meta http-equiv='Refresh' content='0; URL=../registrationStident.php'></head></html>");exit();} else if ( isset( $_POST['pokemon1'] ) )
+				{exit("<html><head><meta http-equiv='Refresh' content='0; URL=../registrationStident.php'></head></html>");} else if ( isset( $_POST['pokemon1'] ) )
 				{exit("<html><head><meta http-equiv='Refresh' content='0; URL=../registrationCompany.php'></head></html>");}
 	              ?>
       </div>

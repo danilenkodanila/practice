@@ -12,16 +12,16 @@ if (isset($_POST['email'])) { $email=$_POST['email']; if ($email =='') { unset($
 //заносим введенный пользователем пароль в переменную $password, если он пустой, то уничтожаем переменную
 $category=2;
 
-if (empty($name_company) or empty($inn) or empty($address) or empty($email) or empty($password)or empty($password1) or $password<>$password1){ //если пользователь не ввел логин или пароль, то выдаем ошибку и останавливаем скрипт
+if (empty($name_company) or empty($inn) or empty($address) or empty($email) or empty($password)or empty($password1)){ //если пользователь не ввел логин или пароль, то выдаем ошибку и останавливаем скрипт
 	?>
 	<script>
 		alert("Вы ввели не всю информацию, венитесь назад и заполните все поля!");
-
+		javascript:history.back()
 	</script>
 	<?
-	exit("<html><head><meta http-equiv='Refresh' content='0; URL=../registrationStident.php'></head></html>");
+	//exit("<html><head><meta http-equiv='Refresh' content='0; URL=../registrationStident.php'></head></html>");
 	
-}
+} else
 if ($password<>$password1){ 
 	?>
 	<script>
@@ -30,7 +30,7 @@ if ($password<>$password1){
 	</script>
 	<?
 	
-	exit("<html><head><meta http-equiv='Refresh' content='0; URL=../registrationStident.php'></head></html>");
+	//exit("<html><head><meta http-equiv='Refresh' content='0; URL=../registrationStident.php'></head></html>");
 }
 else{
 	
@@ -43,6 +43,21 @@ else{
 	$stm = $pdo->prepare($sql);
 	$stm->execute([$inn]);
 	$res = $stm->fetch();
+	
+	$sql1="SELECT * FROM user WHERE email=?";
+	
+	$stm = $pdo->prepare($sql1);
+	$stm->execute([$email]);
+	$res1 = $stm->fetch(); 
+	 if ($res1) {
+		?>
+		<script>
+			alert("Извините, введённый вами email уже зарегистрирован.");
+			javascript:history.back() 
+		</script>
+		<?
+		/*exit("<html><head><meta http-equiv='Refresh' content='0; URL=../registr_form.php'></head></html>");*/
+	} else
 	if ($res) {
 		?>
 		<script>
@@ -61,7 +76,6 @@ else{
 		$result2=true;
 
 		
-		//If ($select_status=="1"){//поменять статус можно тут 
 			$sql="SELECT id FROM user WHERE telephone=?";
 			$stm = $pdo->prepare($sql);
 			$stm->execute([$telephone]);
@@ -89,7 +103,7 @@ else{
 				$stm = $pdo->prepare($sql);
 				$stm->execute(array($id_user, $name_company,$inn,$address));	
 			}
-		//}
+
 			if ($bool){
 			if ($result2=='TRUE') {	
 				?>
