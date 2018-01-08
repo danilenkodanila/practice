@@ -32,7 +32,7 @@ include ("header.php"); ?>
 
     <!-- Блок со ссылками-->
     <div class="grid-x link-block">
-      <div class="small-0 large-1 columns"></div>
+      <div class="small-10 large-10 columns">
 	  <?php
 	   session_start();
 	   include ("bd.php");
@@ -43,10 +43,10 @@ include ("header.php"); ?>
 
 		 while ($row = mysql_fetch_assoc($result))
 		 {  
-			echo "<td><a href=orders-details.php?group=".$row['universityGroup']." class=link-employers name=group>".$row['universityGroup']."</a></td>";	
-				
+			echo "<td><a href=orders-details.php?group=".$row['universityGroup']." class=link-employers>".$row['universityGroup']."</a></td>"."<br/>";	
+		
 		 }
-	?>
+	?></div>
       <div class="small-0 large-1 columns"></div>
     </div>
     <!-- Конец блока со ссылками -->

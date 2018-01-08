@@ -61,11 +61,10 @@ include ("header.php"); ?>
       <div class="small-0 large-1 columns"></div>
       <div class="small-10 large-10 columns">
 <?php
-	  	$qroup=array();
-		
+	  
 		 while ($row = mysql_fetch_assoc($result))
 		 {
-			echo  "<td><a href=employers-detail.php?employers=".$row['name_company']." class=link-employers>".$row['name_company']."</a></td>\n";	 
+			echo  "<td><a href=employers-detail.php?employers=".$row['name_company']." class=link-employers>".$row['name_company']."</a></td>"."<br/>";	 
 		 }
 	?>
       </div>
