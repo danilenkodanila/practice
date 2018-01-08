@@ -37,15 +37,14 @@ include ("header.php"); ?>
 	   session_start();
 	   include ("bd.php");
 		
-		
 		$sql = "SELECT universityGroup FROM student_data GROUP BY universityGroup";
 		$result = mysql_query($sql) or die(mysql_error() ."<br/>". $sql);
 		
 
 		 while ($row = mysql_fetch_assoc($result))
 		 {  
-			$_SESSION['universityGroup']=$row['universityGroup'];
-			echo  "<td><a href=# class=link-employers name=group>".$row['universityGroup']."</a></td>\n";	 
+			echo "<td><a href=orders-details.php?group=".$row['universityGroup']." class=link-employers name=group>".$row['universityGroup']."</a></td>";	
+				
 		 }
 	?>
       <div class="small-0 large-1 columns"></div>

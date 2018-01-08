@@ -19,15 +19,21 @@ session_start(); ?>
   <body>
 <?php
 include ("header.php"); ?>
-
+          <?php 
+		// require_once 'orders.php';
+		
+		include ("bd.php");
+		
+		$group = $_GET['group'];?>
     <!-- Блок со ссылками-->
     <div class="grid-x">
       <div class="small-0 large-1 columns"></div>
       <div class="small-10 large-10 columns">
         <div class="line-solid"></div>
         <div class="pdng">
-          <div class="bold text-left">&emsp;&emsp;&emsp;Название группы 1</div>
-          <div class="text-right">Текущая дата</div>
+          <div class="bold text-left">&emsp;&emsp;&emsp; Группа: <?php echo $group?></div>
+          <div class="text-right"><script type="text/javascript">document.write(new Date().getDate()+"." +new Date().getMonth()+1+"." +new Date().getFullYear())</script>
+</div>
         </div>
         <table class="fnt">
           <thead>
@@ -45,7 +51,7 @@ include ("header.php"); ?>
 		
 		include ("bd.php");
 		
-		$group = $_SESSION['universityGroup'];
+		$group = $_GET['group'];
 		
 		$sql = "SELECT student_data.universityGroup, vacancies.userAddId, vacancies.dateStart, vacancies.dateFinish, employers_data.name_company, employers_data.id, vacancies.id_employers,vacancies.title, student_data.surname, student_data.patronymic, student_data.id_user, student_data.name FROM student_data, vacancies, employers_data WHERE  vacancies.id_employers = employers_data.id AND vacancies.userAddId = student_data.id_user AND student_data.universityGroup='".$group."'";
 		

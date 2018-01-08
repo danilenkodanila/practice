@@ -16,22 +16,40 @@
   <body>
   
 <?php
-  include ("header.php"); 
-  include("bd_PDO.php");
-?>
+	include ("header.php"); 
+	include("bd_PDO.php");
+	include ("bd.php");
+	$employers = $_GET['employers'];
+	$sql = "SELECT employers_data.name_company, employers_data.address, employers_data.inn, user.telephone, 
+	user.email	FROM user, employers_data WHERE  user.id = employers_data.id_user AND employers_data.name_company='".$employers."'";
+		
+	$result = mysql_query($sql) or die(mysql_error() ."<br/>". $sql);
+	while ($row = mysql_fetch_assoc($result))
+	{
+		if ($row['name_company']==$employers)
+			{
+				$address=$row['address'];
+				$telephone=$row['telephone'];
+				$inn=$row['inn'];
+				$email=$row['email'];
+			}
+
+	}
+	?>
+
 
    <div class="grid-x" style="min-height: 500px;">
       <div class="large-10 large-offset-1 cell detail">               
-      <div class="authorization-block-inside">Данные о компании Фарпост</div>
+      <div class="authorization-block-inside">Данные о компании <?php echo $employers?></div>
       <br>
-      Адрес: Владивосток, ул. Светланская, 49
+      Адрес: <?php echo $address?>
       <br>
-      ИНН компании: 4213182177282
+      ИНН компании: <?php echo $inn?>
       <br>
       <br>
-      Номер телефона: 8 4232 543 27
+      Номер телефона: <?php echo $telephone?>
       <br>
-      Электронная почта: practice@farpost.ru      
+      Электронная почта: <?php echo $email?>     
       <br>           
       </div>
     </div>

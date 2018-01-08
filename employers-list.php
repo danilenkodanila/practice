@@ -65,8 +65,7 @@ include ("header.php"); ?>
 		
 		 while ($row = mysql_fetch_assoc($result))
 		 {
-			$qroup=$row['name_company'];
-			echo  "<td><a href=# class=link-employers>".$row['name_company']."</a></td>\n";	 
+			echo  "<td><a href=employers-detail.php?employers=".$row['name_company']." class=link-employers>".$row['name_company']."</a></td>\n";	 
 		 }
 	?>
       </div>
