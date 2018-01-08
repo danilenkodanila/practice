@@ -24,7 +24,7 @@ include ("header.php"); ?>
      <div class="grid-x search-row">
       <div class="small-0 large-1 columns"></div>
       <div class="small-10 large-10 columns">                                                                     
-        <div class="year-choice">Выбор года</div>                           
+        <div class="year-choice">Список групп</div>                           
       </div>
       <div class="small-0 large-1 columns"></div>
     </div>

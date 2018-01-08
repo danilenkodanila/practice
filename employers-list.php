@@ -50,7 +50,7 @@ include ("header.php"); ?>
    ::    ::   :::     ::::: ::  :::: ::      ::    ::   :::   :: ::::  
    :      :   : :      : :  :   :: : :       :      :   : :  : :: : :  
 Поэтому просто сделаю так [тут нужен джим керри]-->
-        <div class="year-choice">Выбор года</div>                           
+        <div class="year-choice">Список компаний</div>                           
       </div>
       <div class="small-0 large-1 columns"></div>
     </div>
