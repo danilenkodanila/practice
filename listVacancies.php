@@ -17,10 +17,26 @@ include ("bd_PDO_short.php");
   <body>
   
 <?php
-include ("header.php"); ?>
+include ("header.php"); 
+include("bd_PDO.php");
+?>
 
-      <!-- Всплывающая форма подробное описание вакансии/оставить заявку -->
-     <!-- <div id="modal_form">
+      <?php
+        if (!empty($_GET)){
+
+          $sql = "SELECT * FROM vacancies WHERE id=?";
+          $result = executeRequest($pdo,$sql,[$_GET["open"]]);
+          // var_dump($result);
+          // var_dump($result[0][0]);
+
+          $suka=$result[0]['id_employers']; 
+          $stmt1 = $pdo->prepare("SELECT name_company FROM employers_data WHERE id=?");
+          $stmt1->execute(array($suka));
+          $name1 = $stmt1->fetchColumn();
+
+          echo'<!-- Всплывающая форма подробное описание вакансии/оставить заявку -->
+     <div id="modal_form">
+        
         <div class="grid-x block">
         <div class="small-1 large-1 columns"></div>
         <div class="small-10 large-10 columns bd-pop">
@@ -28,8 +44,8 @@ include ("header.php"); ?>
           <div class="grid-x block-line">
             <div class="small-1 large-1 columns"></div>
             <div class="small-10 large-10 columns">
-              <div class="bold text-left">Заголовок</div>
-              <div class="bold text-right">Работодатель</div>
+              <div class="bold text-left">'.$result[0]["title"].'</div>
+              <div class="bold text-right">'.$name1.'</div>
             </div>
             <div class="small-1 large-1 columns"></div>
           </div>
@@ -37,8 +53,7 @@ include ("header.php"); ?>
           <div class="grid-x block-line">
             <div class="small-1 large-1 columns"></div>
             <div class="small-10 large-10 columns">
-              &emsp;&emsp;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam non metus a quam dapibus ullamcorper non consequat ex. Aenean porta iaculis dui, et vestibulum magna ultricies a. Nulla id semper libero. In quis est non tellus pharetra imperdiet nec et risus. Nunc pretium auctor mi vitae fringilla. Proin porttitor faucibus justo, ac convallis purus euismod vitae. Donec non ipsum arcu. Proin consequat tortor nunc, sit amet viverra velit accumsan eu.
-              <br>&emsp;&emsp;Vivamus consectetur sapien at malesuada semper. Suspendisse potenti. Cras in scelerisque velit. Aliquam dignissim, justo nec maximus facilisis, arcu neque fermentum mi, consequat ultricies justo nulla sed enim. Ut in magna eget turpis maximus rhoncus. Vivamus aliquet et metus at sollicitudin. Phasellus id suscipit magna.
+              '.$result[0]["description"].'
             </div>
             <div class="small-1 large-1 columns"></div>
           </div>
@@ -46,7 +61,7 @@ include ("header.php"); ?>
           <div class="grid-x block-line">
             <div class="small-1 large-1 columns"></div>
             <div class="small-10 large-10 columns">
-              <div class="bold">Ориентировано на:</div> студентов группы ...
+              <div class="bold">Ориентировано на:</div> студентов группы '.$result[0]["studentsfor"].'
             </div>
             <div class="small-1 large-1 columns"></div>
           </div>
@@ -54,7 +69,7 @@ include ("header.php"); ?>
           <div class="grid-x block-line">
             <div class="small-1 large-1 columns"></div>
             <div class="small-10 large-10 columns">
-              <div class="bold">Дата проведения:</div> с ... по ... 
+              <div class="bold">Дата проведения:</div> с '.$result[0]["dateStart"].' по '.$result[0]["dateFinish"].' 
             </div>
             <div class="small-1 large-1 columns"></div>
           </div>
@@ -62,15 +77,14 @@ include ("header.php"); ?>
           <div class="grid-x block-line">
             <div class="small-1 large-1 columns"></div>
             <div class="small-10 large-10 columns">
-              <div class="bold">Место проведения:</div> ул. ..., ООО ....
-            </div>
+              <div class="bold">Место проведения:</div> '.$result[0]["place"].'            </div>
             <div class="small-1 large-1 columns"></div>
           </div>
 
           <div class="grid-x block-line">
             <div class="small-1 large-1 columns"></div>
             <div class="small-10 large-10 columns">
-              <div class="bold text-right">Дата добавления</div>
+              <div class="bold text-right">'.$result[0]["dateAdd"].'</div>
             </div>
             <div class="small-1 large-1 columns"></div>
           </div>
@@ -83,8 +97,12 @@ include ("header.php"); ?>
         <div class="small-1 large-1 columns"></div>
         </div>
       </div>
-      <div id="overlay"></div> -->
-      <!-- Конец формы -->
+      <div id="overlay"></div>
+      <!-- Конец формы -->';
+        }
+      ?>
+
+
 
       <!-- Форма авторизации -->
       <div id="modal_formTwo">
@@ -136,14 +154,19 @@ include ("header.php"); ?>
 	
 	<?php
 	//echo (). ' ';
-			$search=$_POST['search'];
-			$stmt = $pdo->query("SELECT * FROM vacancies WHERE title LIKE '%$search%'");
-			$stmt->setFetchMode(PDO::FETCH_ASSOC);
+      if (empty($_POST['search'])){
+        $stmt = $pdo->query("SELECT * FROM vacancies");
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+      } else {
+        $search=$_POST['search'];
+        $stmt = $pdo->query("SELECT * FROM vacancies WHERE title LIKE '%$search%'");
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+      }
 			while($row = $stmt->fetch())
 {
     
 	
-    printf('<a href="#" id="go" class="block-a">');
+    printf('<a href="#" id="go" open="'.$row["id"].'" class="block-a">');
     printf('<div class="grid-x block">');
       printf('<div class="small-1 large-1 columns"></div>');
       printf('<div class="small-10 large-10 columns bd">');
@@ -236,7 +259,7 @@ include ("header.php"); ?>
 			?>
     <!-- Конец первого блока с вакансией -->
 
-  
+
 
     <!-- footer -->               
     <?php
@@ -245,12 +268,38 @@ include ("header.php"); ?>
     ?>
     <!-- Конец footer`а --> 
 
+
+   
     <!-- Два одинаковых скрипта, которые обрабатывают клика по первой вакансии и личному кабинету -->  
     <!-- Сделаны просто для примера -->  
     <script type="text/javascript">
+
+      function insertParam(key, value){
+        key = encodeURI(key); value = encodeURI(value);
+        var kvp = document.location.search.substr(1).split('&');
+
+        var i=kvp.length; var x; while(i--) {
+            x = kvp[i].split('=');
+
+            if (x[0]==key){
+                x[1] = value;
+                kvp[i] = x.join('=');
+                break;
+            }
+        }
+          if(i<0) {kvp[kvp.length] = [key,value].join('=');}
+
+          //this will reload the page, it's likely better to store this until finished
+          document.location.search = kvp.join('&'); 
+      }
+      
       $(document).ready(function() { // вся мaгия пoсле зaгрузки стрaницы
         $('a#go').click( function(event){ // лoвим клик пo ссылки с id="go"
           event.preventDefault(); // выключaем стaндaртную рoль элементa
+          console.log(this.getAttribute("open"));
+          insertParam("open",this.getAttribute("open"));
+
+
           $('#overlay').fadeIn(400, // снaчaлa плaвнo пoкaзывaем темную пoдлoжку
             function(){ // пoсле выпoлнения предъидущей aнимaции
               $('#modal_form') 
