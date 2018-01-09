@@ -32,7 +32,7 @@ include ("header.php"); ?>
 
     <!-- Блок со ссылками-->
     <div class="grid-x link-block">
-      <div class="small-10 large-10 columns">
+      <div class="small-10 large-10 large-offset-1 columns">
 	  <?php
 	   session_start();
 	   include ("bd.php");
