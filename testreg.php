@@ -1,6 +1,6 @@
 <?php
 //header('Content-Type: text/html; charset=utf-8', true); 
-session_start();// вся процедура работает на сессиях. Именно в ней хранятся данные пользователя, пока он находится на сайте. Очень важно запустить их в самом начале странички!!!
+session_start();
 	//заносим введенный пользователем логин в переменную $email, если он пустой,  то уничтожаем переменную
 	if    (isset($_POST['email'])) 
 	{ 
@@ -27,7 +27,7 @@ session_start();// вся процедура работает на сессия�
 			alert("Вы ввели не всю информацию, венитесь назад и заполните все поля!");
 		</script>
 		<?
-		exit("<html><head><meta http-equiv='Refresh' content='0; URL=../index.php'></head></html>");
+		exit("<html><head><meta http-equiv='Refresh' content='0; URL=listVacancies.php'></head></html>");
 	}
 	else
 	{
@@ -45,7 +45,7 @@ session_start();// вся процедура работает на сессия�
 				alert("Извините, введённый вами email неверный.");
 			</script>
 			<?
-			exit("<html><head><meta http-equiv='Refresh' content='0; URL=../index.php'></head></html>");
+			exit("<html><head><meta http-equiv='Refresh' content='0; URL=listVacancies.php'></head></html>");
 		} 
 		else
 		{ //если существует, то сверяем пароли
@@ -68,10 +68,10 @@ session_start();// вся процедура работает на сессия�
 					alert("Извините, введённый пароль неверный.");
 				</script>
 				<?
-				exit("<html><head><meta http-equiv='Refresh' content='0; URL=../index.php'></head></html>");
+				exit("<html><head><meta http-equiv='Refresh' content='0; URL=listVacancies.php'></head></html>");
 			}
 		}
 	}
-exit("<html><head><meta http-equiv='Refresh' content='0; URL=addingNewVacancy.php'></head></html>");	
+exit("<html><head><meta http-equiv='Refresh' content='0; URL=listVacancies.php'></head></html>");	
 	
 ?>
