@@ -1,8 +1,8 @@
 
 <?php
 
-		$user = "newuser";
-		$pass = "newuser";
+		$user = "root";
+		$pass = "";
 		//, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
 		try {
 			$pdo = new PDO('mysql:host=localhost;dbname=practice;charset=utf8', $user, $pass);
@@ -27,4 +27,11 @@
 	        $result = $sth->fetchAll();
 	        return $result;
   		}
+		
+		function pushSQLtoDB($dbh, $sql) {
+        $sth = $dbh->prepare($sql);
+        $sth->execute();
+        $result = $sth->fetchAll();
+        return $result;
+		}	
 ?>

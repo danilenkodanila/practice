@@ -33,6 +33,8 @@ include ("header.php"); ?>
     <!-- Конец надписи-->
 
 
+	 
+	
     <!-- Форма с табами -->
     <div class="grid-x link-block" style="min-height: 400px;">
       <div class="small-10 small-offset-1 medium-10 medium-offset-1 large-10 large-offset-1 cell">
@@ -142,12 +144,48 @@ include ("header.php"); ?>
                       <th width="200">Статус заявки</th>
                     </tr>
                   </thead>
-                  <tbody>
+				  <?php
+				  {
+					/*  $sql = "SELECT * FROM notification WHERE id_user=?";
+					  $result = executeRequest($pdo,$sql,$_SESSION['id']]); */
+					  $stmt = $pdo->prepare("SELECT * FROM notification WHERE id_user=?");
+					  $stmt->execute(array($_SESSION['id']));
+					  $stmt->setFetchMode(PDO::FETCH_ASSOC);
+					  while($row = $stmt->fetch()) 
+					  {
+					    $stmt1 = $pdo->prepare("SELECT * FROM vacancies WHERE id=?");
+					    $stmt1->execute(array($row["id_vacancy"]));
+					    $stmt1->setFetchMode(PDO::FETCH_ASSOC);
+						$row1 = $stmt1->fetch();						
+					    printf('<tbody>');
+                        printf('<tr>');
+                        printf('<td><a href="#" class="link-table-two">'.$row1["title"].'</a></td>');
+						
+						$stmt1 = $pdo->prepare("SELECT * FROM employers_data WHERE id=?");
+					    $stmt1->execute(array($row1["id_employers"]));
+					    $stmt1->setFetchMode(PDO::FETCH_ASSOC);
+						$row2 = $stmt1->fetch(); 
+                        printf('<td>'.$row2["name_company"].'</td>');
+						
+						switch ($row["status_employer"])
+						{
+							case 0: printf('<td>Рассматривается</td>'); break;
+							case 1: printf('<td>Принята</td>'); break;
+							case 2: printf('<td>Отклонена</td>'); break;
+						}
+
+						
+                        printf('</tr>');
+					  }
+					  
+				  } ?>
+               <!--  <tbody>
                     <tr>
                       <td><a href="#" class="link-table-two">Вакансия 1</a></td>
                       <td>International Brutal Marines</td>
                       <td>Рассматривается</td>
                     </tr>
+
                     <tr>
                       <td><a href="#" class="link-table-two">Вакансия 2</a></td>
                       <td>Color Dream</td>
@@ -158,7 +196,9 @@ include ("header.php"); ?>
                       <td>Ростовский Дон</td>
                       <td>Подтверждена</td>
                     </tr>
-                  </tbody>
+                  </tbody> -->
+			
+			
                 </table>
               </div>
               <div class="small-0 medium-2 large-2 cell">
@@ -201,6 +241,52 @@ include ("header.php"); ?>
     <!-- Cкрипт, которыQ обрабатывает клик по личному кабинету -->  
     <!-- Сделан просто для примера -->  
     <script type="text/javascript">
+	
+	function insertParam(key, value){
+        key = encodeURI(key); value = encodeURI(value);
+        var kvp = document.location.search.substr(1).split('&');
+
+        var i=kvp.length; var x; while(i--) {
+            x = kvp[i].split('=');
+
+            if (x[0]==key){
+                x[1] = value;
+                kvp[i] = x.join('=');
+                break;
+            }
+        }
+          if(i<0) {kvp[kvp.length] = [key,value].join('=');}
+
+          //this will reload the page, it's likely better to store this until finished
+          document.location.search = kvp.join('&'); 
+      }
+	
+	 $(document).ready(function() { // вся мaгия пoсле зaгрузки стрaницы
+        $('a#go').click( function(event){ // лoвим клик пo ссылки с id="go"
+          event.preventDefault(); // выключaем стaндaртную рoль элементa
+          console.log(this.getAttribute("open"));
+          insertParam("open",this.getAttribute("open"));
+
+
+          $('#overlay').fadeIn(400, // снaчaлa плaвнo пoкaзывaем темную пoдлoжку
+            function(){ // пoсле выпoлнения предъидущей aнимaции
+              $('#modal_form') 
+                .css('display', 'block') // убирaем у мoдaльнoгo oкнa display: none;
+                .animate({opacity: 1, top: '50%'}, 200); // плaвнo прибaвляем прoзрaчнoсть oднoвременнo сo съезжaнием вниз
+          });
+        });
+        /* Зaкрытие мoдaльнoгo oкнa, тут делaем тo же сaмoе нo в oбрaтнoм пoрядке */
+        $('#modal_close, #overlay').click( function(){ // лoвим клик пo крестику или пoдлoжке
+          $('#modal_form')
+            .animate({opacity: 0, top: '45%'}, 200,  // плaвнo меняем прoзрaчнoсть нa 0 и oднoвременнo двигaем oкнo вверх
+              function(){ // пoсле aнимaции
+                $(this).css('display', 'none'); // делaем ему display: none;
+                $('#overlay').fadeOut(400); // скрывaем пoдлoжку
+              }
+            );
+        });
+      });
+	
       $(document).ready(function() { // вся мaгия пoсле зaгрузки стрaницы
         $('a#goTwo').click( function(event){ // лoвим клик пo ссылки с id="go"
           event.preventDefault(); // выключaем стaндaртную рoль элементa

@@ -129,41 +129,73 @@ include ("header.php"); ?>
             </div>
           </div>
 
-          <div class="tabs-panel" id="panel2c">
-          <div class="line-solid">Вакансия 1</div><br>
-           <div class="grid-x">
-            <div class="small-4 medium-8 large-10 cell">
-          <table class="fnt tbl">
-          <thead>
-            <tr>
-              <th width="200">Отозвавшиеся студенты</th>
-              <th width="200">Статус</th>
-              <!-- <th width="100"></th> -->
-              <!-- <th width="100"></th> -->
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Студент 1</td>
-              <td>Отказано</td>
-              <!-- <td width="100"><a href="#" class="link-table">Одобрить</a></td> -->
-              <!-- <td width="100"><a href="#" class="link-table">Отказать</a></td> -->
-            </tr>
-            <tr>
-              <td>Студент 2</td>
-              <td>Одобрено</td>
-              <!-- <td width="100"><a href="#" class="link-table">Удалить</a></td> -->
-              <!-- <td></td> -->
-            </tr>
-            <tr>
-              <td>Студент 3</td>
-              <td>Согласовано</td>
-              <!-- <td></td> -->
-              <!-- <td></td> -->
-            </tr>
-          </tbody>
-        </table>
-      </div>
+		  
+		    <?php
+				  {
+
+					  $stmt = $pdo->prepare("SELECT * FROM employers_data WHERE id_user=?");
+					  $stmt->execute(array($_SESSION['id']));
+					  $stmt->setFetchMode(PDO::FETCH_ASSOC);
+					  $row = $stmt->fetch();
+					
+					  $stmt1 = $pdo->prepare("SELECT * FROM vacancies WHERE id_employers=?");
+					  $stmt1->execute(array($row['id']));
+					  $stmt1->setFetchMode(PDO::FETCH_ASSOC);
+					  $row1 = $stmt1->fetch();
+					  while($row1 = $stmt1->fetch()) 
+					  {
+					      echo '
+					        <div class="tabs-panel" id="panel2c">
+							<div class="line-solid">Вакансия: '.$row1[title].'</div><br>
+							<div class="grid-x">
+							<div class="small-4 medium-8 large-10 cell">
+							<table class="fnt tbl">
+							<thead>
+							<tr>
+							<th width="200">Отозвавшиеся студенты</th>
+							<th width="200">Статус</th>
+							<!-- <th width="100"></th> -->
+							<!-- <th width="100"></th> -->
+							</tr>
+							</thead>
+							<tbody>';  
+							$stmt2 = $pdo->prepare("SELECT * FROM notification WHERE id_vacancy=?");
+							$stmt2->execute(array($row1['id']));
+							$stmt2->setFetchMode(PDO::FETCH_ASSOC);
+					        $row2 = $stmt2->fetch();
+							
+							$stmt3 = $pdo->prepare("SELECT * FROM student_data WHERE id_user=?");
+							$stmt3->execute(array($row2['id_user']));
+							$stmt3->setFetchMode(PDO::FETCH_ASSOC);
+					        $row3 = $stmt3->fetch();
+						  
+							echo("<tr>");
+							echo("<td>Студент: ".$row3[name]." ".$row3[surname]."</td>");
+							
+							switch ($row2["status_employer"])
+							{
+							case 0: printf('<td>Рассматривается</td>'); break;
+							case 1: printf('<td>Принят</td>'); break;
+							case 2: printf('<td>Отказано</td>'); break;
+							}
+							echo("</tr>");
+					        echo '
+					          </tbody>
+							  </table>
+							  </div>';
+					  }
+					  
+				  } ?>
+		  
+
+		  
+            
+              
+              
+            
+			
+
+          
               <div class="small-2 medium-2 large-2 cell">
                 <table style="border-collapse: separate;">
                   <thead>
