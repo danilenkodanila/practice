@@ -188,13 +188,6 @@ include ("header.php"); ?>
 				  } ?>
 		  
 
-		  
-            
-              
-              
-            
-			
-
           
               <div class="small-2 medium-2 large-2 cell">
                 <table style="border-collapse: separate;">

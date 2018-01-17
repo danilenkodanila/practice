@@ -72,6 +72,11 @@ session_start();
 			}
 		}
 	}
+	if    ($_SESSION['category']==2) 
+	{ 
+exit("<html><head><meta http-equiv='Refresh' content='0; URL=BPlistVacancies.php'></head></html>");	
+	} 
+	
 exit("<html><head><meta http-equiv='Refresh' content='0; URL=listVacancies.php'></head></html>");	
 	
 ?>

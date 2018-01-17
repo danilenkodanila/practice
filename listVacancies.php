@@ -93,8 +93,8 @@ include("bd_PDO.php");
 		  $sql1 = "SELECT * FROM notification WHERE id_vacancy=?";
           $result1 = executeRequest($pdo,$sql1,[$_GET["open"]]);
 		 // if (!empty($result)) {echo 'netu';}
-		if ($_SESSION['category']==0) {
-		  if (empty($result1[0][id])) {
+		if ($_SESSION['category']==1) {
+		  if (empty($result1[1][id])) {
 		
             echo ' 
 			  <style>

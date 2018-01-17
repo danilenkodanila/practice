@@ -12,7 +12,7 @@
           <a href="/employers-list.php" class="bt-2">Работодатели</a>
         </div>
         <div class="small-4 small-offset-1 medium-2 medium-offset-0 large-2 large-offset-0 cell employers
-          "><a href="#" class="bt-1">Приказы</a>
+          "><a href="/orders.php" class="bt-1">Приказы</a>
         </div>
         <div class="small-4 small-offset-0 medium-2 medium-offset-0 large-2 large-offset-0 cell employers
           "><a href="/registrationPartOne.php" class="bt-2">Регистрация</a>

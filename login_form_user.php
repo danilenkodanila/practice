@@ -12,7 +12,7 @@
           <div class="lk">
             <img src="image/lk-logo.png" class="lk-logo-Two">
 			<a href="student-account.php"  class="link"><?php echo $_SESSION['email']; ?></a>
-		    <a href="exit.php" id="go" class="link">Выйти из системы</a>
+		    <a href="exit.php"  class="link">Выйти из системы</a>
           </div>
         </div>
       </div>
