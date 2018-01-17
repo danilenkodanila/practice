@@ -167,15 +167,23 @@ include ("header.php"); ?>
 						$row2 = $stmt1->fetch(); 
                         printf('<td>'.$row2["name_company"].'</td>');
 						
-						switch ($row["status_employer"])
+						switch ($row["status"])
 						{
 							case 0: printf('<td>Рассматривается</td>'); break;
 							case 1: printf('<td>Принята</td>'); break;
 							case 2: printf('<td>Отклонена</td>'); break;
 						}
-
+						if ($row["status"]==1){
+                      echo '
+                      <td class="delete-border"><a href="#" class="link-black-underline">Принять</a></td>
+							';   
+							} else if ($row["status"]==2){
+                      echo '
+                      <td class="delete-border"><a href="#" class="link-black-underline">Удалить</a></td>
+							';   
+							}
+					printf('</tr>');
 						
-                        printf('</tr>');
 					  }
 					  
 				  } ?>
@@ -201,26 +209,7 @@ include ("header.php"); ?>
 			
                 </table>
               </div>
-              <div class="small-0 medium-2 large-2 cell">
-                <table style="border-collapse: separate;">
-                  <thead>
-                    <tr class="delete-border">
-                      <th class="delete-border" width="50">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr class="delete-border">
-                      <td class="delete-border"><a href="#" class="link-black-underline">Принять</a></td>
-                    </tr>
-                    <tr class="delete-border">
-                      <td class="delete-border">&nbsp;</td>
-                    </tr>
-                    <tr class="delete-border">
-                      <td class="delete-border"><a href="#" class="link-black-underline">Удалить</a></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+
             </div>
           
           </div>
