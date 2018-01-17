@@ -200,9 +200,12 @@ exit("<html><head><meta http-equiv='Refresh' content='0; URL=addingNewVacancy.ph
 	
 	<?php
 	//echo (). ' ';
+	 $bp=$_SESSION['id'];
+	// echo $bp;
       if (empty($_POST['search'])){
-        $stmt = $pdo->query("SELECT * FROM vacancies");
-        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $stmt = $pdo->query("SELECT * FROM vacancies,user,employers_data WHERE vacancies.id_employers=employers_data.id AND user.id=employers_data.id_user AND user.id=(".$bp.")");
+        $stmt->execute(array($_SESSION['id']));
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);		
       } else {
         $search=$_POST['search'];
         $stmt = $pdo->query("SELECT * FROM vacancies WHERE title LIKE '%$search%'");
