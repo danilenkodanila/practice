@@ -94,7 +94,7 @@ include("bd_PDO.php");
           $result1 = executeRequest($pdo,$sql1,[$_GET["open"]]);
 		 // if (!empty($result)) {echo 'netu';}
 		if ($_SESSION['category']==1) {
-		  if (empty($result1[1][id])) {
+		  if (empty($result1[0][id])) {
 		
             echo ' 
 			  <style>
@@ -127,6 +127,7 @@ include("bd_PDO.php");
 			
 			$sql2 = "INSERT INTO notification (date, id_vacancy, id_user) VALUES ('$date', '$id_vacancy', '$id_user')";
 			pushSQLtoDB($pdo, $sql2);
+			 exit("<html><head><meta http-equiv='Refresh' content='0; URL=listVacancies.php'></head></html>");	 
 			}
 		}
 		
