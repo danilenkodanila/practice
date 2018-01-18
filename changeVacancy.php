@@ -26,7 +26,7 @@
              <div style="text-align: center; padding-top:20px;" class="small-6 small-offset-3 medium-6 medium-offset-3 large-6 large-offset-3 cell"><a href="/listVacancies.php" class="bt-1" style="color: blue;" ">Перейти на страницу с вакансиями</a></div>
              </div><br><br>';
   }
-  function addedForm($title,$dateStart,$dateFinish,$description,$studentsfor,$place){
+  function addedForm($title,$dateStart,$dateFinish,$description,$studentsfor,$place,$idVacancies){
     echo '<form action="changeVacancy.php" method="post">
       <div class="grid-x" style="min-height: 500px; padding-top:20px; padding-bottom: 20px;">
         <div class="small-10 medium-offset-1 medium-10 medium-offset-1 large-10 large-offset-1 cell">
@@ -37,11 +37,16 @@
           <div class="registration-block-line"><input class="registration-plchldr" value="',$studentsfor,'" name="studentsfor" type="text" placeholder="Для студентов группы" required ></div>
           <div class="registration-block-line"><input class="registration-plchldr" value="',$place,'" name="place" type="text" placeholder="Место проведения" required ></div>
           <div style="text-align: center;"><input type="submit" class="registration-btn" value="Изменить"></div>
+          <input type="hidden" name="idVacancies" value="',$idVacancies,'" />
         </div>
       </div>
     </form>';
   }
+
 $idVacancies = 1;
+if (!empty($_POST['action'])) {
+      $idVacancies = $_POST['id'];
+}
 if (empty($_SESSION['category'])){
   HTTP403();
 } else if ($_SESSION['category']==2) {
@@ -49,34 +54,41 @@ if (empty($_SESSION['category'])){
   if (empty($_POST)){
     $sql = "SELECT * FROM vacancies WHERE id=?";
     $result = executeRequest($pdo,$sql,[$idVacancies]);
-    addedForm($result[0]["title"],$result[0]["dateStart"],$result[0]["dateFinish"],$result[0]["description"],$result[0]["studentsfor"],$result[0]["place"]);
+    addedForm($result[0]["title"],$result[0]["dateStart"],$result[0]["dateFinish"],$result[0]["description"],$result[0]["studentsfor"],$result[0]["place"],$idVacancies);
   //если пост не пустой, то то разбираем его выводим сообщение
   } else {
-    if ($_POST['title'] <> "" && $_POST['dateStart'] <> "" && $_POST['dateFinish'] <> "" && $_POST['description'] <> "" && $_POST['studentsfor'] <> "" && $_POST['place'] <> "") {
-      $date = date('Y-m-d', time());
-      $title = $_POST['title'];
-      $dateStart = $_POST['dateStart'];
-      $dateFinish = $_POST['dateFinish'];
-      $description = $_POST['description'];
-      $studentsfor = $_POST['studentsfor'];
-      $place = $_POST['place'];
-      $idUser = $_SESSION['id'];
-      $idEmployers = queryRequest($pdo, "SELECT `id` FROM `employers_data` WHERE `id_user` = '$idUser'");
-      $idEmployers = $idEmployers[0]["id"];
-
-      $sql = "UPDATE vacancies SET title='$title', dateStart='$dateStart', dateFinish='$dateFinish', description='$description', studentsfor='$studentsfor', place='$place' WHERE id='$idVacancies'";
-      
-      queryRequest($pdo, $sql);
-
-      printValue("Вакансия успешно изменена!");
-      echo'<br><div class="grid-x">
-             <div style="text-align: center;" class="small-6 small-offset-3 medium-6 medium-offset-3 large-6 large-offset-3 cell"><img src="image/done.png"></div>
-             <div style="text-align: center; padding-top:20px;" class="small-6 small-offset-3 medium-6 medium-offset-3 large-6 large-offset-3 cell"><a href="/listVacancies.php" class="bt-1" style="color: blue;" ">Перейти на страницу с вакансиями</a></div>
-             </div><br><br>';
-
+    if (!empty($_POST['action'])) {
+      $sql = "SELECT * FROM vacancies WHERE id=?";
+      $result = executeRequest($pdo,$sql,[$idVacancies]);
+      addedForm($result[0]["title"],$result[0]["dateStart"],$result[0]["dateFinish"],$result[0]["description"],$result[0]["studentsfor"],$result[0]["place"],$idVacancies);
     } else {
-      printValue("Введите данные во все поля");
-      addedForm($_POST['title'],$_POST['dateStart'],$_POST['dateFinish'],$_POST['description'],$_POST['studentsfor'],$_POST['place']);
+      if ($_POST['title'] <> "" && $_POST['dateStart'] <> "" && $_POST['dateFinish'] <> "" && $_POST['description'] <> "" && $_POST['studentsfor'] <> "" && $_POST['place'] <> "") {
+        $date = date('Y-m-d', time());
+        $title = $_POST['title'];
+        $dateStart = $_POST['dateStart'];
+        $dateFinish = $_POST['dateFinish'];
+        $description = $_POST['description'];
+        $studentsfor = $_POST['studentsfor'];
+        $place = $_POST['place'];
+        $idUser = $_SESSION['id'];
+        $idVacancies = $_POST['idVacancies'];
+        $idEmployers = queryRequest($pdo, "SELECT `id` FROM `employers_data` WHERE `id_user` = '$idUser'");
+        $idEmployers = $idEmployers[0]["id"];
+
+        $sql = "UPDATE vacancies SET title='$title', dateStart='$dateStart', dateFinish='$dateFinish', description='$description', studentsfor='$studentsfor', place='$place' WHERE id='$idVacancies'";
+        
+        queryRequest($pdo, $sql);
+
+        printValue("<br>Вакансия успешно изменена!");
+        echo'<br><div class="grid-x">
+               <div style="text-align: center;" class="small-6 small-offset-3 medium-6 medium-offset-3 large-6 large-offset-3 cell"><img src="image/done.png"></div>
+               <div style="text-align: center; padding-top:20px;" class="small-6 small-offset-3 medium-6 medium-offset-3 large-6 large-offset-3 cell"><a href="/BPlistVacancies.php" class="bt-1" style="color: blue;" ">Перейти на страницу с вакансиями</a></div>
+               </div><br><br>';
+
+      } else {
+        printValue("Введите данные во все поля");
+        addedForm($_POST['title'],$_POST['dateStart'],$_POST['dateFinish'],$_POST['description'],$_POST['studentsfor'],$_POST['place']);
+      }
     }
   }
 } else {

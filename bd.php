@@ -1,8 +1,8 @@
 
 <?php
 		$dbhost = "localhost"; // Имя хоста БД
-		$dbusername = "newuser"; // Пользователь БД
-		$dbpass = "newuser"; // Пароль к базе
+		$dbusername = "admin"; // Пользователь БД
+		$dbpass = "76543210"; // Пароль к базе
 		$dbname = "practice"; // Имя базы
 		//file_get_contents($query);
 		$dbconnect = mysql_connect ($dbhost, $dbusername, $dbpass); 

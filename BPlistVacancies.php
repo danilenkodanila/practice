@@ -27,7 +27,7 @@ include ("header.php"); ?>
       <div class="small-0 large-1 columns"></div>
       <div class="small-10 large-10 columns">
 	  <form method="POST">
-        <input type="submit" class="btnAdd" name="add" value="Добавить вакансию">
+        <input type="submit" class="btnAdd" name="add" value="   Добавить вакансию">
       </form>
 	   </div>
       <div class="small-0 large-1 columns"></div>
@@ -48,7 +48,6 @@ exit("<html><head><meta http-equiv='Refresh' content='0; URL=addingNewVacancy.ph
 
           $sql = "SELECT * FROM vacancies WHERE id=?";
           $result = executeRequest($pdo,$sql,[$_GET["open"]]);
-          // var_dump($result);
           // var_dump($result[0][0]);
 
           $suka=$result[0]['id_employers']; 
@@ -111,35 +110,17 @@ exit("<html><head><meta http-equiv='Refresh' content='0; URL=addingNewVacancy.ph
             <div class="small-1 large-1 columns"></div>
           </div>
         </div>';
+                echo ' 
+        
+        <div class="formbt">
+          <form action="/changeVacancy.php" method="POST">
+            <input type="submit" class="btnVcntPict" value="   Редактировать">
+            <input type="hidden" name="id" value="'.$result[0]["id"].'" />
+            <input type="hidden" name="action" value="form1" />
+          </form>
+        </div>'; 
 		
-		  $sql1 = "SELECT * FROM notification WHERE id_vacancy=?";
-          $result1 = executeRequest($pdo,$sql1,[$_GET["open"]]);
-		 // if (!empty($result)) {echo 'netu';}
-		if ($_SESSION['category']==2) {
-		  if (empty($result1[2][id])) {
 		
-            echo ' 
-			  <style>
-			    .center { 
-				  height: 50px;
-                  position: absolute;
-				  bottom: 50%; /* Положение от нижнего края */
-				  right: 40%; /* Положение от правого края */
-				}
-			  </style>
-			  <form method="POST">
-			  <div class="center">
-              <input type="submit" name="send" value="Редактировать" />
-			  </div>
-			  </form>'; } 
-		   
-
-
-		  if( isset( $_POST['send'] ) )
-		  {
-			exit("<html><head><meta http-equiv='Refresh' content='0; URL=changeVacancy.php'></head></html>");
-			}
-		}
 		
        echo ' <div class="small-1 large-1 columns"></div>
         </div>
@@ -203,7 +184,9 @@ exit("<html><head><meta http-equiv='Refresh' content='0; URL=addingNewVacancy.ph
 	 $bp=$_SESSION['id'];
 	// echo $bp;
       if (empty($_POST['search'])){
-        $stmt = $pdo->query("SELECT * FROM vacancies,user,employers_data WHERE vacancies.id_employers=employers_data.id AND user.id=employers_data.id_user AND user.id=(".$bp.")");
+        $idUser = $_SESSION['id'];
+        //$stmt = queryRequest($pdo, "SELECT * FROM vacancies WHERE userAddId = '$idUser'");
+        $stmt = $pdo->query("SELECT * FROM vacancies WHERE userAddId = '$idUser'");
         $stmt->execute(array($_SESSION['id']));
         $stmt->setFetchMode(PDO::FETCH_ASSOC);		
       } else {
@@ -211,9 +194,9 @@ exit("<html><head><meta http-equiv='Refresh' content='0; URL=addingNewVacancy.ph
         $stmt = $pdo->query("SELECT * FROM vacancies WHERE title LIKE '%$search%'");
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
       }
+
 			while($row = $stmt->fetch())
 {
-    
 	
     printf('<a href="#" id="go" open="'.$row["id"].'" class="block-a">');
     printf('<div class="grid-x block">');

@@ -18,7 +18,6 @@
 <?php
   include ("header.php"); 
   include("bd_PDO.php");
-
   function HTTP403(){
     printValue("<br>У вас нет прав для просмотра этой страницы :с");
     echo'<br><div class="grid-x">
@@ -73,8 +72,6 @@ if (empty($_SESSION['category'])){
 } else {
   HTTP403();
 }
-
-
     // var_dump($_SESSION['id']);
     ?>
 
@@ -87,9 +84,6 @@ if (empty($_SESSION['category'])){
     <!-- Конец footer`а --> 
 
  <script type="text/javascript">
-
-
-
       $(document).ready(function() { // вся мaгия пoсле зaгрузки стрaницы
         $('a#go').click( function(event){ // лoвим клик пo ссылки с id="go"
           event.preventDefault(); // выключaем стaндaртную рoль элементa
@@ -143,4 +137,5 @@ if (empty($_SESSION['category'])){
     <script src="js/app.js"></script>
   </body>
 </html>
+
 
