@@ -185,10 +185,9 @@ exit("<html><head><meta http-equiv='Refresh' content='0; URL=addingNewVacancy.ph
 	// echo $bp;
       if (empty($_POST['search'])){
         $idUser = $_SESSION['id'];
-        //$stmt = queryRequest($pdo, "SELECT * FROM vacancies WHERE userAddId = '$idUser'");
-        $stmt = $pdo->query("SELECT * FROM vacancies WHERE userAddId = '$idUser'");
+        $stmt = $pdo->query("SELECT vacancies.id,vacancies.title,vacancies.dateStart,vacancies.dateFinish,vacancies.description,vacancies.studentsfor,vacancies.place,vacancies.dateAdd,vacancies.id_employers,vacancies.userAddId    FROM vacancies,user,employers_data WHERE vacancies.id_employers=employers_data.id AND user.id=employers_data.id_user AND user.id=(".$bp.")");
         $stmt->execute(array($_SESSION['id']));
-        $stmt->setFetchMode(PDO::FETCH_ASSOC);		
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);  	
       } else {
         $search=$_POST['search'];
         $stmt = $pdo->query("SELECT * FROM vacancies WHERE title LIKE '%$search%'");
