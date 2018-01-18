@@ -12,6 +12,7 @@ a{
 	background-color: #1b49a2;
 	text-align: center;
 	height: 30px;
+	width: 100%;
 }
 .white{
 	background-color: #white;
@@ -165,6 +166,11 @@ float: right;
 .text-right{
 	text-align: right;
 	float: right;
+}
+.text-center{
+	text-align: center;
+	float: center;
+	padding-left: 43%;
 }
 /*-------------------------------------*/
 .btnAdd {

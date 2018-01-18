@@ -90,49 +90,76 @@ include("bd_PDO.php");
           </div>
         </div>';
 		
-		  $sql1 = "SELECT * FROM notification WHERE id_vacancy=?";
-          $result1 = executeRequest($pdo,$sql1,[$_GET["open"]]);
-		 // if (!empty($result)) {echo 'netu';}
+          //если сессия пустая, то пользователь не залогенен, значит делаем кнопку disable
           if (empty($_SESSION['category'])){
             echo '<div class="formbt">
                     <input type="button" class="btnVcnt" disabled value="Оставить заявку">
                   </div>';
           } else {
+            //если пользователь вошел под акккаунтом студента, то он может подать заявку
             if ($_SESSION['category']==1) {
-                  if (empty($result1[0][id])) {
-                
-                        echo ' 
-                    <style>
-                      .center { 
-                      height: 50px;
-                              position: absolute;
-                      bottom: 50%; /* Положение от нижнего края */
-                      right: 40%; /* Положение от правого края */
-                    }
-                    </style>
-                    <form method="POST">
-                    <div class="center">
-                          <input type="submit" name="send" value="Отправить заявку" />
-                    </div>
-                    </form>'; } 
-                    else {
-                    echo'
-                            <div class="small-1 large-1 columns"></div>
-                            <div class="small-10 large-10 columns">
-                            <div class="bold text-right">Заявка уже занята!</div>
-                            </div>
-                    ';}
 
+              $sql = ("SELECT * FROM notification WHERE status=? AND id_user=?");
+            $idUser = $_SESSION['id'];
+            $result = executeRequest($pdo,$sql,[3,$idUser]);
+            // var_dump($result);
+            if (empty($result)) {
+
+              $sql1 = "SELECT * FROM notification WHERE id_vacancy=? AND id_user=?";
+              $result1 = executeRequest($pdo,$sql1,[$_GET["open"],$_SESSION['id']]);
+
+              if (empty($result1)) {
+                
+                
+                    echo '
+                      <form method="POST">
+                      <div class="formbt">
+                            <input type="submit" name="send" value="Отправить заявку" />
+                      </div>
+                      </form>'; 
+                    } 
+                    else {
+                      echo '<div class="small-1 large-1 columns"></div>
+                            <div class="small-12 large-12 columns" style="text-align: center;font-weight: bold;">';
+
+                      switch ($result1[0]["status"]) {
+                        case 0: 
+                          echo 'Заявка рассматривается
+                            </div>';
+                          break;
+                        case 1: 
+                          echo 'Заявка принята
+                            </div>';
+                          break;
+                        case 2: 
+                          echo 'Заявка отклонена
+                            </div>';
+                          break;
+                        case 3: 
+                          echo 'Заявка согласована
+                            </div>';
+                          break;
+                      }
+
+                    }
+            } else {
+              echo '<div class="small-1 large-1 columns"></div>
+                            <div class="small-12 large-12 columns" style="text-align: center;font-weight: bold;">';
+                            echo 'Вы уже выбрали место прохождения практики
+                            </div>';
+            }
 
                   if( isset( $_POST['send'] ) )
                   {
                   $date = date("Y-m-d");
                   $id_vacancy = $_GET["open"];
                   $id_user = $_SESSION['id'];  
+
                   
-                  $sql2 = "INSERT INTO notification (date, id_vacancy, id_user) VALUES ('$date', '$id_vacancy', '$id_user')";
-                  pushSQLtoDB($pdo, $sql2);
-                   exit("<html><head><meta http-equiv='Refresh' content='0; URL=listVacancies.php'></head></html>");   
+                  $sql2 = "INSERT INTO notification (date, id_vacancy, id_user, status) VALUES ('$date', '$id_vacancy', '$id_user', 0)";
+
+                  $res = pushSQLtoDB($pdo, $sql2);
+                  exit("<html><head><meta http-equiv='Refresh' content='0; URL=listVacancies.php'></head></html>");   
                   }
                 } 
           }
