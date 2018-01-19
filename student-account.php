@@ -134,61 +134,7 @@ include ("header.php"); ?>
           </div>
 
           <div class="tabs-panel" id="panel2c">
-            <?php
-              $sql = "SELECT * FROM notification WHERE id_user=? AND status=?";
-              $idUser = $_SESSION['id'];
-              $result = executeRequest($pdo,$sql,[$idUser,3]);              
-              if (!empty($result)) {
-                $idVac = $result[0]['id_vacancy'];
-                $sql = "SELECT title FROM vacancies WHERE id=?";
-                $result = executeRequest($pdo,$sql,[$idVac]);
-                echo'<div class="grid-x">
-                    <div class="small-0 large-12 cell">
-                      Выбранное место прохождение практики:
-                      <br>
-                      <a href="/listVacancies.php?&open=',$idVac,'" style="color: blue;border-color: blue;" class="link-table">',$result[0][0],'</a>
-                      <br>
-                      <br>
-                      <div style="display:inline;"><a href="#" class="link-table">Отклонить</a></div>  (доступно в течении 6 часов)
-                      <br>
-                      <br>
-                    </div>
-                  </div>';
-              }
-            ?>
-            
-            
-
-
-
-				  <?php
-				  
-          if( isset( $_POST['delete'] ) ){  
-               $sql = ("DELETE FROM notification WHERE id_vacancy=? AND id_user=?");
-               $id = $_POST["id"];
-               $idUser = $_SESSION['id'];
-               $result = executeRequest($pdo,$sql,[$id,$idUser]);
-               exit("<html><head><meta http-equiv='Refresh' content='0; URL=student-account.php'></head></html>");
-              // echo $_GET['open'];
-          } 
-          if( isset( $_POST['accept'] ) ){ 
-               $sql = ("UPDATE `notification` SET `status`=3 WHERE id_vacancy=? AND id_user=?");
-               $id = $_POST["id"];
-               $idUser = $_SESSION['id'];
-               $result = executeRequest($pdo,$sql,[$id,$idUser]);
-               exit("<html><head><meta http-equiv='Refresh' content='0; URL=student-account.php'></head></html>");
-              // echo $_GET['open'];
-          } 
-
-					/*  $sql = "SELECT * FROM notification WHERE id_user=?";
-					  $result = executeRequest($pdo,$sql,$_SESSION['id']]); */
-
-            $sql = ("SELECT * FROM notification WHERE status=? AND id_user=?");
-            $idUser = $_SESSION['id'];
-            $result = executeRequest($pdo,$sql,[3,$idUser]);
-            // var_dump($result);
-            if (empty($result)) {
-              echo'<div class="grid-x">
+            <div class="grid-x">
               <div class="small-0 medium-8 large-10 cell">
                 <table class="fnt tbl">
                   <thead>
@@ -196,65 +142,102 @@ include ("header.php"); ?>
                       <th width="400">Наименование вакансии</th>
                       <th width="200">Наименование организации</th>
                       <th width="200">Статус заявки</th>
-            <th width="200">Действия</th>
+					  <th width="200">Действия</th>
                     </tr>
-                  </thead>';
-              $stmt = $pdo->prepare("SELECT * FROM notification WHERE id_user=?");
-            $stmt->execute(array($_SESSION['id']));
-            $stmt->setFetchMode(PDO::FETCH_ASSOC);
-            while($row = $stmt->fetch()) 
-            {
-              $stmt1 = $pdo->prepare("SELECT * FROM vacancies WHERE id=?");
-              $stmt1->execute(array($row["id_vacancy"]));
-              $stmt1->setFetchMode(PDO::FETCH_ASSOC);
-            $row1 = $stmt1->fetch();            
-              printf('<tbody>');
+                  </thead>
+				  <?php
+				  {
+					/*  $sql = "SELECT * FROM notification WHERE id_user=?";
+					  $result = executeRequest($pdo,$sql,$_SESSION['id']]); */
+					  $stmt = $pdo->prepare("SELECT * FROM notification WHERE id_user=?");
+					  $stmt->execute(array($_SESSION['id']));
+					  $stmt->setFetchMode(PDO::FETCH_ASSOC);
+					  while($row = $stmt->fetch()) 
+					  {
+					    $stmt1 = $pdo->prepare("SELECT * FROM vacancies WHERE id=?");
+					    $stmt1->execute(array($row["id_vacancy"]));
+					    $stmt1->setFetchMode(PDO::FETCH_ASSOC);
+						$row1 = $stmt1->fetch();						
+					    printf('<tbody>');
                         printf('<tr>');
                         printf('<td><a href="#" class="link-table-two">'.$row1["title"].'</a></td>');
-            
-            $stmt1 = $pdo->prepare("SELECT * FROM employers_data WHERE id=?");
-              $stmt1->execute(array($row1["id_employers"]));
-              $stmt1->setFetchMode(PDO::FETCH_ASSOC);
-            $row2 = $stmt1->fetch(); 
+						
+						$stmt1 = $pdo->prepare("SELECT * FROM employers_data WHERE id=?");
+					    $stmt1->execute(array($row1["id_employers"]));
+					    $stmt1->setFetchMode(PDO::FETCH_ASSOC);
+						$row2 = $stmt1->fetch(); 
                         printf('<td>'.$row2["name_company"].'</td>');
-            
-            switch ($row["status"])
-            {
-              case 0: printf('<td>Рассматривается</td>'); break;
-              case 1: 
-                printf('<td>Принята</td>');  
-                echo('
-                 <td class="delete-border">
-                  <form action="/student-account.php" method="POST">
-                    <input type="submit" name="accept" value="Принять" />
-                    <input type="hidden" name="id" value="'.$row["id_vacancy"].'" />
-                    <input type="hidden" name="action" value="form1" />
-                  </form>
-                </td>
-               ');
-                break;
-              case 2: 
-                printf('<td>Отклонена</td>'); 
-                echo('
-                 <td class="delete-border">
-                  <form action="/student-account.php" method="POST">
-                    <input type="submit" name="delete" value="Удалить" />
-                    <input type="hidden" name="id" value="'.$row["id_vacancy"].'" />
-                    <input type="hidden" name="action" value="form1" />
-                  </form>
-                </td>
-               ');
-                break;
-              case 3: printf('<td>Согласована</td>'); break;
-            }
-            
-              printf('</tr>');
-            
-            }
-
-            }
-
-						?>
+						
+						switch ($row["status"])
+						{
+							case 0: 
+							
+							  printf('<td>Рассматривается</td>'); 
+							  printf('<td class="delete-border">Нет доступных действий</td>');
+							  break;	
+							case 1:
+							  $stmt11 = $pdo->prepare("SELECT * FROM notification WHERE id_vacancy=?");
+							  $stmt11->execute(array($_POST["id"]));
+							  $stmt11->setFetchMode(PDO::FETCH_ASSOC);
+					          $row11 = $stmt11->fetch();
+							  date_default_timezone_set('Europe/Moscow');
+							  $date1=$row11["date"];
+							  $date2=date("Y-m-d h:m:s");
+							  $diff = strtotime($date2) - strtotime($date1);
+							  $diff=abs($diff);	
+							  echo $date2.' '.$date1;
+							  printf('<td>Принята</td>');  
+							//  if ($diff<21600){			    
+							    echo('
+							        <td class="delete-border">
+									<form action="/student-account.php" method="POST">
+									<input type="submit" name="accept" value="Подтвердить" />
+									<input type="hidden" name="id" value="'.$row["id_vacancy"].'" />
+									<input type="hidden" name="action" value="form1" />
+									</form>
+									</td>
+							  '); 		//} else printf('<td class="delete-border">Нет доступных действий</td>');
+							  break;
+							  
+							case 2: 
+							  printf('<td>Отклонена</td>'); 
+							  echo('
+							     <td class="delete-border">
+                                 <form action="/student-account.php" method="POST">
+								<input type="submit" name="delete" value="Удалить" />
+								<input type="hidden" name="id" value="'.$row["id_vacancy"].'" />
+								<input type="hidden" name="action" value="form1" />
+								</form>
+								</td>
+							     ');
+							  break;
+							 case 3:
+							   printf('<td>Принята</td>');      
+							   printf('<td class="delete-border">Нет доступных действий</td>');
+							   break;
+						}
+						
+					    printf('</tr>');
+						
+					  }
+						if( isset( $_POST['delete'] ) )
+						{	  
+							//var_dump($_POST);
+							//var_dump($_POST["id"]);
+							$id=$_POST["id"];			   
+							$sql = "DELETE FROM notification WHERE id_vacancy='$id'";
+							pushSQLtoDB($pdo, $sql);  
+							echo'<meta http-equiv="refresh" content="0;student-account.php">';
+						} 
+						
+						if( isset( $_POST['accept'] ) )
+						{	  
+							$id_vacancy = $_POST["id"];
+							$sql = "UPDATE notification set status = 3 where id_vacancy='$id_vacancy'";
+							pushSQLtoDB($pdo, $sql);
+							echo'<meta http-equiv="refresh" content="0;student-account.php">';
+						}
+						}?>
 
                <!--  <tbody>
                     <tr>
@@ -300,11 +283,30 @@ include ("header.php"); ?>
     <!-- Сделан просто для примера -->  
     <script type="text/javascript">
 	
-	
+	function insertParam(key, value){
+        key = encodeURI(key); value = encodeURI(value);
+        var kvp = document.location.search.substr(1).split('&');
+
+        var i=kvp.length; var x; while(i--) {
+            x = kvp[i].split('=');
+
+            if (x[0]==key){
+                x[1] = value;
+                kvp[i] = x.join('=');
+                break;
+            }
+        }
+          if(i<0) {kvp[kvp.length] = [key,value].join('=');}
+
+          //this will reload the page, it's likely better to store this until finished
+          document.location.search = kvp.join('&'); 
+      }
 	
 	 $(document).ready(function() { // вся мaгия пoсле зaгрузки стрaницы
         $('a#go').click( function(event){ // лoвим клик пo ссылки с id="go"
           event.preventDefault(); // выключaем стaндaртную рoль элементa
+          console.log(this.getAttribute("open"));
+          // insertParam("open",this.getAttribute("open"));
 
 
           $('#overlay').fadeIn(400, // снaчaлa плaвнo пoкaзывaем темную пoдлoжку
