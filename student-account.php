@@ -187,16 +187,16 @@ include ("header.php"); ?>
 							  $diff=abs($diff);	
 							  echo $date2.' '.$date1;
 							  printf('<td>Принята</td>');  
-							//  if ($diff<21600){			    
+							  if ($diff<21600){			    
 							    echo('
 							        <td class="delete-border">
 									<form action="/student-account.php" method="POST">
-									<input type="submit" name="accept" value="Подтвердить" />
+									<input type="submit" name="dec" value="Отклонить (доступно в течении 6 часов)" />
 									<input type="hidden" name="id" value="'.$row["id_vacancy"].'" />
 									<input type="hidden" name="action" value="form1" />
 									</form>
 									</td>
-							  '); 		//} else printf('<td class="delete-border">Нет доступных действий</td>');
+							  '); 		} else printf('<td class="delete-border">Нет доступных действий</td>');
 							  break;
 							  
 							case 2: 
@@ -230,10 +230,10 @@ include ("header.php"); ?>
 							echo'<meta http-equiv="refresh" content="0;student-account.php">';
 						} 
 						
-						if( isset( $_POST['accept'] ) )
+						if( isset( $_POST['dec'] ) )
 						{	  
 							$id_vacancy = $_POST["id"];
-							$sql = "UPDATE notification set status = 3 where id_vacancy='$id_vacancy'";
+							$sql = "UPDATE notification set status = 2 where id_vacancy='$id_vacancy'";
 							pushSQLtoDB($pdo, $sql);
 							echo'<meta http-equiv="refresh" content="0;student-account.php">';
 						}
