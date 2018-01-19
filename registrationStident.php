@@ -41,16 +41,16 @@ include ("header.php"); ?>
     <div class="grid-x link-block">
       <div class="small-0 large-1 columns"></div>
       <div class="small-10 large-10 columns">
-        <div class="registration-block-line"><input class="registration-plchldr"  pattern="[A-Za-zА-Яа-яЁё]{1,50}" name="name" type="text" placeholder="Имя"></div>
-        <div class="registration-block-line"><input class="registration-plchldr"  pattern="[A-Za-zА-Яа-яЁё]{1,50}" name="surname" type="text" placeholder="Фамилия"></div>
-        <div class="registration-block-line"><input class="registration-plchldr" pattern="[A-Za-zА-Яа-яЁё]{1,50}" name="patronymic" type="text" placeholder="Отчество"></div>
-        <div class="registration-block-line"><input class="registration-plchldr" type="text" pattern="[А-Яа-яЁё]{1}[0-9]{4}[a-яё]{0,1}" name="universityGroup" type="text" placeholder="Номер группы Б0000х"></div>
-        <div class="registration-block-line"><input class="registration-plchldr" type="text" pattern="[0-9]{4}[\-][0-9]{4}" name="record_book_number" type="text" placeholder="Номер зачетной книжки XXXX-XXXX"></div>
+        <div class="registration-block-line"><input class="registration-plchldr"  pattern="[A-Za-zА-Яа-яЁё]{1,50}" title="Только латинские/русские заглавные/строчные буквы" name="name" type="text" placeholder="Имя"></div>
+        <div class="registration-block-line"><input class="registration-plchldr"  title="Только латинские/русские заглавные/строчные буквы" pattern="[A-Za-zА-Яа-яЁё]{1,50}" name="surname" type="text" placeholder="Фамилия"></div>
+        <div class="registration-block-line"><input class="registration-plchldr" title="Только латинские/русские заглавные/строчные буквы" pattern="[A-Za-zА-Яа-яЁё]{1,50}" name="patronymic" type="text" placeholder="Отчество"></div>
+        <div class="registration-block-line"><input class="registration-plchldr" title="Формат: Б0000x - Одна русская буква, далее 4 цифры и опционально строчная русская буква" type="text" pattern="[А-Яа-яЁё]{1}[0-9]{4}[a-яё]{0,1}" name="universityGroup" type="text" placeholder="Номер группы Б0000х"></div>
+        <div class="registration-block-line"><input class="registration-plchldr" type="text" pattern="[0-9]{4}[\-][0-9]{4}" name="record_book_number" type="text" title="Формат 0000-0000 — 4 цифры - дефис - 4 цифры" placeholder="Номер зачетной книжки XXXX-XXXX"></div>
         <div class="line-stroke"></div><br>
-        <div class="registration-block-line"><input class="registration-plchldr" type="text" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" name="password" type="text" placeholder="Пароль (заглавные/строчные/цифры)"></div>
-        <div class="registration-block-line"><input class="registration-plchldr" type="text" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" name="password1" type="text" placeholder="Повтор пароля"></div>
+        <div class="registration-block-line"><input class="registration-plchldr" type="text" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" name="password" title="Пароль должен содержать заглавные и строчные буквы, а так же цифры" type="text" placeholder="Пароль (заглавные/строчные/цифры)"></div>
+        <div class="registration-block-line"><input class="registration-plchldr" type="text" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" title="Пароль должен содержать заглавные и строчные буквы, а так же цифры" name="password1" type="text" placeholder="Повтор пароля"></div>
         <div class="registration-block-line"><input class="registration-plchldr" type="email" name="email" placeholder="Электронная почта"></div>
-        <div class="registration-block-line"><input class="registration-plchldr" pattern="[\+]\d{11}$" name="telephone" type="text" placeholder="Номер телефона (+79999999999)"></div>
+        <div class="registration-block-line"><input class="registration-plchldr" title="Формат: знак плюса + 11 цифр" pattern="[\+]\d{11}$" name="telephone" type="text" placeholder="Номер телефона (+79999999999)"></div>
         <!-- <div class="registration-block-line"><input type="checkbox" name="your-group" value="unit-in-group">&emsp;&emsp;   Запомнить меня</div>-->
         <div class="authorization-block-inside">
               <input name="reg" type="submit" class="registration-btn"  value="Подтвердить">
