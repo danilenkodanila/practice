@@ -57,8 +57,37 @@ include ("header.php"); ?>
             <div class="block-dan">
         
         
-              <?php if ($_SESSION['category']==2){  
+              <?php
+
+              if ($_SESSION['category']==2){  
 			  
+        if( isset( $_POST['delete'] ) ){  
+              var_dump($_POST);
+               $sql = ("DELETE FROM notification WHERE id_vacancy=? AND id_user=?");
+               $id = $_POST["id"];
+               $idUs = $_POST["id1"];
+               $result = executeRequest($pdo,$sql,[$id,$idUs]);
+               exit("<html><head><meta http-equiv='Refresh' content='0; URL=employers-account.php'></head></html>");
+          } 
+          
+
+          if( isset( $_POST['accept'] ) ){ 
+               $sql = ("UPDATE `notification` SET `status`=1 WHERE id_vacancy=? AND id_user=?");
+               $id = $_POST["id"];
+               $idUs = $_POST["id1"];
+               $result = executeRequest($pdo,$sql,[$id,$idUs]);
+               exit("<html><head><meta http-equiv='Refresh' content='0; URL=employers-account.php'></head></html>");
+              // echo $_GET['open'];
+          } 
+
+          if( isset( $_POST['disaccept'] ) ){ 
+               $sql = ("UPDATE `notification` SET `status`=2 WHERE id_vacancy=? AND id_user=?");
+               $id = $_POST["id"];
+               $idUs = $_POST["id1"];
+               $result = executeRequest($pdo,$sql,[$id,$idUs]);
+               exit("<html><head><meta http-equiv='Refresh' content='0; URL=employers-account.php'></head></html>");
+              // echo $_GET['open'];
+          } 
               
 			 
 			 echo ("Компания:");
@@ -132,28 +161,31 @@ include ("header.php"); ?>
 		  
 		    <?php
 				  {
-
+            echo' <div class="tabs-panel" id="panel2c">';
 					  $stmt = $pdo->prepare("SELECT * FROM employers_data WHERE id_user=?");
 					  $stmt->execute(array($_SESSION['id']));
 					  $stmt->setFetchMode(PDO::FETCH_ASSOC);
 					  $row = $stmt->fetch();
+
+
 					
-					  $stmt1 = $pdo->prepare("SELECT * FROM vacancies WHERE id_employers=?");
-					  $stmt1->execute(array($row['id']));
-					  $stmt1->setFetchMode(PDO::FETCH_ASSOC);
-					  $row1 = $stmt1->fetch();
-					  while($row1 = $stmt1->fetch()) 
+					  $stmt = $pdo->prepare("SELECT * FROM vacancies WHERE id_employers=?");
+            $stmt->execute(array($row['id']));
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            while($row1 = $stmt->fetch()) 
 					  {
+              // <div class="line-solid">Вакансия: '.$row1["title"].'</div><br>
 					      echo '
-					        <div class="tabs-panel" id="panel2c">
-							<div class="line-solid">Вакансия: '.$row1[title].'</div><br>
-							<div class="grid-x">
-							<div class="small-4 medium-8 large-10 cell">
+					       
+							
+              <div class="grid-x">
+              <div class="small-4 medium-8 large-10 cell">
 							<table class="fnt tbl">
 							<thead>
 							<tr>
 							<th width="200">Отозвавшиеся студенты</th>
 							<th width="200">Статус</th>
+              <th width="200">Действия</th>
 							<!-- <th width="100"></th> -->
 							<!-- <th width="100"></th> -->
 							</tr>
@@ -162,34 +194,87 @@ include ("header.php"); ?>
 							$stmt2 = $pdo->prepare("SELECT * FROM notification WHERE id_vacancy=?");
 							$stmt2->execute(array($row1['id']));
 							$stmt2->setFetchMode(PDO::FETCH_ASSOC);
-					        $row2 = $stmt2->fetch();
+					    while($row2 = $stmt2->fetch()){
+                $stmt3 = $pdo->prepare("SELECT * FROM student_data WHERE id_user=?");
+                $stmt3->execute(array($row2['id_user']));
+                $stmt3->setFetchMode(PDO::FETCH_ASSOC);
+                $row3 = $stmt3->fetch();
+                echo("<tr>");
+                echo("<td>Студент: ".$row3["name"]." ".$row3["surname"]."</td>");
+                switch ($row2["status"])
+              {
+              case 0:
+                printf('<td>Рассматривается</td>');
+                echo('
+                 <td class="delete-border">
+                 <div style="overflow: hidden;white-space: nowrap;">
+                  <form action="/employers-account.php" method="POST">
+                    <input type="submit" name="disaccept" value="Отказать" />
+                    <input type="hidden" name="id" value="'.$row2["id_vacancy"].'" />
+                    <input type="hidden" name="id1" value="'.$row3["id_user"].'" />
+                  </form>
+                  </div>
+                  <div style="overflow: hidden;white-space: nowrap;">
+                  <form action="/employers-account.php" method="POST">
+                    <input type="submit" name="accept" value="Одобрить" />
+                    <input type="hidden" name="id" value="'.$row2["id_vacancy"].'" />
+                    <input type="hidden" name="id1" value="'.$row3["id_user"].'" />
+                  </form>
+                  </div>
+                </td>
+               ');
+              break;
+              case 3:
+                printf('<td>Принят</td>'); 
+                echo('
+                   <td class="delete-border">
+                  </td>
+                 ');
+              break;
+              case 2:
+                printf('<td>Отказано</td>');
+                echo('
+                 <td class="delete-border">
+                  <form action="/employers-account.php" method="POST">
+                    <input type="submit" name="delete" value="Удалить" />
+                    <input type="hidden" name="id" value="'.$row2["id_vacancy"].'" />
+                    <input type="hidden" name="id1" value="'.$row3["id_user"].'" />
+                  </form>
+                </td>
+               ');
+              break;
+              case 1: printf('<td>Согласован</td>'); 
+                echo('
+                 <td class="delete-border">
+                  <form action="/employers-account.php" method="POST">
+                    <input type="submit" name="disaccept" value="Отказать" />
+                    <input type="hidden" name="id" value="'.$row2["id_vacancy"].'" />
+                    <input type="hidden" name="id1" value="'.$row3["id_user"].'" />
+                  </form>
+                </td>
+               ');
+              break;
+              }
+              
 							
-							$stmt3 = $pdo->prepare("SELECT * FROM student_data WHERE id_user=?");
-							$stmt3->execute(array($row2['id_user']));
-							$stmt3->setFetchMode(PDO::FETCH_ASSOC);
-					        $row3 = $stmt3->fetch();
+							
 						  
-							echo("<tr>");
-							echo("<td>Студент: ".$row3[name]." ".$row3[surname]."</td>");
 							
-							switch ($row2["status_employer"])
-							{
-							case 0: printf('<td>Рассматривается</td>'); break;
-							case 1: printf('<td>Принят</td>'); break;
-							case 2: printf('<td>Отказано</td>'); break;
-							}
-							echo("</tr>");
-					        echo '
-					          </tbody>
-							  </table>
-							  </div>';
+							
 					  }
 					  
-				  } ?>
-		  
+				  } 
+
+          echo("</tr>");
+                  echo '
+                    </tbody>
+                </table>
+                </div>';
+             
+		      }?>  
 
           
-              <div class="small-2 medium-2 large-2 cell">
+              <!-- <div class="small-2 medium-2 large-2 cell">
                 <table style="border-collapse: separate;">
                   <thead>
                     <tr class="delete-border">
@@ -210,8 +295,8 @@ include ("header.php"); ?>
                     </tr>
                   </tbody>
                 </table>
-              </div>
-
+              </div> -->
+             
 
           </div>
           </div>
