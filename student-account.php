@@ -173,7 +173,15 @@ include ("header.php"); ?>
 							case 0: 
 							
 							  printf('<td>Рассматривается</td>'); 
-							  printf('<td class="delete-border">Нет доступных действий</td>');
+							  echo('
+							     <td class="delete-border">
+									<form action="/student-account.php" method="POST">
+									<input type="submit" name="dec" value="Отклонить (доступно в течении 6 часов)" />
+									<input type="hidden" name="id" value="'.$row["id_vacancy"].'" />
+									<input type="hidden" name="action" value="form1" />
+									</form>
+									</td>
+							     ');
 							  break;	
 							case 1:
 							  $stmt11 = $pdo->prepare("SELECT * FROM notification WHERE id_vacancy=?");
@@ -185,9 +193,9 @@ include ("header.php"); ?>
 							  $date2=date("Y-m-d h:m:s");
 							  $diff = strtotime($date2) - strtotime($date1);
 							  $diff=abs($diff);	
-							  echo $date2.' '.$date1;
+							 // echo $date2.' '.$date1;
 							  printf('<td>Принята</td>');  
-							  if ($diff<21600){			    
+						//	  if ($diff<21600){			    
 							    echo('
 							        <td class="delete-border">
 									<form action="/student-account.php" method="POST">
@@ -196,7 +204,7 @@ include ("header.php"); ?>
 									<input type="hidden" name="action" value="form1" />
 									</form>
 									</td>
-							  '); 		} else printf('<td class="delete-border">Нет доступных действий</td>');
+							  '); //	} else printf('<td class="delete-border">Нет доступных действий</td>');
 							  break;
 							  
 							case 2: 
