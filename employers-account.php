@@ -133,7 +133,7 @@ include ("header.php"); ?>
 		    <?php
 				  { 
 
-					   $stmt = $pdo->prepare("SELECT employers_data.id_user as id_user, vacancies.title as title, vacancies.id as id_vac, student_data.name as name, student_data.surname as surname, notification.status as status_employer  
+					   $stmt = $pdo->prepare("SELECT employers_data.id_user as id_user, vacancies.title as title, vacancies.id as id_vac, student_data.name as name, student_data.surname as surname, notification.status as status_employer, notification.id_user as id_us  
 					   FROM employers_data 
 					  left join vacancies on employers_data.id=vacancies.id_employers
 					  left join notification on vacancies.id=notification.id_vacancy
@@ -189,7 +189,12 @@ include ("header.php"); ?>
 							
 						  
 							echo("<tr>");
-							echo("<td>Студент: ".$row['name']." ".$row['surname']."</td>");
+							echo("<td>
+							<form action='/student-detail.php' method='POST'>
+							<a href='student-detail.php?id=".$row["id_us"]."' class='link-table-two'>Студент: ".$row['name']." ".$row['surname']."</a>
+							<input type='hidden' name='id' value=".$row["id_us"]."/>
+							</form>
+							</td>");
 							switch ($row["status_employer"])
 							{
 							case 0: 

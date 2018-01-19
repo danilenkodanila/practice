@@ -160,7 +160,17 @@ include ("header.php"); ?>
 						$row1 = $stmt1->fetch();						
 					    printf('<tbody>');
                         printf('<tr>');
-                        printf('<td><a href="#" class="link-table-two">'.$row1["title"].'</a></td>');
+						
+                      //  printf('<td><a href="#" class="link-table-two">'.$row1["title"].'</a></td>');
+						echo("
+							<td>
+							<form action='/vacancy-detail.php' method='POST'>
+							<a href='vacancy-detail.php?id=".$row['id_vacancy']."' class= 'link-table-two'>".$row1["title"]."</a>
+							<input type='hidden' name='id' value=".$row["id_vacancy"]."/>
+							</form>
+							</td>
+							");
+						
 						
 						$stmt1 = $pdo->prepare("SELECT * FROM employers_data WHERE id=?");
 					    $stmt1->execute(array($row1["id_employers"]));
