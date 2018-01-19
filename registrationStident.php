@@ -41,16 +41,16 @@ include ("header.php"); ?>
     <div class="grid-x link-block">
       <div class="small-0 large-1 columns"></div>
       <div class="small-10 large-10 columns">
-        <div class="registration-block-line"><input class="registration-plchldr" name="name" type="text" placeholder="Имя"></div>
-        <div class="registration-block-line"><input class="registration-plchldr" name="surname" type="text" placeholder="Фамилия"></div>
-        <div class="registration-block-line"><input class="registration-plchldr" name="patronymic" type="text" placeholder="Отчество"></div>
-        <div class="registration-block-line"><input class="registration-plchldr" name="universityGroup" type="text" placeholder="Номер группы Б0000х"></div>
-        <div class="registration-block-line"><input class="registration-plchldr" name="record_book_number" type="text" placeholder="Номер зачетной книжки"></div>
+        <div class="registration-block-line"><input class="registration-plchldr"  pattern="[A-Za-zА-Яа-яЁё]{1,50}" name="name" type="text" placeholder="Имя"></div>
+        <div class="registration-block-line"><input class="registration-plchldr"  pattern="[A-Za-zА-Яа-яЁё]{1,50}" name="surname" type="text" placeholder="Фамилия"></div>
+        <div class="registration-block-line"><input class="registration-plchldr" pattern="[A-Za-zА-Яа-яЁё]{1,50}" name="patronymic" type="text" placeholder="Отчество"></div>
+        <div class="registration-block-line"><input class="registration-plchldr" type="text" pattern="[А-Яа-яЁё]{1}[0-9]{4}[a-яё]{0,1}" name="universityGroup" type="text" placeholder="Номер группы Б0000х"></div>
+        <div class="registration-block-line"><input class="registration-plchldr" type="text" pattern="[0-9]{4}[\-][0-9]{4}" name="record_book_number" type="text" placeholder="Номер зачетной книжки XXXX-XXXX"></div>
         <div class="line-stroke"></div><br>
-        <div class="registration-block-line"><input class="registration-plchldr" name="password" type="text" placeholder="Пароль"></div>
-        <div class="registration-block-line"><input class="registration-plchldr" name="password1" type="text" placeholder="Повтор пароля"></div>
-        <div class="registration-block-line"><input class="registration-plchldr" name="email" type="text" placeholder="Электронная почта"></div>
-        <div class="registration-block-line"><input class="registration-plchldr" name="telephone" type="text" placeholder="Номер телефона"></div>
+        <div class="registration-block-line"><input class="registration-plchldr" type="text" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" name="password" type="text" placeholder="Пароль (заглавные/строчные/цифры)"></div>
+        <div class="registration-block-line"><input class="registration-plchldr" type="text" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" name="password1" type="text" placeholder="Повтор пароля"></div>
+        <div class="registration-block-line"><input class="registration-plchldr" type="email" name="email" placeholder="Электронная почта"></div>
+        <div class="registration-block-line"><input class="registration-plchldr" pattern="[\+]\d{11}$" name="telephone" type="text" placeholder="Номер телефона (+79999999999)"></div>
         <!-- <div class="registration-block-line"><input type="checkbox" name="your-group" value="unit-in-group">&emsp;&emsp;   Запомнить меня</div>-->
         <div class="authorization-block-inside">
               <input name="reg" type="submit" class="registration-btn"  value="Подтвердить">
