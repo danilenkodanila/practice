@@ -174,27 +174,31 @@ include ("header.php"); ?>
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             while($row1 = $stmt->fetch()) 
 					  {
-              // <div class="line-solid">Вакансия: '.$row1["title"].'</div><br>
-					      echo '
-					       
-							
-              <div class="grid-x">
-              <div class="small-4 medium-8 large-10 cell">
-							<table class="fnt tbl">
-							<thead>
-							<tr>
-							<th width="200">Отозвавшиеся студенты</th>
-							<th width="200">Статус</th>
-              <th width="200">Действия</th>
-							<!-- <th width="100"></th> -->
-							<!-- <th width="100"></th> -->
-							</tr>
-							</thead>
-							<tbody>';  
+              
+					     
 							$stmt2 = $pdo->prepare("SELECT * FROM notification WHERE id_vacancy=?");
 							$stmt2->execute(array($row1['id']));
 							$stmt2->setFetchMode(PDO::FETCH_ASSOC);
-					    while($row2 = $stmt2->fetch()){
+              $row2 = $stmt2->fetchAll();
+              // <div class="line-solid">Вакансия: '.$row1["title"].'</div><br>
+              if (!empty($row2)) {
+                echo '
+                 
+              
+              <div class="grid-x">
+              <div class="small-4 medium-8 large-10 cell">
+              <table class="fnt tbl">
+              <thead>
+              <tr>
+              <th width="200">'.$row1["title"].'</th>
+              <th width="200">Статус</th>
+              <th width="200">Действия</th>
+              <!-- <th width="100"></th> -->
+              <!-- <th width="100"></th> -->
+              </tr>
+              </thead>
+              <tbody>';  
+                foreach($row2 as $row => $row2){
                 $stmt3 = $pdo->prepare("SELECT * FROM student_data WHERE id_user=?");
                 $stmt3->execute(array($row2['id_user']));
                 $stmt3->setFetchMode(PDO::FETCH_ASSOC);
@@ -206,7 +210,14 @@ include ("header.php"); ?>
               case 0:
                 printf('<td>Рассматривается</td>');
                 echo('
-                 <td class="delete-border">
+                 <td>
+                 <div style="overflow: hidden;white-space: nowrap;">
+                  <form action="/employers-account.php" method="POST">
+                    <input type="submit" name="accept" value="Одобрить" />
+                    <input type="hidden" name="id" value="'.$row2["id_vacancy"].'" />
+                    <input type="hidden" name="id1" value="'.$row3["id_user"].'" />
+                  </form>
+                  </div>
                  <div style="overflow: hidden;white-space: nowrap;">
                   <form action="/employers-account.php" method="POST">
                     <input type="submit" name="disaccept" value="Отказать" />
@@ -214,27 +225,20 @@ include ("header.php"); ?>
                     <input type="hidden" name="id1" value="'.$row3["id_user"].'" />
                   </form>
                   </div>
-                  <div style="overflow: hidden;white-space: nowrap;">
-                  <form action="/employers-account.php" method="POST">
-                    <input type="submit" name="accept" value="Одобрить" />
-                    <input type="hidden" name="id" value="'.$row2["id_vacancy"].'" />
-                    <input type="hidden" name="id1" value="'.$row3["id_user"].'" />
-                  </form>
-                  </div>
                 </td>
                ');
               break;
-              case 3:
+              case 1:
                 printf('<td>Принят</td>'); 
                 echo('
-                   <td class="delete-border">
+                   <td>
                   </td>
                  ');
               break;
               case 2:
                 printf('<td>Отказано</td>');
                 echo('
-                 <td class="delete-border">
+                 <td>
                   <form action="/employers-account.php" method="POST">
                     <input type="submit" name="delete" value="Удалить" />
                     <input type="hidden" name="id" value="'.$row2["id_vacancy"].'" />
@@ -243,9 +247,9 @@ include ("header.php"); ?>
                 </td>
                ');
               break;
-              case 1: printf('<td>Согласован</td>'); 
+              case 3: printf('<td>Согласован</td>'); 
                 echo('
-                 <td class="delete-border">
+                 <td>
                   <form action="/employers-account.php" method="POST">
                     <input type="submit" name="disaccept" value="Отказать" />
                     <input type="hidden" name="id" value="'.$row2["id_vacancy"].'" />
@@ -256,12 +260,14 @@ include ("header.php"); ?>
               break;
               }
               
-							
-							
-						  
-							
-							
-					  }
+            
+              
+              
+              
+              
+            }
+
+              }
 					  
 				  } 
 
