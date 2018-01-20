@@ -7,7 +7,7 @@
     if ($host == "/BPlistVacancies.php") {
       $BPlistVacancies = "bt-1";
       $employers = "bt-2";
-    } else if ($host == "/employers-list.php.php"){
+    } else if ($host == "/employers-list.php"){
       $BPlistVacancies = "bt-2";
       $employers = "bt-1";
     }
