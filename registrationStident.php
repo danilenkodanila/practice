@@ -33,11 +33,11 @@ include ("header.php"); ?>
 
 
     <!-- Форма регистрации -->
-		  <?php 
+      <?php 
     if (isset($_POST['reg'])) {
        require_once 'save_user.php'; 
     }?>
-	<form action="" method="post">
+  <form action="" method="post">
     <div class="grid-x link-block">
       <div class="small-0 large-1 columns"></div>
       <div class="small-10 large-10 columns">
@@ -58,7 +58,7 @@ include ("header.php"); ?>
       </div>
       <div class="small-0 large-1 columns"></div>
     </div>
-	</form>
+  </form>
      <!-- Конец-->
 
     

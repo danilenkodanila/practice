@@ -432,10 +432,16 @@ th,tr,thead,td{
 a.tabs-a{
 	color: black;
 	background-color: white;
+	border: 0;
+	border-color: transparent;
 }
-a.tabs-a:hover{
+
+
+a.tabs-a:visited{
 	color: black;
-	background-color: white;
+	background-color: black;
+	border: 0;
+	border-color: transparent;
 }
 .tabs-title > a:focus{
 	color: black;
@@ -447,7 +453,7 @@ a.tabs-a:hover{
 	color: black;
 	background-color: white;
 	border: 0;
-	border-color: white;
+	border-color: transparent;
 }
 .tabs-title > a[aria-selected='true']{
 	background-color: white;
@@ -457,6 +463,8 @@ a.tabs-a:hover{
 	color: black;
 	border: 0;
 	font-weight: bold;
+	border: 0;
+	border-color: transparent;
 }
 ul.tabs{
 	border: 0;
@@ -541,14 +549,16 @@ li.tabs-title{
 	color:black;
 }
 
-.delete-border{
-	border: 0;
+td.delete-border{
+	    border-color: transparent;
 }
 
 .detail{
 	padding-top: 15px;
 	padding-bottom: 30px;
 }
-
-
-
+input.input-button{
+	background-color: transparent;
+    border: 0;
+    text-decoration-line: underline;
+}
